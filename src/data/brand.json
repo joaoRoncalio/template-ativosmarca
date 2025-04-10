@@ -1,0 +1,197 @@
+{
+  "companyName": "Acme Corp",
+  "logos": {
+    "primary": {
+      "svg": "/assets/logo-primary.svg",
+      "png": "/assets/logo-primary.png",
+      "description": "The primary logo should be used in most applications where the brand is prominently featured."
+    },
+    "dark": {
+      "svg": "/assets/logo-dark.svg",
+      "png": "/assets/logo-dark.png",
+      "description": "The dark version should be used on light backgrounds for maximum contrast."
+    },
+    "light": {
+      "svg": "/assets/logo-light.svg",
+      "png": "/assets/logo-light.png",
+      "description": "The light version should be used on dark backgrounds for maximum contrast."
+    },
+    "icon": {
+      "svg": "/assets/logo-icon.svg",
+      "png": "/assets/logo-icon.png",
+      "description": "The icon-only version can be used for favicons, app icons, or when space is limited."
+    },
+    "guidelines": [
+      "Maintain clear space around the logo equal to the height of the logo mark",
+      "Never modify the logo colors",
+      "Don't stretch or distort the logo",
+      "Use the appropriate version for different backgrounds",
+      "The minimum size for the logo is 40px in height",
+      "Always use the vector version when possible for maximum quality"
+    ]
+  },
+  "colors": {
+    "primary": [
+      {
+        "name": "Blue",
+        "hex": "#2563eb",
+        "rgb": "37, 99, 235",
+        "description": "Primary brand color, used for main actions and highlights"
+      },
+      {
+        "name": "Blue Light",
+        "hex": "#60a5fa",
+        "rgb": "96, 165, 250",
+        "description": "Used for hover states and secondary elements"
+      },
+      {
+        "name": "Blue Dark",
+        "hex": "#1e40af",
+        "rgb": "30, 64, 175",
+        "description": "Used for active states and emphasis"
+      }
+    ],
+    "accent": [
+      {
+        "name": "Purple",
+        "hex": "#8b5cf6",
+        "rgb": "139, 92, 246",
+        "description": "Accent color for special elements and highlights"
+      },
+      {
+        "name": "Green",
+        "hex": "#10b981",
+        "rgb": "16, 185, 129",
+        "description": "Used for success states and positive indicators"
+      },
+      {
+        "name": "Red",
+        "hex": "#ef4444",
+        "rgb": "239, 68, 68",
+        "description": "Used for error states and negative indicators"
+      }
+    ],
+    "neutral": [
+      {
+        "name": "Dark",
+        "hex": "#1f2937",
+        "rgb": "31, 41, 55",
+        "description": "Used for text and dark UI elements"
+      },
+      {
+        "name": "Gray",
+        "hex": "#6b7280",
+        "rgb": "107, 114, 128",
+        "description": "Used for secondary text and disabled states"
+      },
+      {
+        "name": "Light Gray",
+        "hex": "#e5e7eb",
+        "rgb": "229, 231, 235",
+        "description": "Used for borders and dividers"
+      },
+      {
+        "name": "Light",
+        "hex": "#f3f4f6",
+        "rgb": "243, 244, 246",
+        "description": "Used for backgrounds and light UI elements"
+      },
+      {
+        "name": "White",
+        "hex": "#ffffff",
+        "rgb": "255, 255, 255",
+        "description": "Used for card backgrounds and primary content areas"
+      }
+    ],
+    "usage": {
+      "primary": [
+        "Call-to-action buttons",
+        "Interactive elements",
+        "Important highlights",
+        "Brand accents",
+        "Primary navigation",
+        "Links and clickable elements"
+      ],
+      "accent": [
+        "Special features or promotions",
+        "Secondary actions",
+        "Visual interest and variety",
+        "Status indicators"
+      ],
+      "neutral": [
+        "Dark gray for text and content",
+        "Medium gray for secondary text",
+        "Light gray for backgrounds and subtle elements",
+        "White for card backgrounds and content areas"
+      ]
+    }
+  },
+  "typography": {
+    "font": "Inter",
+    "weights": ["400 Regular", "500 Medium", "600 Semibold", "700 Bold"],
+    "headings": [
+      {
+        "name": "H1",
+        "weight": "Bold",
+        "size": "2.25rem",
+        "lineHeight": "1.2",
+        "example": "Main Page Heading"
+      },
+      {
+        "name": "H2",
+        "weight": "Semibold",
+        "size": "1.875rem",
+        "lineHeight": "1.3",
+        "example": "Section Heading"
+      },
+      {
+        "name": "H3",
+        "weight": "Medium",
+        "size": "1.5rem",
+        "lineHeight": "1.4",
+        "example": "Subsection Heading"
+      },
+      {
+        "name": "H4",
+        "weight": "Semibold",
+        "size": "1.25rem",
+        "lineHeight": "1.4",
+        "example": "Card Heading"
+      }
+    ],
+    "body": [
+      {
+        "name": "Regular text",
+        "weight": "Regular",
+        "size": "1rem",
+        "lineHeight": "1.5",
+        "example": "This is regular body text used for most content."
+      },
+      {
+        "name": "Medium emphasis",
+        "weight": "Medium",
+        "size": "1rem",
+        "lineHeight": "1.5",
+        "example": "This text has medium emphasis for important information."
+      },
+      {
+        "name": "Strong emphasis",
+        "weight": "Semibold",
+        "size": "1rem",
+        "lineHeight": "1.5",
+        "example": "This text has strong emphasis for critical information."
+      },
+      {
+        "name": "Small text",
+        "weight": "Regular",
+        "size": "0.875rem",
+        "lineHeight": "1.5",
+        "example": "This smaller text is used for captions and supporting information."
+      }
+    ],
+    "downloads": {
+      "web": "/assets/fonts/inter.zip",
+      "desktop": "/assets/fonts/inter-desktop.zip"
+    }
+  }
+}

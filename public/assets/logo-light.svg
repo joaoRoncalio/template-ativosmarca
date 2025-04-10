@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60" fill="none">
+  <rect width="60" height="60" rx="12" fill="#F3F4F6"/>
+  <path d="M15 30C15 21.716 21.716 15 30 15H45C53.284 15 60 21.716 60 30C60 38.284 53.284 45 45 45H30C21.716 45 15 38.284 15 30Z" fill="#2563EB"/>
+  <path d="M30 22.5C30 18.358 33.358 15 37.5 15C41.642 15 45 18.358 45 22.5C45 26.642 41.642 30 37.5 30C33.358 30 30 26.642 30 22.5Z" fill="#F3F4F6"/>
+  <text x="75" y="38" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#1F2937">BRAND NAME</text>
+</svg>

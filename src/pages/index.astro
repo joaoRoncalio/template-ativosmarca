@@ -1,0 +1,908 @@
+---
+import Layout from '../layouts/Layout.astro';
+import brandData from '../data/brand.json';
+---
+
+<Layout>
+	<div class="container">
+		<section class="hero">
+			<div class="hero-content">
+				<h1>{brandData.companyName} <span>Brand Guidelines</span></h1>
+				<p>Essential resources for our brand identity</p>
+				<div class="hero-cta">
+					<a href="#logos" class="btn btn-primary">Explore Guidelines</a>
+					<a href="#colors" class="btn btn-secondary">View Color Palette</a>
+				</div>
+			</div>
+			<div class="hero-image">
+				<img src={brandData.logos.primary.svg} alt="{brandData.companyName} Logo" width="300" height="90" />
+			</div>
+		</section>
+
+		<section id="logos" class="section">
+			<h2>Logo</h2>
+			<div class="content">
+				<div class="logo-main">
+					<h3>Primary Logo</h3>
+					<p>{brandData.logos.primary.description}</p>
+					<div class="logo-preview">
+						<img src={brandData.logos.primary.svg} alt="Primary Logo" width="300" height="90" />
+					</div>
+					<div class="download-links">
+						<a href={brandData.logos.primary.svg} class="download-link" download>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+							Download SVG
+						</a>
+						<a href={brandData.logos.primary.png} class="download-link" download>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+							Download PNG
+						</a>
+					</div>
+				</div>
+
+				<h3>Usage Guidelines</h3>
+				<ul class="guidelines-list">
+					{brandData.logos.guidelines.map(guideline => (
+						<li>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							{guideline}
+						</li>
+					))}
+				</ul>
+
+				<h3>Logo Variations</h3>
+				<div class="logo-variations">
+					<div class="logo-card">
+						<h4>Dark Version</h4>
+						<p>{brandData.logos.dark.description}</p>
+						<div class="logo-preview dark-bg">
+							<img src={brandData.logos.dark.svg} alt="Dark Logo" width="200" height="60" />
+						</div>
+						<div class="download-links">
+							<a href={brandData.logos.dark.svg} class="download-link" download>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								SVG
+							</a>
+							<a href={brandData.logos.dark.png} class="download-link" download>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								PNG
+							</a>
+						</div>
+					</div>
+					<div class="logo-card">
+						<h4>Light Version</h4>
+						<p>{brandData.logos.light.description}</p>
+						<div class="logo-preview light-bg">
+							<img src={brandData.logos.light.svg} alt="Light Logo" width="200" height="60" />
+						</div>
+						<div class="download-links">
+							<a href={brandData.logos.light.svg} class="download-link" download>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								SVG
+							</a>
+							<a href={brandData.logos.light.png} class="download-link" download>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								PNG
+							</a>
+						</div>
+					</div>
+					<div class="logo-card">
+						<h4>Icon Only</h4>
+						<p>{brandData.logos.icon.description}</p>
+						<div class="logo-preview">
+							<img src={brandData.logos.icon.svg} alt="Icon Logo" width="60" height="60" />
+						</div>
+						<div class="download-links">
+							<a href={brandData.logos.icon.svg} class="download-link" download>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								SVG
+							</a>
+							<a href={brandData.logos.icon.png} class="download-link" download>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								PNG
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="colors" class="section">
+			<h2>Colors</h2>
+			<div class="content">
+				<div class="color-intro">
+					<p>Our color palette is designed to create a consistent and recognizable brand experience across all touchpoints. The colors below form the foundation of our visual identity.</p>
+				</div>
+
+				<h3>Primary Colors</h3>
+				<div class="color-grid">
+					{brandData.colors.primary.map(color => (
+						<div class="color-card">
+							<div
+								class="color-preview"
+								style={`background-color: ${color.hex}`}
+							/>
+							<div class="color-info">
+								<h3>{color.name}</h3>
+								<div class="color-values">
+									<div class="color-value" data-clipboard={color.hex}>
+										<code>HEX: {color.hex}</code>
+										<button class="copy-btn" aria-label="Copy to clipboard">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+										</button>
+									</div>
+									<div class="color-value" data-clipboard={`rgb(${color.rgb})`}>
+										<code>RGB: {color.rgb}</code>
+										<button class="copy-btn" aria-label="Copy to clipboard">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+										</button>
+									</div>
+								</div>
+								<p>{color.description}</p>
+							</div>
+						</div>
+					))}
+				</div>
+
+				<h3>Accent Colors</h3>
+				<div class="color-grid">
+					{brandData.colors.accent.map(color => (
+						<div class="color-card">
+							<div
+								class="color-preview"
+								style={`background-color: ${color.hex}`}
+							/>
+							<div class="color-info">
+								<h3>{color.name}</h3>
+								<div class="color-values">
+									<div class="color-value" data-clipboard={color.hex}>
+										<code>HEX: {color.hex}</code>
+										<button class="copy-btn" aria-label="Copy to clipboard">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+										</button>
+									</div>
+									<div class="color-value" data-clipboard={`rgb(${color.rgb})`}>
+										<code>RGB: {color.rgb}</code>
+										<button class="copy-btn" aria-label="Copy to clipboard">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+										</button>
+									</div>
+								</div>
+								<p>{color.description}</p>
+							</div>
+						</div>
+					))}
+				</div>
+
+				<h3>Neutral Colors</h3>
+				<div class="color-grid">
+					{brandData.colors.neutral.map(color => (
+						<div class="color-card">
+							<div
+								class="color-preview"
+								style={`background-color: ${color.hex}`}
+							/>
+							<div class="color-info">
+								<h3>{color.name}</h3>
+								<div class="color-values">
+									<div class="color-value" data-clipboard={color.hex}>
+										<code>HEX: {color.hex}</code>
+										<button class="copy-btn" aria-label="Copy to clipboard">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+										</button>
+									</div>
+									<div class="color-value" data-clipboard={`rgb(${color.rgb})`}>
+										<code>RGB: {color.rgb}</code>
+										<button class="copy-btn" aria-label="Copy to clipboard">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+										</button>
+									</div>
+								</div>
+								<p>{color.description}</p>
+							</div>
+						</div>
+					))}
+				</div>
+
+				<h3>Color Usage Guidelines</h3>
+				<div class="color-usage">
+					<div class="usage-card">
+						<h4>Primary Colors</h4>
+						<ul class="usage-list">
+							{brandData.colors.usage.primary.map(usage => (
+								<li>
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+									{usage}
+								</li>
+							))}
+						</ul>
+					</div>
+					<div class="usage-card">
+						<h4>Accent Colors</h4>
+						<ul class="usage-list">
+							{brandData.colors.usage.accent.map(usage => (
+								<li>
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+									{usage}
+								</li>
+							))}
+						</ul>
+					</div>
+					<div class="usage-card">
+						<h4>Neutral Colors</h4>
+						<ul class="usage-list">
+							{brandData.colors.usage.neutral.map(usage => (
+								<li>
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+									{usage}
+								</li>
+							))}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="typography" class="section">
+			<h2>Typography</h2>
+			<div class="content">
+				<div class="typography-intro">
+					<div class="typography-header">
+						<h3>Font Family: {brandData.typography.font}</h3>
+						<p>Our typography system is designed to create clear visual hierarchy and ensure readability across all platforms.</p>
+					</div>
+					<div class="download-links">
+						<a href={brandData.typography.downloads.web} class="download-link" download>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+							Download Web Fonts
+						</a>
+						<a href={brandData.typography.downloads.desktop} class="download-link" download>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+							Download Desktop Fonts
+						</a>
+					</div>
+				</div>
+
+				<div class="type-section">
+					<h3>Headings</h3>
+					<div class="type-grid">
+						{brandData.typography.headings.map(heading => (
+							<div class="type-card">
+								<div class="type-preview">
+									<div
+										class="type-sample"
+										style={`
+											font-size: ${heading.size};
+											font-weight: ${heading.weight === 'Regular' ? '400' : heading.weight === 'Medium' ? '500' : heading.weight === 'Semibold' ? '600' : '700'};
+											line-height: ${heading.lineHeight};
+										`}
+									>
+										{heading.example}
+									</div>
+								</div>
+								<div class="type-info">
+									<h4>{heading.name}</h4>
+									<ul class="type-specs">
+										<li><strong>Font:</strong> {brandData.typography.font}</li>
+										<li><strong>Weight:</strong> {heading.weight}</li>
+										<li><strong>Size:</strong> {heading.size}</li>
+										<li><strong>Line Height:</strong> {heading.lineHeight}</li>
+									</ul>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+
+				<div class="type-section">
+					<h3>Body Text</h3>
+					<div class="type-grid">
+						{brandData.typography.body.map(text => (
+							<div class="type-card">
+								<div class="type-preview">
+									<p
+										class="type-sample"
+										style={`
+											font-size: ${text.size};
+											font-weight: ${text.weight === 'Regular' ? '400' : text.weight === 'Medium' ? '500' : text.weight === 'Semibold' ? '600' : '700'};
+											line-height: ${text.lineHeight};
+										`}
+									>
+										{text.example}
+									</p>
+								</div>
+								<div class="type-info">
+									<h4>{text.name}</h4>
+									<ul class="type-specs">
+										<li><strong>Font:</strong> {brandData.typography.font}</li>
+										<li><strong>Weight:</strong> {text.weight}</li>
+										<li><strong>Size:</strong> {text.size}</li>
+										<li><strong>Line Height:</strong> {text.lineHeight}</li>
+									</ul>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+
+				<div class="typography-guidelines">
+					<h3>Typography Guidelines</h3>
+					<ul class="guidelines-list">
+						<li>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							Maintain consistent use of typography across all brand materials
+						</li>
+						<li>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							Use appropriate heading levels to establish clear content hierarchy
+						</li>
+						<li>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							Ensure sufficient contrast between text and background colors
+						</li>
+						<li>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							Avoid using more than two font weights in a single design
+						</li>
+						<li>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							Maintain appropriate line length for optimal readability (50-75 characters)
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	:root {
+		--primary: #2563eb;
+		--primary-light: #60a5fa;
+		--primary-dark: #1e40af;
+		--accent-purple: #8b5cf6;
+		--accent-green: #10b981;
+		--accent-red: #ef4444;
+		--text: #1f2937;
+		--text-light: #6b7280;
+		--background: #ffffff;
+		--secondary-bg: #f3f4f6;
+		--border: #e5e7eb;
+		--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+		--shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+		--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+		--radius-sm: 0.375rem;
+		--radius: 0.5rem;
+		--radius-lg: 1rem;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	/* Hero Section */
+	.hero {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 6rem 2rem 4rem;
+		background: linear-gradient(135deg, var(--secondary-bg) 0%, #ffffff 100%);
+		border-radius: var(--radius-lg);
+		margin-bottom: 4rem;
+	}
+
+	.hero-content {
+		max-width: 600px;
+	}
+
+	.hero h1 {
+		font-size: 3.5rem;
+		font-weight: 700;
+		margin: 0;
+		color: var(--text);
+		line-height: 1.1;
+	}
+
+	.hero h1 span {
+		display: block;
+		color: var(--primary);
+	}
+
+	.hero p {
+		font-size: 1.25rem;
+		color: var(--text-light);
+		margin: 1.5rem 0;
+		line-height: 1.6;
+	}
+
+	.hero-cta {
+		display: flex;
+		gap: 1rem;
+		margin-top: 2rem;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.75rem 1.5rem;
+		border-radius: var(--radius);
+		font-weight: 600;
+		transition: all 0.2s ease;
+		text-decoration: none;
+	}
+
+	.btn-primary {
+		background-color: var(--primary);
+		color: white;
+		box-shadow: var(--shadow);
+	}
+
+	.btn-primary:hover {
+		background-color: var(--primary-dark);
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.btn-secondary {
+		background-color: white;
+		color: var(--primary);
+		border: 1px solid var(--border);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.btn-secondary:hover {
+		background-color: var(--secondary-bg);
+		transform: translateY(-2px);
+		box-shadow: var(--shadow);
+	}
+
+	/* Section Styles */
+	.section {
+		margin: 6rem 0;
+		padding: 2rem;
+		background: var(--secondary-bg);
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow);
+	}
+
+	.section h2 {
+		font-size: 2.25rem;
+		font-weight: 700;
+		margin: 0 0 2rem 0;
+		color: var(--text);
+		position: relative;
+		display: inline-block;
+	}
+
+	.section h2::after {
+		content: '';
+		position: absolute;
+		bottom: -0.5rem;
+		left: 0;
+		width: 3rem;
+		height: 0.25rem;
+		background-color: var(--primary);
+		border-radius: 1rem;
+	}
+
+	.content {
+		background: var(--background);
+		padding: 2.5rem;
+		border-radius: var(--radius);
+		box-shadow: var(--shadow);
+	}
+
+	h3 {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin: 2.5rem 0 1.5rem;
+		color: var(--text);
+	}
+
+	h4 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		margin: 1.5rem 0 1rem;
+		color: var(--text);
+	}
+
+	/* Logo Section */
+	.logo-main {
+		margin-bottom: 3rem;
+	}
+
+	.logo-preview {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem;
+		background-color: var(--secondary-bg);
+		border-radius: var(--radius);
+		margin: 1.5rem 0;
+	}
+
+	.dark-bg {
+		background-color: var(--text);
+	}
+
+	.light-bg {
+		background-color: white;
+		border: 1px solid var(--border);
+	}
+
+	.logo-card {
+		background: white;
+		border-radius: var(--radius);
+		padding: 1.5rem;
+		box-shadow: var(--shadow-sm);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.logo-card:hover {
+		transform: translateY(-5px);
+		box-shadow: var(--shadow);
+	}
+
+	.guidelines-list {
+		list-style-type: none;
+		padding: 0;
+		margin: 1.5rem 0;
+	}
+
+	.guidelines-list li {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.75rem;
+		margin-bottom: 1rem;
+		padding: 0.75rem;
+		background-color: var(--secondary-bg);
+		border-radius: var(--radius-sm);
+		transition: background-color 0.2s ease;
+	}
+
+	.guidelines-list li:hover {
+		background-color: #e5e7eb;
+	}
+
+	.guidelines-list svg {
+		color: var(--accent-green);
+		margin-top: 0.25rem;
+	}
+
+	/* Download Links */
+	.download-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin: 1.5rem 0;
+	}
+
+	.download-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.25rem;
+		background-color: var(--secondary-bg);
+		border-radius: var(--radius);
+		text-decoration: none;
+		color: var(--text);
+		font-weight: 500;
+		transition: all 0.2s ease;
+		box-shadow: var(--shadow-sm);
+	}
+
+	.download-link:hover {
+		background-color: #e5e7eb;
+		transform: translateY(-2px);
+		box-shadow: var(--shadow);
+	}
+
+	.download-link svg {
+		color: var(--primary);
+	}
+
+	/* Color Section */
+	.color-intro {
+		margin-bottom: 2rem;
+	}
+
+	.color-intro p {
+		font-size: 1.125rem;
+		line-height: 1.6;
+		color: var(--text-light);
+	}
+
+	.color-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 2rem;
+		margin: 2rem 0 3rem;
+	}
+
+	.color-card {
+		border-radius: var(--radius);
+		overflow: hidden;
+		box-shadow: var(--shadow);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.color-card:hover {
+		transform: translateY(-5px);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.color-preview {
+		height: 160px;
+	}
+
+	.color-info {
+		padding: 1.5rem;
+		background: white;
+	}
+
+	.color-info h3 {
+		margin: 0 0 1rem;
+		font-size: 1.25rem;
+	}
+
+	.color-values {
+		margin: 1rem 0;
+	}
+
+	.color-value {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 0.5rem;
+		padding: 0.5rem 0.75rem;
+		background-color: var(--secondary-bg);
+		border-radius: var(--radius-sm);
+		transition: background-color 0.2s ease;
+	}
+
+	.color-value:hover {
+		background-color: #e5e7eb;
+	}
+
+	.color-info code {
+		font-family: monospace;
+		color: var(--text-light);
+	}
+
+	.copy-btn {
+		background: none;
+		border: none;
+		cursor: pointer;
+		color: var(--primary);
+		padding: 0.25rem;
+		border-radius: var(--radius-sm);
+		transition: background-color 0.2s ease;
+	}
+
+	.copy-btn:hover {
+		background-color: rgba(0, 0, 0, 0.05);
+	}
+
+	.usage-card {
+		background: white;
+		border-radius: var(--radius);
+		padding: 1.5rem;
+		box-shadow: var(--shadow-sm);
+	}
+
+	.usage-list {
+		list-style-type: none;
+		padding: 0;
+		margin: 1rem 0 0;
+	}
+
+	.usage-list li {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.75rem;
+		margin-bottom: 0.75rem;
+		padding-bottom: 0.75rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.usage-list li:last-child {
+		border-bottom: none;
+		padding-bottom: 0;
+	}
+
+	.usage-list svg {
+		color: var(--primary);
+		margin-top: 0.25rem;
+	}
+
+	.color-usage {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		margin: 2rem 0;
+	}
+
+	/* Typography Section */
+	.typography-intro {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: 3rem;
+		padding-bottom: 2rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.typography-header {
+		max-width: 60%;
+	}
+
+	.typography-header p {
+		font-size: 1.125rem;
+		line-height: 1.6;
+		color: var(--text-light);
+		margin-top: 1rem;
+	}
+
+	.type-section {
+		margin-bottom: 3rem;
+	}
+
+	.type-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		margin: 2rem 0;
+	}
+
+	.type-card {
+		background: white;
+		border-radius: var(--radius);
+		padding: 1.5rem;
+		box-shadow: var(--shadow-sm);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.type-card:hover {
+		transform: translateY(-5px);
+		box-shadow: var(--shadow);
+	}
+
+	.type-preview {
+		padding: 1.5rem;
+		background-color: var(--secondary-bg);
+		border-radius: var(--radius);
+		margin-bottom: 1.5rem;
+	}
+
+	.type-sample {
+		margin: 0;
+		color: var(--text);
+	}
+
+	.type-info h4 {
+		margin-top: 0;
+	}
+
+	.type-specs {
+		list-style-type: none;
+		padding: 0;
+		margin: 1rem 0 0;
+	}
+
+	.type-specs li {
+		margin-bottom: 0.5rem;
+		color: var(--text-light);
+	}
+
+	.type-specs strong {
+		color: var(--text);
+		margin-right: 0.5rem;
+	}
+
+	.typography-guidelines {
+		margin-top: 3rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--border);
+	}
+
+	/* Responsive Styles */
+	@media (max-width: 992px) {
+		.hero {
+			flex-direction: column;
+			text-align: center;
+			padding: 4rem 1.5rem 3rem;
+		}
+
+		.hero-content {
+			max-width: 100%;
+		}
+
+		.hero-cta {
+			justify-content: center;
+		}
+
+		.hero-image {
+			margin-top: 2rem;
+		}
+
+		.typography-intro {
+			flex-direction: column;
+		}
+
+		.typography-header {
+			max-width: 100%;
+			margin-bottom: 1.5rem;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.section {
+			padding: 1.5rem;
+		}
+
+		.content {
+			padding: 1.5rem;
+		}
+
+		.hero h1 {
+			font-size: 2.5rem;
+		}
+
+		.logo-variations,
+		.color-usage,
+		.type-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.download-links {
+			flex-direction: column;
+		}
+	}
+
+	/* Add JavaScript functionality for copy buttons */
+	.copy-btn:active {
+		transform: scale(0.95);
+	}
+</style>
+
+<script>
+	// Add client-side JavaScript for copy to clipboard functionality
+	document.addEventListener('DOMContentLoaded', () => {
+		// Handle copy to clipboard
+		const copyButtons = document.querySelectorAll('.copy-btn');
+		copyButtons.forEach(button => {
+			button.addEventListener('click', () => {
+				const colorValue = button.closest('.color-value').getAttribute('data-clipboard');
+				navigator.clipboard.writeText(colorValue).then(() => {
+					// Show success feedback
+					const originalHTML = button.innerHTML;
+					button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+					button.style.color = '#10b981'; // Green color
+
+					setTimeout(() => {
+						button.innerHTML = originalHTML;
+						button.style.color = '';
+					}, 2000);
+				});
+			});
+		});
+
+		// Smooth scrolling for anchor links
+		const anchorLinks = document.querySelectorAll('a[href^="#"]');
+		anchorLinks.forEach(link => {
+			link.addEventListener('click', (e) => {
+				e.preventDefault();
+				const targetId = link.getAttribute('href');
+				const targetElement = document.querySelector(targetId);
+				if (targetElement) {
+					window.scrollTo({
+						top: targetElement.offsetTop - 80, // Adjust for fixed header
+						behavior: 'smooth'
+					});
+				}
+			});
+		});
+	});
+</script>
