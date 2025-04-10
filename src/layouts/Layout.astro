@@ -9,6 +9,25 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 		<title>Acme Corp Brand Guidelines</title>
+		<script src="/js/colorManager.js" type="module"></script>
+
+		<!-- Initialize default CSS variables -->
+		<script is:inline>
+			// This will be replaced by dynamic values from colorManager.js
+			window.brandColors = {
+				primary: '#2563eb',
+				primaryLight: '#60a5fa',
+				primaryDark: '#1e40af',
+				accentPurple: '#8b5cf6',
+				accentGreen: '#10b981',
+				accentRed: '#ef4444',
+				text: '#1f2937',
+				textLight: '#6b7280',
+				background: '#ffffff',
+				secondaryBg: '#f3f4f6',
+				border: '#e5e7eb'
+			};
+		</script>
 	</head>
 	<body>
 		<header>
@@ -65,6 +84,7 @@
 
 <style is:global>
 	:root {
+		/* These default values will be overridden by the colorManager.js */
 		--primary: #2563eb;
 		--primary-light: #60a5fa;
 		--primary-dark: #1e40af;
@@ -84,6 +104,9 @@
 		--radius-lg: 1rem;
 		--footer-bg: #1f2937;
 		--footer-text: #f3f4f6;
+
+		/* Add transition for smooth color changes */
+		transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 	}
 
 	/* Base Styles */
@@ -311,16 +334,27 @@
 	}
 </style>
 
-<script>
+<script is:inline>
 	// Mobile menu toggle
-	document.addEventListener('DOMContentLoaded', () => {
+	document.addEventListener('DOMContentLoaded', function() {
+		// Handle mobile menu toggle
 		const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 		const navLinks = document.querySelector('.nav-links');
 
 		if (mobileMenuToggle && navLinks) {
-			mobileMenuToggle.addEventListener('click', () => {
+			mobileMenuToggle.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
 				navLinks.classList.toggle('active');
+				console.log('Mobile menu toggled');
 			});
+		}
+
+		// Use color manager from global object
+		// Apply CSS variables from color manager if available
+		if (window.colorManager) {
+			const colorData = window.colorManager.getColorData();
+			window.colorManagerModule.updateCSSVariables(colorData);
 		}
 
 		// Close mobile menu when clicking outside

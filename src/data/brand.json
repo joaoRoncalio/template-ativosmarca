@@ -33,21 +33,21 @@
   "colors": {
     "primary": [
       {
-        "name": "Blue",
-        "hex": "#2563eb",
-        "rgb": "37, 99, 235",
-        "description": "Primary brand color, used for main actions and highlights"
+        "name": "Verde Cu",
+        "hex": "#51173d",
+        "cmyk": "65, 0, 73, 10",
+        "description": ""
       },
       {
-        "name": "Blue Light",
+        "name": "Verde Light",
         "hex": "#60a5fa",
-        "rgb": "96, 165, 250",
+        "cmyk": "62, 33, 0, 2",
         "description": "Used for hover states and secondary elements"
       },
       {
         "name": "Blue Dark",
         "hex": "#1e40af",
-        "rgb": "30, 64, 175",
+        "cmyk": "83, 64, 0, 31",
         "description": "Used for active states and emphasis"
       }
     ],
@@ -55,19 +55,19 @@
       {
         "name": "Purple",
         "hex": "#8b5cf6",
-        "rgb": "139, 92, 246",
+        "cmyk": "44, 63, 0, 4",
         "description": "Accent color for special elements and highlights"
       },
       {
         "name": "Green",
         "hex": "#10b981",
-        "rgb": "16, 185, 129",
+        "cmyk": "91, 0, 30, 28",
         "description": "Used for success states and positive indicators"
       },
       {
-        "name": "Red",
-        "hex": "#ef4444",
-        "rgb": "239, 68, 68",
+        "name": "HAHAHA",
+        "hex": "#ff40ff",
+        "cmyk": "0, 71, 71, 6",
         "description": "Used for error states and negative indicators"
       }
     ],
@@ -75,31 +75,31 @@
       {
         "name": "Dark",
         "hex": "#1f2937",
-        "rgb": "31, 41, 55",
+        "cmyk": "44, 26, 0, 78",
         "description": "Used for text and dark UI elements"
       },
       {
         "name": "Gray",
         "hex": "#6b7280",
-        "rgb": "107, 114, 128",
+        "cmyk": "16, 11, 0, 50",
         "description": "Used for secondary text and disabled states"
       },
       {
         "name": "Light Gray",
         "hex": "#e5e7eb",
-        "rgb": "229, 231, 235",
+        "cmyk": "3, 2, 0, 8",
         "description": "Used for borders and dividers"
       },
       {
         "name": "Light",
         "hex": "#f3f4f6",
-        "rgb": "243, 244, 246",
+        "cmyk": "1, 1, 0, 4",
         "description": "Used for backgrounds and light UI elements"
       },
       {
         "name": "White",
         "hex": "#ffffff",
-        "rgb": "255, 255, 255",
+        "cmyk": "0, 0, 0, 0",
         "description": "Used for card backgrounds and primary content areas"
       }
     ],

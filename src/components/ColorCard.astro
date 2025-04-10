@@ -1,0 +1,120 @@
+---
+// Define the props for the ColorCard component
+interface Props {
+  color: {
+    name: string;
+    hex: string;
+    cmyk: string;
+    description: string;
+  };
+  category: string;
+}
+
+const { color, category } = Astro.props;
+---
+
+<div class="color-card">
+  <div
+    class="color-preview"
+    style={`background-color: ${color.hex}`}
+    data-category={category}
+    data-color-name={color.name}
+  />
+  <div class="color-info">
+    <h3>{color.name}</h3>
+    <div class="color-values">
+      <div class="color-value" data-clipboard={color.hex}>
+        <code>HEX: {color.hex}</code>
+        <button class="copy-btn" aria-label="Copy to clipboard">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        </button>
+      </div>
+      <div class="color-value" data-clipboard={`cmyk(${color.cmyk})`}>
+        <code>CMYK: {color.cmyk}</code>
+        <button class="copy-btn" aria-label="Copy to clipboard">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        </button>
+      </div>
+    </div>
+    <p>{color.description}</p>
+  </div>
+</div>
+
+<style>
+  .color-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .color-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .color-preview {
+    height: 160px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .color-info {
+    padding: 1.5rem;
+    background: white;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .color-info h3 {
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+  }
+
+  .color-values {
+    margin: 1rem 0;
+  }
+
+  .color-value {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--secondary-bg);
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s ease;
+  }
+
+  .color-value:hover {
+    background-color: #e5e7eb;
+  }
+
+  .color-info code {
+    font-family: monospace;
+    color: var(--text-light);
+  }
+
+  .copy-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--primary);
+    padding: 0.25rem;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s ease;
+  }
+
+  .copy-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .copy-btn:active {
+    transform: scale(0.95);
+  }
+</style>

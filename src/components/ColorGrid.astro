@@ -1,0 +1,60 @@
+---
+import ColorCard from './ColorCard.astro';
+
+interface Props {
+  colors: Array<{
+    name: string;
+    hex: string;
+    cmyk: string;
+    description: string;
+  }>;
+  category: string;
+  title: string;
+}
+
+const { colors, category, title } = Astro.props;
+
+// Calculate the grid columns based on the number of colors
+// For 1 color: 1 column, 2 colors: 2 columns, 3+ colors: 3 columns
+const getGridColumns = (count: number) => {
+  if (count === 1) return 1;
+  if (count === 2) return 2;
+  return 'repeat(auto-fill, minmax(280px, 1fr))';
+};
+
+const gridStyle = `grid-template-columns: ${getGridColumns(colors.length)};`;
+---
+
+<div class="color-section">
+  <h3>{title}</h3>
+  <div class="color-grid" style={gridStyle}>
+    {colors.map(color => (
+      <ColorCard color={color} category={category} />
+    ))}
+  </div>
+</div>
+
+<style>
+  .color-section {
+    margin-bottom: 3rem;
+  }
+
+  .color-grid {
+    display: grid;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2.5rem 0 1.5rem;
+    color: var(--text);
+  }
+
+  @media (max-width: 768px) {
+    .color-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

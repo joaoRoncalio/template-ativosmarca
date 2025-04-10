@@ -1,9 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ColorGrid from '../components/ColorGrid.astro';
 import brandData from '../data/brand.json';
 ---
 
 <Layout>
+	<!-- Hidden element to store brand data for JavaScript access -->
+	<script id="brand-data" type="application/json" is:inline>
+		{JSON.stringify(brandData)}
+	</script>
 	<div class="container">
 		<section class="hero">
 			<div class="hero-content">
@@ -114,95 +119,24 @@ import brandData from '../data/brand.json';
 					<p>Our color palette is designed to create a consistent and recognizable brand experience across all touchpoints. The colors below form the foundation of our visual identity.</p>
 				</div>
 
-				<h3>Primary Colors</h3>
-				<div class="color-grid">
-					{brandData.colors.primary.map(color => (
-						<div class="color-card">
-							<div
-								class="color-preview"
-								style={`background-color: ${color.hex}`}
-							/>
-							<div class="color-info">
-								<h3>{color.name}</h3>
-								<div class="color-values">
-									<div class="color-value" data-clipboard={color.hex}>
-										<code>HEX: {color.hex}</code>
-										<button class="copy-btn" aria-label="Copy to clipboard">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-										</button>
-									</div>
-									<div class="color-value" data-clipboard={`rgb(${color.rgb})`}>
-										<code>RGB: {color.rgb}</code>
-										<button class="copy-btn" aria-label="Copy to clipboard">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-										</button>
-									</div>
-								</div>
-								<p>{color.description}</p>
-							</div>
-						</div>
-					))}
-				</div>
+				{/* Dynamic color grids that adjust based on the number of colors */}
+				<ColorGrid
+					colors={brandData.colors.primary}
+					category="primary"
+					title="Primary Colors"
+				/>
 
-				<h3>Accent Colors</h3>
-				<div class="color-grid">
-					{brandData.colors.accent.map(color => (
-						<div class="color-card">
-							<div
-								class="color-preview"
-								style={`background-color: ${color.hex}`}
-							/>
-							<div class="color-info">
-								<h3>{color.name}</h3>
-								<div class="color-values">
-									<div class="color-value" data-clipboard={color.hex}>
-										<code>HEX: {color.hex}</code>
-										<button class="copy-btn" aria-label="Copy to clipboard">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-										</button>
-									</div>
-									<div class="color-value" data-clipboard={`rgb(${color.rgb})`}>
-										<code>RGB: {color.rgb}</code>
-										<button class="copy-btn" aria-label="Copy to clipboard">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-										</button>
-									</div>
-								</div>
-								<p>{color.description}</p>
-							</div>
-						</div>
-					))}
-				</div>
+				<ColorGrid
+					colors={brandData.colors.accent}
+					category="accent"
+					title="Accent Colors"
+				/>
 
-				<h3>Neutral Colors</h3>
-				<div class="color-grid">
-					{brandData.colors.neutral.map(color => (
-						<div class="color-card">
-							<div
-								class="color-preview"
-								style={`background-color: ${color.hex}`}
-							/>
-							<div class="color-info">
-								<h3>{color.name}</h3>
-								<div class="color-values">
-									<div class="color-value" data-clipboard={color.hex}>
-										<code>HEX: {color.hex}</code>
-										<button class="copy-btn" aria-label="Copy to clipboard">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-										</button>
-									</div>
-									<div class="color-value" data-clipboard={`rgb(${color.rgb})`}>
-										<code>RGB: {color.rgb}</code>
-										<button class="copy-btn" aria-label="Copy to clipboard">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-										</button>
-									</div>
-								</div>
-								<p>{color.description}</p>
-							</div>
-						</div>
-					))}
-				</div>
+				<ColorGrid
+					colors={brandData.colors.neutral}
+					category="neutral"
+					title="Neutral Colors"
+				/>
 
 				<h3>Color Usage Guidelines</h3>
 				<div class="color-usage">
@@ -614,76 +548,7 @@ import brandData from '../data/brand.json';
 		color: var(--text-light);
 	}
 
-	.color-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-		gap: 2rem;
-		margin: 2rem 0 3rem;
-	}
-
-	.color-card {
-		border-radius: var(--radius);
-		overflow: hidden;
-		box-shadow: var(--shadow);
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
-	}
-
-	.color-card:hover {
-		transform: translateY(-5px);
-		box-shadow: var(--shadow-lg);
-	}
-
-	.color-preview {
-		height: 160px;
-	}
-
-	.color-info {
-		padding: 1.5rem;
-		background: white;
-	}
-
-	.color-info h3 {
-		margin: 0 0 1rem;
-		font-size: 1.25rem;
-	}
-
-	.color-values {
-		margin: 1rem 0;
-	}
-
-	.color-value {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		margin-bottom: 0.5rem;
-		padding: 0.5rem 0.75rem;
-		background-color: var(--secondary-bg);
-		border-radius: var(--radius-sm);
-		transition: background-color 0.2s ease;
-	}
-
-	.color-value:hover {
-		background-color: #e5e7eb;
-	}
-
-	.color-info code {
-		font-family: monospace;
-		color: var(--text-light);
-	}
-
-	.copy-btn {
-		background: none;
-		border: none;
-		cursor: pointer;
-		color: var(--primary);
-		padding: 0.25rem;
-		border-radius: var(--radius-sm);
-		transition: background-color 0.2s ease;
-	}
-
-	.copy-btn:hover {
-		background-color: rgba(0, 0, 0, 0.05);
-	}
+	/* Color section styles moved to components */
 
 	.usage-card {
 		background: white;
@@ -867,14 +732,24 @@ import brandData from '../data/brand.json';
 	}
 </style>
 
-<script>
+<script src="/js/colorManager.js" type="module" is:inline></script>
+
+<script is:inline>
 	// Add client-side JavaScript for copy to clipboard functionality
 	document.addEventListener('DOMContentLoaded', () => {
+		// Initialize color manager with brand data
+		const brandData = JSON.parse(document.getElementById('brand-data').textContent);
+		const colorManager = window.colorManagerModule.initColorManager(brandData.colors);
+
+		// Make colorManager available globally
+		window.colorManager = colorManager;
+
 		// Handle copy to clipboard
 		const copyButtons = document.querySelectorAll('.copy-btn');
 		copyButtons.forEach(button => {
 			button.addEventListener('click', () => {
-				const colorValue = button.closest('.color-value').getAttribute('data-clipboard');
+				const colorValueElement = button.closest('.color-value');
+				const colorValue = colorValueElement?.getAttribute('data-clipboard') || '';
 				navigator.clipboard.writeText(colorValue).then(() => {
 					// Show success feedback
 					const originalHTML = button.innerHTML;
@@ -889,16 +764,64 @@ import brandData from '../data/brand.json';
 			});
 		});
 
+		// Add color update functionality to color previews
+		const colorPreviews = document.querySelectorAll('.color-preview');
+		colorPreviews.forEach(preview => {
+			// Get category and color name from data attributes
+			const category = preview.getAttribute('data-category');
+			const colorName = preview.getAttribute('data-color-name');
+			if (!category || !colorName) return;
+
+			// Find the current hex value
+			const card = preview.closest('.color-card');
+			if (!card) return;
+
+			const hexEl = card.querySelector('.color-value[data-clipboard*="#"] code');
+			if (!hexEl || !hexEl.textContent) return;
+
+			const hexValue = hexEl.textContent.split(': ')[1] || '';
+
+			// Add click event to color preview for editing
+			preview.addEventListener('click', function() {
+				const newColor = prompt(`Update ${colorName} color:`, hexValue);
+				if (newColor && /^#[0-9A-F]{6}$/i.test(newColor)) {
+					// Update color in data and UI
+					colorManager.updateColor(category, colorName, newColor);
+
+					// Update the preview and hex code display
+					this.style.backgroundColor = newColor;
+
+					const hexEl = card.querySelector('.color-value[data-clipboard*="#"] code');
+					if (hexEl) hexEl.textContent = `HEX: ${newColor}`;
+
+					const hexClipEl = card.querySelector('.color-value[data-clipboard*="#"]');
+					if (hexClipEl) hexClipEl.setAttribute('data-clipboard', newColor);
+
+					// Update CSS variables
+					document.documentElement.style.setProperty(`--${category}-${colorName.toLowerCase().replace(' ', '-')}`, newColor);
+				} else if (newColor) {
+					alert('Please enter a valid hex color (e.g., #FF5500)');
+				}
+			});
+
+			// Add tooltip to indicate editability
+			preview.title = 'Click to edit color';
+			preview.style.cursor = 'pointer';
+		});
+
 		// Smooth scrolling for anchor links
 		const anchorLinks = document.querySelectorAll('a[href^="#"]');
 		anchorLinks.forEach(link => {
-			link.addEventListener('click', (e) => {
+			link.addEventListener('click', function(e) {
 				e.preventDefault();
-				const targetId = link.getAttribute('href');
+				const targetId = this.getAttribute('href');
+				if (!targetId) return;
+
 				const targetElement = document.querySelector(targetId);
 				if (targetElement) {
+					const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
 					window.scrollTo({
-						top: targetElement.offsetTop - 80, // Adjust for fixed header
+						top: offsetTop - 80, // Adjust for fixed header
 						behavior: 'smooth'
 					});
 				}
