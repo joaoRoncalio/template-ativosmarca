@@ -13,7 +13,7 @@ import brandData from '../data/brand.json';
 		<section class="hero">
 			<div class="hero-content">
 				<h1>{brandData.companyName} <span>Brand Guidelines</span></h1>
-				<p>Essential resources for our brand identity</p>
+				<p>{brandData.tagline}</p>
 				<div class="hero-cta">
 					<a href="#logos" class="btn btn-primary">Explore Guidelines</a>
 					<a href="#colors" class="btn btn-secondary">View Color Palette</a>
@@ -116,7 +116,7 @@ import brandData from '../data/brand.json';
 			<h2>Colors</h2>
 			<div class="content">
 				<div class="color-intro">
-					<p>Our color palette is designed to create a consistent and recognizable brand experience across all touchpoints. The colors below form the foundation of our visual identity.</p>
+					<p>{brandData.colors.intro}</p>
 				</div>
 
 				{/* Dynamic color grids that adjust based on the number of colors */}
@@ -145,7 +145,7 @@ import brandData from '../data/brand.json';
 						<ul class="usage-list">
 							{brandData.colors.usage.primary.map(usage => (
 								<li>
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="usage-icon"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
 									{usage}
 								</li>
 							))}
@@ -156,7 +156,7 @@ import brandData from '../data/brand.json';
 						<ul class="usage-list">
 							{brandData.colors.usage.accent.map(usage => (
 								<li>
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="usage-icon"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
 									{usage}
 								</li>
 							))}
@@ -167,7 +167,7 @@ import brandData from '../data/brand.json';
 						<ul class="usage-list">
 							{brandData.colors.usage.neutral.map(usage => (
 								<li>
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="usage-icon"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
 									{usage}
 								</li>
 							))}
@@ -182,21 +182,65 @@ import brandData from '../data/brand.json';
 			<div class="content">
 				<div class="typography-intro">
 					<div class="typography-header">
-						<h3>Font Family: {brandData.typography.font}</h3>
-						<p>Our typography system is designed to create clear visual hierarchy and ensure readability across all platforms.</p>
-					</div>
-					<div class="download-links">
-						<a href={brandData.typography.downloads.web} class="download-link" download>
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-							Download Web Fonts
-						</a>
-						<a href={brandData.typography.downloads.desktop} class="download-link" download>
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-							Download Desktop Fonts
-						</a>
+						<p>{brandData.typography.intro}</p>
 					</div>
 				</div>
 
+				<div class="font-family-section">
+					<div class="font-family-card">
+						<div class="font-family-header">
+							<h3>{brandData.typography.families.heading.title}</h3>
+							<p class="font-name">{brandData.typography.font}</p>
+							<p class="font-description">{brandData.typography.families.heading.description}</p>
+						</div>
+						<div class="font-preview">
+							<div class="font-sample heading-sample">{brandData.typography.families.heading.sample}</div>
+							<div class="font-weights">
+								{brandData.typography.families.heading.weights.map(weight => (
+									<span style={`font-weight: ${weight === 'Regular' ? '400' : weight === 'Medium' ? '500' : weight === 'Semibold' ? '600' : '700'};`}>{weight}</span>
+								))}
+							</div>
+						</div>
+						<div class="download-links">
+							<a href={brandData.typography.downloads.web} class="download-link" download>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								Download Web Fonts
+							</a>
+							<a href={brandData.typography.downloads.desktop} class="download-link" download>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								Download Desktop Fonts
+							</a>
+						</div>
+					</div>
+
+					<div class="font-family-card">
+						<div class="font-family-header">
+							<h3>{brandData.typography.families.body.title}</h3>
+							<p class="font-name">{brandData.typography.font}</p>
+							<p class="font-description">{brandData.typography.families.body.description}</p>
+						</div>
+						<div class="font-preview">
+							<div class="font-sample body-sample">{brandData.typography.families.body.sample}</div>
+							<div class="font-weights">
+								{brandData.typography.families.body.weights.map(weight => (
+									<span style={`font-weight: ${weight === 'Regular' ? '400' : weight === 'Medium' ? '500' : weight === 'Semibold' ? '600' : '700'};`}>{weight}</span>
+								))}
+							</div>
+						</div>
+						<div class="download-links">
+							<a href={brandData.typography.downloads.web} class="download-link" download>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								Download Web Fonts
+							</a>
+							<a href={brandData.typography.downloads.desktop} class="download-link" download>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								Download Desktop Fonts
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Keep the original sections but hide them with CSS -->
 				<div class="type-section">
 					<h3>Headings</h3>
 					<div class="type-grid">
@@ -262,26 +306,12 @@ import brandData from '../data/brand.json';
 				<div class="typography-guidelines">
 					<h3>Typography Guidelines</h3>
 					<ul class="guidelines-list">
-						<li>
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-							Maintain consistent use of typography across all brand materials
-						</li>
-						<li>
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-							Use appropriate heading levels to establish clear content hierarchy
-						</li>
-						<li>
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-							Ensure sufficient contrast between text and background colors
-						</li>
-						<li>
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-							Avoid using more than two font weights in a single design
-						</li>
-						<li>
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-							Maintain appropriate line length for optimal readability (50-75 characters)
-						</li>
+						{brandData.typography.guidelines.map(guideline => (
+							<li>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+								{guideline}
+							</li>
+						))}
 					</ul>
 				</div>
 			</div>
@@ -577,9 +607,12 @@ import brandData from '../data/brand.json';
 		padding-bottom: 0;
 	}
 
-	.usage-list svg {
+	.usage-list svg, .usage-icon {
 		color: var(--primary);
 		margin-top: 0.25rem;
+		min-width: 20px;
+		min-height: 20px;
+		flex-shrink: 0;
 	}
 
 	.color-usage {
@@ -610,8 +643,90 @@ import brandData from '../data/brand.json';
 		margin-top: 1rem;
 	}
 
+	.font-family-section {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+		gap: 2rem;
+		margin-bottom: 3rem;
+	}
+
+	.font-family-card {
+		background: white;
+		border-radius: var(--radius);
+		padding: 2rem;
+		box-shadow: var(--shadow-sm);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.font-family-card:hover {
+		transform: translateY(-5px);
+		box-shadow: var(--shadow);
+	}
+
+	.font-family-header h3 {
+		margin-top: 0;
+		margin-bottom: 0.5rem;
+	}
+
+	.font-name {
+		font-size: 1.5rem;
+		font-weight: 600;
+		color: var(--primary);
+		margin: 0.5rem 0;
+	}
+
+	.font-description {
+		font-size: 1.125rem;
+		line-height: 1.6;
+		color: var(--text-light);
+		margin-bottom: 1.5rem;
+	}
+
+	.font-preview {
+		padding: 2rem;
+		background-color: var(--secondary-bg);
+		border-radius: var(--radius);
+		margin: 1.5rem 0;
+	}
+
+	.font-sample {
+		margin: 0 0 1.5rem 0;
+		color: var(--text);
+		text-align: center;
+	}
+
+	.heading-sample {
+		font-size: 2rem;
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	.body-sample {
+		font-size: 1.25rem;
+		font-weight: 400;
+		line-height: 1.5;
+	}
+
+	.font-weights {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin-top: 1.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--border);
+	}
+
+	.font-weights span {
+		font-size: 1rem;
+		color: var(--text);
+	}
+
 	.type-section {
 		margin-bottom: 3rem;
+		display: none; /* Hide the original type sections */
 	}
 
 	.type-grid {
