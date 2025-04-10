@@ -1,6 +1,6 @@
 /**
  * Brand Guide Template Configuration
- * 
+ *
  * This file contains the main configuration for the brand guide template.
  * Customize these values to match your brand's needs.
  */
@@ -14,7 +14,7 @@ export interface TemplateConfig {
     description: string;
     favicon: string;
   };
-  
+
   /**
    * Default theme colors
    * These will be used as fallbacks if the brand.json file doesn't define them
@@ -32,7 +32,7 @@ export interface TemplateConfig {
     secondaryBg: string;
     border: string;
   };
-  
+
   /**
    * Navigation settings
    */
@@ -43,7 +43,7 @@ export interface TemplateConfig {
       href: string;
     }>;
   };
-  
+
   /**
    * Feature flags
    */
@@ -53,6 +53,11 @@ export interface TemplateConfig {
     showCMYK: boolean;
     showTypographyDetails: boolean;
   };
+
+  /**
+   * Admin settings
+   */
+  adminPassword?: string;
 }
 
 /**
@@ -92,13 +97,16 @@ export const defaultConfig: TemplateConfig = {
     showCMYK: true,
     showTypographyDetails: true,
   },
+  adminPassword: "brandguide123", // Default password, change this in your config.ts
 };
 
 /**
  * Get the template configuration
  * This function allows you to override the default configuration
  */
-export function getConfig(overrides: Partial<TemplateConfig> = {}): TemplateConfig {
+export function getConfig(
+  overrides: Partial<TemplateConfig> = {},
+): TemplateConfig {
   return {
     ...defaultConfig,
     ...overrides,

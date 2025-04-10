@@ -1,11 +1,11 @@
 /**
  * User Configuration
- * 
+ *
  * This file allows you to customize the template without modifying the core files.
  * Override any settings from the default configuration here.
  */
 
-import { getConfig, type TemplateConfig } from './template';
+import { getConfig, type TemplateConfig } from "./template";
 
 /**
  * Your custom configuration
@@ -18,7 +18,7 @@ const userConfig: Partial<TemplateConfig> = {
     description: "A comprehensive guide to your brand identity",
     favicon: "/favicon.svg",
   },
-  
+
   // Override default colors if needed
   // defaultColors: {
   //   primary: "#4f46e5",
@@ -26,7 +26,7 @@ const userConfig: Partial<TemplateConfig> = {
   //   primaryDark: "#3730a3",
   //   // ... other colors
   // },
-  
+
   // Customize navigation
   // navigation: {
   //   showMobileMenu: true,
@@ -38,7 +38,7 @@ const userConfig: Partial<TemplateConfig> = {
   //     { text: "Voice", href: "#voice" },
   //   ],
   // },
-  
+
   // Enable/disable features
   features: {
     enableColorCopy: true,
@@ -46,6 +46,9 @@ const userConfig: Partial<TemplateConfig> = {
     showCMYK: true,
     showTypographyDetails: true,
   },
+
+  // Admin password (change this to your own secure password)
+  adminPassword: "admin",
 };
 
 // Export the merged configuration

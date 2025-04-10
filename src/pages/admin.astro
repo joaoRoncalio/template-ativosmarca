@@ -1,128 +1,260 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { config } from '../config/config';
-import brandData from '../data/brand.json';
+import Layout from "../layouts/Layout.astro";
+import AdminLogin from "../components/AdminLogin.astro";
+import { config } from "../config/config";
+import brandData from "../data/brand.json";
+
+// Simple authentication for personal use
+// In a real app, you would use a more secure approach
+
+// Check if the user is authenticated
+let isAuthenticated = false;
+let showError = false;
+
+// Always allow access with the direct URL parameter (for development/personal use)
+const url = new URL(Astro.request.url);
+if (url.searchParams.get("auth") === "bypass123") {
+  isAuthenticated = true;
+}
+
+// Check for cookie-based authentication
+const cookies = Astro.request.headers.get("cookie");
+if (cookies && cookies.includes("admin_authenticated=true")) {
+  isAuthenticated = true;
+}
+
+// Handle form submission
+if (Astro.request.method === "POST") {
+  try {
+    const formData = await Astro.request.formData();
+    const password = formData.get("password");
+
+    // Accept either the config password or the hardcoded one for simplicity
+    const validPasswords = ["admin", "brandguide123"];
+
+    if (validPasswords.includes(password?.toString() || "")) {
+      isAuthenticated = true;
+      // Set a cookie to maintain authentication
+      Astro.response.headers.set(
+        "Set-Cookie",
+        "admin_authenticated=true; Path=/; HttpOnly; SameSite=Strict; Max-Age=3600",
+      );
+    } else {
+      showError = true;
+    }
+  } catch (error) {
+    console.error("Error processing form:", error);
+  }
+}
 ---
 
-<Layout>
-  <div class="admin-container">
-    <header class="admin-header">
-      <h1>Brand Guide Admin</h1>
-      <p>Use this page to manage your brand guide configuration</p>
-    </header>
+<Layout title="Admin Panel" showNav={false}>
+  {
+    !isAuthenticated ? (
+      <AdminLogin error={showError} />
+    ) : (
+      <div class="admin-container">
+        <header class="admin-header">
+          <div class="admin-header-content">
+            <div>
+              <h1>Brand Guide Admin</h1>
+              <p>Use this page to manage your brand guide configuration</p>
+            </div>
+            <a href="/" class="btn-secondary">
+              Back to Brand Guide
+            </a>
+          </div>
+        </header>
 
-    <div class="admin-content">
-      <section class="admin-section">
-        <h2>Brand Information</h2>
-        <div class="form-group">
-          <label for="companyName">Company Name</label>
-          <input type="text" id="companyName" value={brandData.companyName} />
-        </div>
-        <div class="form-group">
-          <label for="tagline">Tagline</label>
-          <input type="text" id="tagline" value={brandData.tagline} />
-        </div>
-      </section>
+        <div class="admin-content">
+          <section class="admin-section">
+            <h2>Brand Information</h2>
+            <div class="form-group">
+              <label for="companyName">Company Name</label>
+              <input
+                type="text"
+                id="companyName"
+                value={brandData.companyName}
+              />
+            </div>
+            <div class="form-group">
+              <label for="tagline">Tagline</label>
+              <input type="text" id="tagline" value={brandData.tagline} />
+            </div>
+          </section>
 
-      <section class="admin-section">
-        <h2>Color Management</h2>
-        <div class="color-categories">
-          <div class="color-category">
-            <h3>Primary Colors</h3>
-            <div class="color-list" id="primary-colors">
-              {brandData.colors.primary.map((color, index) => (
-                <div class="color-item" data-category="primary" data-index={index}>
-                  <div class="color-preview" style={`background-color: ${color.hex}`}></div>
-                  <div class="color-details">
-                    <input type="text" class="color-name" value={color.name} />
-                    <div class="color-values">
-                      <div class="color-value">
-                        <label>HEX</label>
-                        <input type="text" class="color-hex" value={color.hex} />
-                      </div>
-                      <div class="color-value">
-                        <label>CMYK</label>
-                        <input type="text" class="color-cmyk" value={color.cmyk} />
+          <section class="admin-section">
+            <h2>Color Management</h2>
+            <div class="color-categories">
+              <div class="color-category">
+                <h3>Primary Colors</h3>
+                <div class="color-list" id="primary-colors">
+                  {brandData.colors.primary.map((color, index) => (
+                    <div
+                      class="color-item"
+                      data-category="primary"
+                      data-index={index}
+                    >
+                      <div
+                        class="color-preview"
+                        style={`background-color: ${color.hex}`}
+                      />
+                      <div class="color-details">
+                        <input
+                          type="text"
+                          class="color-name"
+                          value={color.name}
+                        />
+                        <div class="color-values">
+                          <div class="color-value">
+                            <label>HEX</label>
+                            <input
+                              type="text"
+                              class="color-hex"
+                              value={color.hex}
+                            />
+                          </div>
+                          <div class="color-value">
+                            <label>CMYK</label>
+                            <input
+                              type="text"
+                              class="color-cmyk"
+                              value={color.cmyk}
+                            />
+                          </div>
+                        </div>
+                        <textarea
+                          class="color-description"
+                          placeholder="Color description"
+                        >
+                          {color.description}
+                        </textarea>
                       </div>
                     </div>
-                    <textarea class="color-description" placeholder="Color description">{color.description}</textarea>
-                  </div>
+                  ))}
+                  <button class="add-color-btn" data-category="primary">
+                    + Add Primary Color
+                  </button>
                 </div>
-              ))}
-              <button class="add-color-btn" data-category="primary">+ Add Primary Color</button>
-            </div>
-          </div>
+              </div>
 
-          <div class="color-category">
-            <h3>Accent Colors</h3>
-            <div class="color-list" id="accent-colors">
-              {brandData.colors.accent.map((color, index) => (
-                <div class="color-item" data-category="accent" data-index={index}>
-                  <div class="color-preview" style={`background-color: ${color.hex}`}></div>
-                  <div class="color-details">
-                    <input type="text" class="color-name" value={color.name} />
-                    <div class="color-values">
-                      <div class="color-value">
-                        <label>HEX</label>
-                        <input type="text" class="color-hex" value={color.hex} />
-                      </div>
-                      <div class="color-value">
-                        <label>CMYK</label>
-                        <input type="text" class="color-cmyk" value={color.cmyk} />
+              <div class="color-category">
+                <h3>Accent Colors</h3>
+                <div class="color-list" id="accent-colors">
+                  {brandData.colors.accent.map((color, index) => (
+                    <div
+                      class="color-item"
+                      data-category="accent"
+                      data-index={index}
+                    >
+                      <div
+                        class="color-preview"
+                        style={`background-color: ${color.hex}`}
+                      />
+                      <div class="color-details">
+                        <input
+                          type="text"
+                          class="color-name"
+                          value={color.name}
+                        />
+                        <div class="color-values">
+                          <div class="color-value">
+                            <label>HEX</label>
+                            <input
+                              type="text"
+                              class="color-hex"
+                              value={color.hex}
+                            />
+                          </div>
+                          <div class="color-value">
+                            <label>CMYK</label>
+                            <input
+                              type="text"
+                              class="color-cmyk"
+                              value={color.cmyk}
+                            />
+                          </div>
+                        </div>
+                        <textarea
+                          class="color-description"
+                          placeholder="Color description"
+                        >
+                          {color.description}
+                        </textarea>
                       </div>
                     </div>
-                    <textarea class="color-description" placeholder="Color description">{color.description}</textarea>
-                  </div>
+                  ))}
+                  <button class="add-color-btn" data-category="accent">
+                    + Add Accent Color
+                  </button>
                 </div>
-              ))}
-              <button class="add-color-btn" data-category="accent">+ Add Accent Color</button>
+              </div>
             </div>
+          </section>
+
+          <section class="admin-section">
+            <h2>Typography</h2>
+            <div class="form-group">
+              <label for="font-family">Primary Font</label>
+              <input
+                type="text"
+                id="font-family"
+                value={brandData.typography.font}
+              />
+            </div>
+            <div class="form-group">
+              <label for="typography-intro">Typography Introduction</label>
+              <textarea id="typography-intro" rows="3">
+                {brandData.typography.intro}
+              </textarea>
+            </div>
+          </section>
+
+          <section class="admin-section">
+            <h2>Template Configuration</h2>
+            <div class="form-group">
+              <label for="site-title">Site Title</label>
+              <input type="text" id="site-title" value={config.site.title} />
+            </div>
+            <div class="form-group">
+              <label for="site-description">Site Description</label>
+              <input
+                type="text"
+                id="site-description"
+                value={config.site.description}
+              />
+            </div>
+            <div class="form-group checkbox-group">
+              <label>
+                <input
+                  type="checkbox"
+                  id="show-cmyk"
+                  checked={config.features.showCMYK}
+                />
+                Show CMYK Values
+              </label>
+            </div>
+            <div class="form-group checkbox-group">
+              <label>
+                <input
+                  type="checkbox"
+                  id="enable-downloads"
+                  checked={config.features.enableDownloads}
+                />
+                Enable Downloads
+              </label>
+            </div>
+          </section>
+
+          <div class="admin-actions">
+            <button id="save-config" class="btn-primary">
+              Save Configuration
+            </button>
           </div>
         </div>
-      </section>
-
-      <section class="admin-section">
-        <h2>Typography</h2>
-        <div class="form-group">
-          <label for="font-family">Primary Font</label>
-          <input type="text" id="font-family" value={brandData.typography.font} />
-        </div>
-        <div class="form-group">
-          <label for="typography-intro">Typography Introduction</label>
-          <textarea id="typography-intro" rows="3">{brandData.typography.intro}</textarea>
-        </div>
-      </section>
-
-      <section class="admin-section">
-        <h2>Template Configuration</h2>
-        <div class="form-group">
-          <label for="site-title">Site Title</label>
-          <input type="text" id="site-title" value={config.site.title} />
-        </div>
-        <div class="form-group">
-          <label for="site-description">Site Description</label>
-          <input type="text" id="site-description" value={config.site.description} />
-        </div>
-        <div class="form-group checkbox-group">
-          <label>
-            <input type="checkbox" id="show-cmyk" checked={config.features.showCMYK} />
-            Show CMYK Values
-          </label>
-        </div>
-        <div class="form-group checkbox-group">
-          <label>
-            <input type="checkbox" id="enable-downloads" checked={config.features.enableDownloads} />
-            Enable Downloads
-          </label>
-        </div>
-      </section>
-
-      <div class="admin-actions">
-        <button id="save-config" class="btn-primary">Save Configuration</button>
-        <a href="/" class="btn-secondary">View Brand Guide</a>
       </div>
-    </div>
-  </div>
+    )
+  }
 </Layout>
 
 <style>
@@ -136,6 +268,12 @@ import brandData from '../data/brand.json';
     margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--border);
+  }
+
+  .admin-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .admin-header h1 {
@@ -310,29 +448,30 @@ import brandData from '../data/brand.json';
   // This is a simplified admin interface
   // In a real implementation, you would need to add server-side functionality
   // to save the configuration to the file system
-  
-  document.addEventListener('DOMContentLoaded', () => {
+
+  document.addEventListener("DOMContentLoaded", () => {
     // Initialize color pickers
-    document.querySelectorAll('.color-hex').forEach(input => {
-      input.addEventListener('change', (e) => {
-        const colorItem = e.target.closest('.color-item');
-        const preview = colorItem.querySelector('.color-preview');
+    document.querySelectorAll(".color-hex").forEach((input) => {
+      input.addEventListener("change", (e) => {
+        const colorItem = e.target.closest(".color-item");
+        const preview = colorItem.querySelector(".color-preview");
         preview.style.backgroundColor = e.target.value;
       });
     });
-    
+
     // Add color buttons
-    document.querySelectorAll('.add-color-btn').forEach(button => {
-      button.addEventListener('click', (e) => {
+    document.querySelectorAll(".add-color-btn").forEach((button) => {
+      button.addEventListener("click", (e) => {
         const category = e.target.dataset.category;
         const colorList = document.getElementById(`${category}-colors`);
-        
+
         // Create a new color item
-        const newColorItem = document.createElement('div');
-        newColorItem.className = 'color-item';
+        const newColorItem = document.createElement("div");
+        newColorItem.className = "color-item";
         newColorItem.dataset.category = category;
-        newColorItem.dataset.index = colorList.querySelectorAll('.color-item').length;
-        
+        newColorItem.dataset.index =
+          colorList.querySelectorAll(".color-item").length;
+
         newColorItem.innerHTML = `
           <div class="color-preview" style="background-color: #cccccc"></div>
           <div class="color-details">
@@ -350,22 +489,24 @@ import brandData from '../data/brand.json';
             <textarea class="color-description" placeholder="Color description"></textarea>
           </div>
         `;
-        
+
         // Add event listener to the new color hex input
-        const hexInput = newColorItem.querySelector('.color-hex');
-        hexInput.addEventListener('change', (e) => {
-          const preview = newColorItem.querySelector('.color-preview');
+        const hexInput = newColorItem.querySelector(".color-hex");
+        hexInput.addEventListener("change", (e) => {
+          const preview = newColorItem.querySelector(".color-preview");
           preview.style.backgroundColor = e.target.value;
         });
-        
+
         // Insert before the add button
         colorList.insertBefore(newColorItem, e.target);
       });
     });
-    
+
     // Save button (this would need server-side implementation)
-    document.getElementById('save-config').addEventListener('click', () => {
-      alert('In a real implementation, this would save the configuration to the server. For now, changes are only temporary.');
+    document.getElementById("save-config").addEventListener("click", () => {
+      alert(
+        "In a real implementation, this would save the configuration to the server. For now, changes are only temporary.",
+      );
     });
   });
 </script>

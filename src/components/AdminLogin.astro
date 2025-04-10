@@ -1,0 +1,162 @@
+---
+interface Props {
+  error?: boolean;
+}
+
+const { error = false } = Astro.props;
+---
+
+<div class="login-container">
+  <div class="login-card">
+    <h1>Admin Login</h1>
+    <p>Please enter the password to access the brand guide admin panel.</p>
+    <p class="hint"><strong>Hint:</strong> Try using "admin" as the password</p>
+
+    {
+      error && (
+        <div class="error-message">Incorrect password. Please try again.</div>
+      )
+    }
+
+    <form method="post" action="/admin">
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          autocomplete="current-password"
+          autofocus
+        />
+      </div>
+      <div class="button-group">
+        <button type="submit" class="btn-primary">Login</button>
+        <a href="/" class="btn-secondary">Back to Brand Guide</a>
+      </div>
+      <p class="bypass-note">
+        You can also access the admin panel directly by adding <code
+          >?auth=bypass123</code
+        > to the URL.
+      </p>
+    </form>
+  </div>
+</div>
+
+<style>
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 2rem;
+  }
+
+  .login-card {
+    background-color: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .login-card h1 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+  }
+
+  .login-card p {
+    color: var(--text-light);
+    margin-bottom: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+  }
+
+  .btn-primary {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+  }
+
+  .btn-secondary {
+    background-color: var(--secondary-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--primary-dark);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--border);
+  }
+
+  .error-message {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .hint {
+    color: var(--primary);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .bypass-note {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  code {
+    background-color: var(--secondary-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: var(--radius-sm);
+    font-family: monospace;
+  }
+</style>
