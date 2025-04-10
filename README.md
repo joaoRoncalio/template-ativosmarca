@@ -1,48 +1,140 @@
-# Astro Starter Kit: Basics
+# Brand Guide Template
 
-```sh
-npm create astro@latest -- --template basics
-```
+A customizable brand guidelines template built with Astro. This template provides a beautiful, responsive interface for showcasing your brand's identity, including colors, typography, and logo usage guidelines.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+![Brand Guide Template Preview](public/assets/preview.png)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Features
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+- 🎨 **Dynamic Color System**: JSON-based color management with CMYK support
+- 🔤 **Typography Showcase**: Display font families, weights, and usage examples
+- 🖼️ **Logo Guidelines**: Show proper logo usage with downloadable assets
+- 📱 **Fully Responsive**: Looks great on all devices
+- ⚡ **Fast & Lightweight**: Built with Astro for optimal performance
+- 🛠️ **Easy to Customize**: Simple JSON configuration
 
-## 🚀 Project Structure
+## Getting Started
 
-Inside of your Astro project, you'll see the following folders and files:
+### Prerequisites
+
+- Node.js 16 or higher
+- npm or pnpm
+
+### Installation
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/yourusername/brand-guide-template.git
+   cd brand-guide-template
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   # or
+   pnpm install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   # or
+   pnpm dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:4321`
+
+## Customization
+
+### Basic Configuration
+
+The template can be customized by editing the following files:
+
+1. **Brand Data**: Edit `src/data/brand.json` to update your brand information
+2. **Template Config**: Modify `src/config/config.ts` to change template settings
+3. **Logo Assets**: Replace the logo files in `public/assets/` with your own
+
+### Brand Data Structure
+
+The `brand.json` file contains all the information about your brand, including:
+
+- Company name and tagline
+- Logo files and usage guidelines
+- Color palette with HEX and CMYK values
+- Typography specifications
+
+A template file with documentation is available at `src/data/brand-template.json`.
+
+### Color System
+
+The color system supports:
+
+- Primary colors
+- Accent colors
+- Neutral colors
+
+Each color can have:
+
+- Name
+- HEX value
+- CMYK value
+- Description
+
+Colors are automatically applied to the CSS variables in the template.
+
+### Typography
+
+The typography section allows you to showcase:
+
+- Font families (heading and body)
+- Font weights
+- Heading styles
+- Body text styles
+
+### Advanced Customization
+
+For more advanced customization:
+
+1. **Components**: Modify or create new components in `src/components/`
+2. **Layouts**: Edit the main layout in `src/layouts/Layout.astro`
+3. **Styles**: Update global styles in the Layout component
+4. **Color Manager**: Customize color mapping in `public/js/colorManager.js`
+
+## Project Structure
 
 ```text
 /
-├── public/
-│   └── favicon.svg
+├── public/               # Static assets
+│   ├── assets/           # Brand assets (logos, fonts)
+│   ├── js/               # Client-side JavaScript
+│   └── favicon.svg       # Site favicon
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/       # Reusable UI components
+│   ├── config/           # Template configuration
+│   ├── data/             # Brand data (JSON)
+│   ├── layouts/          # Page layouts
+│   ├── pages/            # Page components
+│   └── types/            # TypeScript type definitions
+└── package.json          # Project dependencies
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Commands
 
-## 🧞 Commands
+| Command           | Action                                       |
+| :---------------- | :------------------------------------------- |
+| `npm install`     | Installs dependencies                        |
+| `npm run dev`     | Starts local dev server at `localhost:4321`  |
+| `npm run build`   | Build your production site to `./dist/`      |
+| `npm run preview` | Preview your build locally, before deploying |
 
-All commands are run from the root of the project, from a terminal:
+## License
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 👀 Want to learn more?
+## Acknowledgments
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Built with [Astro](https://astro.build)
+- Uses [Inter](https://rsms.me/inter/) font by default

@@ -1,0 +1,227 @@
+{
+  "companyName": "Your Company Name",
+  "tagline": "Your brand tagline or slogan",
+  
+  "logos": {
+    "primary": {
+      "svg": "/assets/logo-primary.svg",
+      "png": "/assets/logo-primary.png",
+      "description": "The primary logo should be used in most applications where the brand is prominently featured."
+    },
+    "dark": {
+      "svg": "/assets/logo-dark.svg",
+      "png": "/assets/logo-dark.png",
+      "description": "The dark version should be used on light backgrounds for maximum contrast."
+    },
+    "light": {
+      "svg": "/assets/logo-light.svg",
+      "png": "/assets/logo-light.png",
+      "description": "The light version should be used on dark backgrounds for maximum contrast."
+    },
+    "icon": {
+      "svg": "/assets/logo-icon.svg",
+      "png": "/assets/logo-icon.png",
+      "description": "The icon-only version can be used for favicons, app icons, or when space is limited."
+    },
+    "guidelines": [
+      "Maintain clear space around the logo equal to the height of the logo mark",
+      "Never modify the logo colors",
+      "Don't stretch or distort the logo",
+      "Use the appropriate version for different backgrounds",
+      "The minimum size for the logo is 40px in height",
+      "Always use the vector version when possible for maximum quality"
+    ]
+  },
+  
+  "colors": {
+    "intro": "Our color palette is designed to create a consistent and recognizable brand experience across all touchpoints. The colors below form the foundation of our visual identity.",
+    
+    "primary": [
+      {
+        "name": "Primary",
+        "hex": "#4f46e5",
+        "cmyk": "65, 58, 0, 0",
+        "description": "Our main brand color, used for primary buttons, links, and key brand elements"
+      },
+      {
+        "name": "Primary Light",
+        "hex": "#818cf8",
+        "cmyk": "48, 38, 0, 0",
+        "description": "Used for hover states and secondary elements"
+      },
+      {
+        "name": "Primary Dark",
+        "hex": "#3730a3",
+        "cmyk": "80, 75, 0, 20",
+        "description": "Used for active states and emphasis"
+      }
+    ],
+    
+    "accent": [
+      {
+        "name": "Purple",
+        "hex": "#8b5cf6",
+        "cmyk": "45, 65, 0, 0",
+        "description": "Used for highlighting important information and secondary actions"
+      },
+      {
+        "name": "Green",
+        "hex": "#10b981",
+        "cmyk": "70, 0, 60, 0",
+        "description": "Used for success states, confirmation messages, and positive indicators"
+      },
+      {
+        "name": "Red",
+        "hex": "#ef4444",
+        "cmyk": "0, 85, 75, 0",
+        "description": "Used for error states, warnings, and negative indicators"
+      }
+    ],
+    
+    "neutral": [
+      {
+        "name": "Dark",
+        "hex": "#1f2937",
+        "cmyk": "70, 60, 50, 75",
+        "description": "Used for primary text and high-contrast UI elements"
+      },
+      {
+        "name": "Gray",
+        "hex": "#6b7280",
+        "cmyk": "55, 45, 40, 10",
+        "description": "Used for secondary text and medium-contrast UI elements"
+      },
+      {
+        "name": "Light Gray",
+        "hex": "#e5e7eb",
+        "cmyk": "10, 5, 5, 0",
+        "description": "Used for borders, dividers, and subtle UI elements"
+      },
+      {
+        "name": "Light",
+        "hex": "#f3f4f6",
+        "cmyk": "5, 2, 2, 0",
+        "description": "Used for backgrounds, cards, and low-contrast UI elements"
+      },
+      {
+        "name": "White",
+        "hex": "#ffffff",
+        "cmyk": "0, 0, 0, 0",
+        "description": "Used for page backgrounds and high-contrast text on dark backgrounds"
+      }
+    ],
+    
+    "usage": {
+      "primary": [
+        "Primary buttons and interactive elements",
+        "Main navigation and key UI components",
+        "Headings and important text highlights",
+        "Brand icons and graphical elements",
+        "Progress indicators and focus states"
+      ],
+      "accent": [
+        "Secondary buttons and interactive elements",
+        "Highlighting important information",
+        "Success, warning, and error states",
+        "Charts, graphs, and data visualization",
+        "Badges, tags, and status indicators"
+      ],
+      "neutral": [
+        "Text content in various hierarchies",
+        "Backgrounds, borders, and dividers",
+        "Form elements and input fields",
+        "Secondary UI components",
+        "Disabled states and inactive elements"
+      ]
+    }
+  },
+  
+  "typography": {
+    "font": "Inter",
+    "intro": "Our typography system is designed to create clear visual hierarchy and ensure readability across all platforms.",
+    "weights": ["400 Regular", "500 Medium", "600 Semibold", "700 Bold"],
+    
+    "headings": [
+      {
+        "name": "H1",
+        "weight": "Bold",
+        "size": "2.25rem",
+        "lineHeight": "1.2",
+        "example": "Main Page Heading"
+      },
+      {
+        "name": "H2",
+        "weight": "Semibold",
+        "size": "1.875rem",
+        "lineHeight": "1.3",
+        "example": "Section Heading"
+      },
+      {
+        "name": "H3",
+        "weight": "Medium",
+        "size": "1.5rem",
+        "lineHeight": "1.4",
+        "example": "Subsection Heading"
+      },
+      {
+        "name": "H4",
+        "weight": "Semibold",
+        "size": "1.25rem",
+        "lineHeight": "1.4",
+        "example": "Card Heading"
+      }
+    ],
+    
+    "body": [
+      {
+        "name": "Body",
+        "weight": "Regular",
+        "size": "1rem",
+        "lineHeight": "1.5",
+        "example": "Main body text used for paragraphs and general content."
+      },
+      {
+        "name": "Body Small",
+        "weight": "Regular",
+        "size": "0.875rem",
+        "lineHeight": "1.5",
+        "example": "Secondary text used for captions, footnotes, and supporting content."
+      },
+      {
+        "name": "Body Large",
+        "weight": "Regular",
+        "size": "1.125rem",
+        "lineHeight": "1.6",
+        "example": "Featured text used for important paragraphs and highlighted content."
+      }
+    ],
+    
+    "families": {
+      "heading": {
+        "title": "Heading Font Family",
+        "description": "Used for all headings, titles, and prominent text elements to establish visual hierarchy.",
+        "sample": "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj",
+        "weights": ["Regular", "Medium", "Semibold", "Bold"]
+      },
+      "body": {
+        "title": "Body Font Family",
+        "description": "Used for body text, paragraphs, and general content to ensure optimal readability.",
+        "sample": "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj",
+        "weights": ["Regular", "Medium", "Semibold"]
+      }
+    },
+    
+    "guidelines": [
+      "Maintain consistent use of typography across all brand materials",
+      "Use appropriate heading levels to establish clear content hierarchy",
+      "Ensure sufficient contrast between text and background colors",
+      "Avoid using more than two font weights in a single design",
+      "Maintain appropriate line length for optimal readability (50-75 characters)"
+    ],
+    
+    "downloads": {
+      "web": "/assets/fonts/inter.zip",
+      "desktop": "/assets/fonts/inter-desktop.zip"
+    }
+  }
+}

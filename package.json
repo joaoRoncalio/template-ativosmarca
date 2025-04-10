@@ -1,8 +1,15 @@
 {
-  "name": "@example/basics",
+  "name": "brand-guide-template",
   "type": "module",
-  "version": "0.0.1",
-  "private": true,
+  "version": "1.0.0",
+  "description": "A customizable brand guidelines template built with Astro",
+  "author": "Your Name",
+  "keywords": [
+    "astro-template",
+    "brand-guidelines",
+    "design-system",
+    "style-guide"
+  ],
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

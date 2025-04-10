@@ -2,9 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import ColorGrid from '../components/ColorGrid.astro';
 import brandData from '../data/brand.json';
+import { config } from '../config/config';
 ---
 
-<Layout>
+<Layout title="Brand Guidelines" description={`Official brand guidelines for ${brandData.companyName}`}>
 	<!-- Hidden element to store brand data for JavaScript access -->
 	<script id="brand-data" type="application/json" is:inline>
 		{JSON.stringify(brandData)}
@@ -849,22 +850,14 @@ import brandData from '../data/brand.json';
 
 <script src="/js/colorManager.js" type="module" is:inline></script>
 
-<script is:inline>
+<script>
 	// Add client-side JavaScript for copy to clipboard functionality
 	document.addEventListener('DOMContentLoaded', () => {
-		// Initialize color manager with brand data
-		const brandData = JSON.parse(document.getElementById('brand-data').textContent);
-		const colorManager = window.colorManagerModule.initColorManager(brandData.colors);
-
-		// Make colorManager available globally
-		window.colorManager = colorManager;
-
 		// Handle copy to clipboard
 		const copyButtons = document.querySelectorAll('.copy-btn');
 		copyButtons.forEach(button => {
 			button.addEventListener('click', () => {
-				const colorValueElement = button.closest('.color-value');
-				const colorValue = colorValueElement?.getAttribute('data-clipboard') || '';
+				const colorValue = button.closest('.color-value').getAttribute('data-clipboard');
 				navigator.clipboard.writeText(colorValue).then(() => {
 					// Show success feedback
 					const originalHTML = button.innerHTML;
@@ -877,51 +870,6 @@ import brandData from '../data/brand.json';
 					}, 2000);
 				});
 			});
-		});
-
-		// Add color update functionality to color previews
-		const colorPreviews = document.querySelectorAll('.color-preview');
-		colorPreviews.forEach(preview => {
-			// Get category and color name from data attributes
-			const category = preview.getAttribute('data-category');
-			const colorName = preview.getAttribute('data-color-name');
-			if (!category || !colorName) return;
-
-			// Find the current hex value
-			const card = preview.closest('.color-card');
-			if (!card) return;
-
-			const hexEl = card.querySelector('.color-value[data-clipboard*="#"] code');
-			if (!hexEl || !hexEl.textContent) return;
-
-			const hexValue = hexEl.textContent.split(': ')[1] || '';
-
-			// Add click event to color preview for editing
-			preview.addEventListener('click', function() {
-				const newColor = prompt(`Update ${colorName} color:`, hexValue);
-				if (newColor && /^#[0-9A-F]{6}$/i.test(newColor)) {
-					// Update color in data and UI
-					colorManager.updateColor(category, colorName, newColor);
-
-					// Update the preview and hex code display
-					this.style.backgroundColor = newColor;
-
-					const hexEl = card.querySelector('.color-value[data-clipboard*="#"] code');
-					if (hexEl) hexEl.textContent = `HEX: ${newColor}`;
-
-					const hexClipEl = card.querySelector('.color-value[data-clipboard*="#"]');
-					if (hexClipEl) hexClipEl.setAttribute('data-clipboard', newColor);
-
-					// Update CSS variables
-					document.documentElement.style.setProperty(`--${category}-${colorName.toLowerCase().replace(' ', '-')}`, newColor);
-				} else if (newColor) {
-					alert('Please enter a valid hex color (e.g., #FF5500)');
-				}
-			});
-
-			// Add tooltip to indicate editability
-			preview.title = 'Click to edit color';
-			preview.style.cursor = 'pointer';
 		});
 
 		// Smooth scrolling for anchor links
