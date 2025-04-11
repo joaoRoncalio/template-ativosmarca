@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
     <title>Acme Corp Brand Guidelines</title>
-    <script src="/js/colorManager.js" type="module"></script>
+    <script src="/js/colorManager.js" type="module" is:inline></script>
 
     <!-- Initialize color manager with brand data -->
     <script is:inline>
@@ -167,6 +167,9 @@
   main {
     flex: 1;
     padding: 6rem 2rem 4rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 
   /* Header & Navigation */
@@ -191,6 +194,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .logo {
@@ -239,12 +244,37 @@
     width: 100%;
   }
 
+  .nav-link.active-section {
+    color: var(--primary);
+  }
+
+  .nav-link.active-section::after {
+    width: 100%;
+  }
+
+  /* Prevent scrolling when mobile menu is open */
+  body.menu-open {
+    overflow: hidden;
+  }
+
   .mobile-menu-toggle {
     display: none;
     background: none;
     border: none;
     cursor: pointer;
     color: var(--text);
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s ease;
+  }
+
+  .mobile-menu-toggle:hover {
+    background-color: var(--secondary-bg);
+  }
+
+  .mobile-menu-toggle:active {
+    transform: scale(0.95);
   }
 
   /* Footer Styles */
@@ -319,8 +349,12 @@
     }
 
     .footer-logo {
-      margin: 0 auto;
-      text-align: center;
+      margin: 0;
+      text-align: left;
+    }
+
+    .nav-content {
+      padding: 0.75rem 1.5rem;
     }
   }
 
@@ -339,7 +373,24 @@
     }
 
     main {
-      padding: 5rem 1.5rem 3rem;
+      padding: 4.5rem 1rem 2rem;
+    }
+
+    .logo span {
+      font-size: 1rem;
+    }
+
+    .logo img {
+      width: 120px;
+      height: auto;
+    }
+
+    .footer-content {
+      gap: 2rem;
+    }
+
+    footer {
+      padding: 3rem 1.5rem 1rem;
     }
   }
 
@@ -353,10 +404,22 @@
       left: 0;
       right: 0;
       background: var(--background);
-      padding: 1.5rem;
+      padding: 1rem;
       border-bottom: 1px solid var(--border);
       box-shadow: var(--shadow);
       animation: slideDown 0.3s ease-out forwards;
+      z-index: 200;
+    }
+
+    .nav-links.active .nav-link {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      width: 100%;
+      text-align: center;
+    }
+
+    .nav-links.active .nav-link:last-child {
+      border-bottom: none;
     }
 
     @keyframes slideDown {
@@ -368,6 +431,30 @@
         opacity: 1;
         transform: translateY(0);
       }
+    }
+  }
+
+  /* Small mobile devices */
+  @media (max-width: 480px) {
+    .nav-content {
+      padding: 0.5rem 1rem;
+    }
+
+    .logo span {
+      font-size: 0.9rem;
+    }
+
+    .logo img {
+      width: 100px;
+    }
+
+    main {
+      padding: 4rem 0.75rem 1.5rem;
+    }
+
+    footer {
+      padding: 2rem 1rem 1rem;
+      margin-top: 2rem;
     }
   }
 </style>
@@ -384,7 +471,17 @@
         e.preventDefault();
         e.stopPropagation();
         navLinks.classList.toggle("active");
-        console.log("Mobile menu toggled");
+
+        // Toggle aria-expanded attribute for accessibility
+        const isExpanded = navLinks.classList.contains("active");
+        mobileMenuToggle.setAttribute("aria-expanded", isExpanded);
+
+        // Add a class to the body to prevent scrolling when menu is open
+        if (isExpanded) {
+          document.body.classList.add("menu-open");
+        } else {
+          document.body.classList.remove("menu-open");
+        }
       });
     }
 
@@ -400,8 +497,26 @@
       if (navLinks && navLinks.classList.contains("active")) {
         if (!e.target.closest("nav")) {
           navLinks.classList.remove("active");
+          document.body.classList.remove("menu-open");
+          if (mobileMenuToggle) {
+            mobileMenuToggle.setAttribute("aria-expanded", "false");
+          }
         }
       }
+    });
+
+    // Close mobile menu when clicking on a nav link
+    const navLinkItems = document.querySelectorAll(".nav-link");
+    navLinkItems.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 768 && navLinks) {
+          navLinks.classList.remove("active");
+          document.body.classList.remove("menu-open");
+          if (mobileMenuToggle) {
+            mobileMenuToggle.setAttribute("aria-expanded", "false");
+          }
+        }
+      });
     });
 
     // Highlight active nav link based on scroll position
@@ -421,9 +536,9 @@
           scrollPosition < sectionTop + sectionHeight
         ) {
           navItems.forEach((item) => {
-            item.classList.remove("active");
+            item.classList.remove("active-section");
             if (item.getAttribute("href") === `#${sectionId}`) {
-              item.classList.add("active");
+              item.classList.add("active-section");
             }
           });
         }
@@ -432,5 +547,20 @@
 
     window.addEventListener("scroll", highlightNavOnScroll);
     highlightNavOnScroll(); // Run once on page load
+
+    // Handle window resize - reset menu state if window is resized above mobile breakpoint
+    window.addEventListener("resize", () => {
+      if (
+        window.innerWidth > 768 &&
+        navLinks &&
+        navLinks.classList.contains("active")
+      ) {
+        navLinks.classList.remove("active");
+        document.body.classList.remove("menu-open");
+        if (mobileMenuToggle) {
+          mobileMenuToggle.setAttribute("aria-expanded", "false");
+        }
+      }
+    });
   });
 </script>
