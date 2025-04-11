@@ -26,7 +26,7 @@ const { color, category } = Astro.props;
     <div class="color-values">
       <div class="color-value" data-clipboard={color.hex}>
         <code>HEX: {color.hex}</code>
-        <button class="copy-btn" aria-label="Copy to clipboard">
+        <button class="copy-btn" aria-label="Copiar para área de transferência">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -45,7 +45,7 @@ const { color, category } = Astro.props;
       </div>
       <div class="color-value" data-clipboard={`cmyk(${color.cmyk})`}>
         <code>CMYK: {color.cmyk}</code>
-        <button class="copy-btn" aria-label="Copy to clipboard">
+        <button class="copy-btn" aria-label="Copiar para área de transferência">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -82,6 +82,7 @@ const { color, category } = Astro.props;
         box-shadow 0.2s ease;
       display: flex;
       flex-direction: column;
+      width: 100%;
     }
 
     .color-card:hover {
@@ -161,6 +162,39 @@ const { color, category } = Astro.props;
       color: var(--text-light);
       font-size: 0.9rem;
       line-height: 1.5;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      .color-info {
+        padding: 1.25rem;
+      }
+
+      .color-preview {
+        height: 120px;
+      }
+
+      .color-value {
+        padding: 0.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .color-info h3 {
+        font-size: 1.1rem;
+      }
+
+      .color-info code {
+        font-size: 0.85rem;
+      }
+
+      .color-description p {
+        font-size: 0.8rem;
+      }
+
+      .color-preview {
+        height: 100px;
+      }
     }
   </style>
 </div>

@@ -4,7 +4,7 @@ import ColorGrid from '../components/ColorGrid.astro';
 import brandData from '../data/brand.json';
 ---
 
-<Layout>
+<Layout title={brandData.ui.meta.title} description={`${brandData.ui.meta.description} ${brandData.companyName}`}>
 	<!-- Hidden element to store brand data for JavaScript access -->
 	<script id="brand-data" type="application/json" is:inline>
 		{JSON.stringify(brandData)}
@@ -12,40 +12,40 @@ import brandData from '../data/brand.json';
 	<div class="container">
 		<section class="hero">
 			<div class="hero-content">
-				<h1>{brandData.companyName} <span>Brand Guidelines</span></h1>
+				<h1>{brandData.companyName} <span>{brandData.ui.meta.title}</span></h1>
 				<p>{brandData.tagline}</p>
 				<div class="hero-cta">
-					<a href="#logos" class="btn btn-primary">Explore Guidelines</a>
-					<a href="#colors" class="btn btn-secondary">View Color Palette</a>
+					<a href="#logos" class="btn btn-primary">{brandData.ui.buttons.exploreGuidelines}</a>
+					<a href="#colors" class="btn btn-secondary">{brandData.ui.buttons.viewColorPalette}</a>
 				</div>
 			</div>
 			<div class="hero-image">
-				<img src={brandData.logos.primary.svg} alt="{brandData.companyName} Logo" width="300" height="90" />
+				<img src={brandData.logos.primary.svg} alt="Logotipo {brandData.companyName}" width="300" height="90" />
 			</div>
 		</section>
 
 		<section id="logos" class="section">
-			<h2>Logo</h2>
+			<h2>{brandData.ui.sections.logos}</h2>
 			<div class="content">
 				<div class="logo-main">
-					<h3>Primary Logo</h3>
+					<h3>{brandData.ui.sections.primaryLogo}</h3>
 					<p>{brandData.logos.primary.description}</p>
 					<div class="logo-preview">
-						<img src={brandData.logos.primary.svg} alt="Primary Logo" width="300" height="90" />
+						<img src={brandData.logos.primary.svg} alt="Logotipo Principal" width="300" height="90" />
 					</div>
 					<div class="download-links">
 						<a href={brandData.logos.primary.svg} class="download-link" download>
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-							Download SVG
+							{brandData.ui.buttons.downloadSvg}
 						</a>
 						<a href={brandData.logos.primary.png} class="download-link" download>
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-							Download PNG
+							{brandData.ui.buttons.downloadPng}
 						</a>
 					</div>
 				</div>
 
-				<h3>Usage Guidelines</h3>
+				<h3>{brandData.ui.sections.usageGuidelines}</h3>
 				<ul class="guidelines-list">
 					{brandData.logos.guidelines.map(guideline => (
 						<li>
@@ -55,56 +55,56 @@ import brandData from '../data/brand.json';
 					))}
 				</ul>
 
-				<h3>Logo Variations</h3>
+				<h3>{brandData.ui.sections.logoVariations}</h3>
 				<div class="logo-variations">
 					<div class="logo-card">
-						<h4>Dark Version</h4>
+						<h4>{brandData.ui.sections.darkVersion}</h4>
 						<p>{brandData.logos.dark.description}</p>
 						<div class="logo-preview dark-bg">
-							<img src={brandData.logos.dark.svg} alt="Dark Logo" width="200" height="60" />
+							<img src={brandData.logos.dark.svg} alt="Logotipo Escuro" width="200" height="60" />
 						</div>
 						<div class="download-links">
 							<a href={brandData.logos.dark.svg} class="download-link" download>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-								SVG
+								{brandData.ui.buttons.downloadSvg}
 							</a>
 							<a href={brandData.logos.dark.png} class="download-link" download>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-								PNG
+								{brandData.ui.buttons.downloadPng}
 							</a>
 						</div>
 					</div>
 					<div class="logo-card">
-						<h4>Light Version</h4>
+						<h4>{brandData.ui.sections.lightVersion}</h4>
 						<p>{brandData.logos.light.description}</p>
 						<div class="logo-preview light-bg">
-							<img src={brandData.logos.light.svg} alt="Light Logo" width="200" height="60" />
+							<img src={brandData.logos.light.svg} alt="Logotipo Claro" width="200" height="60" />
 						</div>
 						<div class="download-links">
 							<a href={brandData.logos.light.svg} class="download-link" download>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-								SVG
+								{brandData.ui.buttons.downloadSvg}
 							</a>
 							<a href={brandData.logos.light.png} class="download-link" download>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-								PNG
+								{brandData.ui.buttons.downloadPng}
 							</a>
 						</div>
 					</div>
 					<div class="logo-card">
-						<h4>Icon Only</h4>
+						<h4>{brandData.ui.sections.iconOnly}</h4>
 						<p>{brandData.logos.icon.description}</p>
 						<div class="logo-preview">
-							<img src={brandData.logos.icon.svg} alt="Icon Logo" width="60" height="60" />
+							<img src={brandData.logos.icon.svg} alt="Ícone do Logotipo" width="60" height="60" />
 						</div>
 						<div class="download-links">
 							<a href={brandData.logos.icon.svg} class="download-link" download>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-								SVG
+								{brandData.ui.buttons.downloadSvg}
 							</a>
 							<a href={brandData.logos.icon.png} class="download-link" download>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-								PNG
+								{brandData.ui.buttons.downloadPng}
 							</a>
 						</div>
 					</div>
@@ -113,7 +113,7 @@ import brandData from '../data/brand.json';
 		</section>
 
 		<section id="colors" class="section">
-			<h2>Colors</h2>
+			<h2>{brandData.ui.sections.colors}</h2>
 			<div class="content">
 				<div class="color-intro">
 					<p>{brandData.colors.intro}</p>
@@ -123,25 +123,25 @@ import brandData from '../data/brand.json';
 				<ColorGrid
 					colors={brandData.colors.primary}
 					category="primary"
-					title="Primary Colors"
+					title={brandData.ui.sections.primaryColors}
 				/>
 
 				<ColorGrid
 					colors={brandData.colors.accent}
 					category="accent"
-					title="Accent Colors"
+					title={brandData.ui.sections.accentColors}
 				/>
 
 				<ColorGrid
 					colors={brandData.colors.neutral}
 					category="neutral"
-					title="Neutral Colors"
+					title={brandData.ui.sections.neutralColors}
 				/>
 
-				<h3>Color Usage Guidelines</h3>
+				<h3>{brandData.ui.sections.colorUsageGuidelines}</h3>
 				<div class="color-usage">
 					<div class="usage-card">
-						<h4>Primary Colors</h4>
+						<h4>{brandData.ui.sections.primaryColors}</h4>
 						<ul class="usage-list">
 							{brandData.colors.usage.primary.map(usage => (
 								<li>
@@ -152,7 +152,7 @@ import brandData from '../data/brand.json';
 						</ul>
 					</div>
 					<div class="usage-card">
-						<h4>Accent Colors</h4>
+						<h4>{brandData.ui.sections.accentColors}</h4>
 						<ul class="usage-list">
 							{brandData.colors.usage.accent.map(usage => (
 								<li>
@@ -163,7 +163,7 @@ import brandData from '../data/brand.json';
 						</ul>
 					</div>
 					<div class="usage-card">
-						<h4>Neutral Colors</h4>
+						<h4>{brandData.ui.sections.neutralColors}</h4>
 						<ul class="usage-list">
 							{brandData.colors.usage.neutral.map(usage => (
 								<li>
@@ -178,7 +178,7 @@ import brandData from '../data/brand.json';
 		</section>
 
 		<section id="typography" class="section">
-			<h2>Typography</h2>
+			<h2>{brandData.ui.sections.typography}</h2>
 			<div class="content">
 				<div class="typography-intro">
 					<div class="typography-header">
@@ -190,7 +190,6 @@ import brandData from '../data/brand.json';
 					<div class="font-family-card">
 						<div class="font-family-header">
 							<h3>{brandData.typography.families.heading.title}</h3>
-							<p class="font-name">{brandData.typography.font}</p>
 							<p class="font-description">{brandData.typography.families.heading.description}</p>
 						</div>
 						<div class="font-preview">
@@ -202,13 +201,25 @@ import brandData from '../data/brand.json';
 							</div>
 						</div>
 						<div class="download-links">
-							<a href={brandData.typography.downloads.web} class="download-link" download>
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-								Download Web Fonts
+							<!-- <a href={brandData.typography.downloads.heading.web.url} class="download-link" download={brandData.typography.downloads.heading.web.iconType === 'download' ? true : null}>
+								{brandData.typography.downloads.heading.web.iconType === 'download' ? (
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								) : (
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+								)}
+								{brandData.ui.buttons.downloadWebFonts}
+							</a> -->
+							<a href={brandData.typography.downloads.heading.desktop.url} class="download-link" download={brandData.typography.downloads.heading.desktop.iconType === 'download' ? true : null}>
+								{brandData.typography.downloads.heading.desktop.iconType === 'download' ? (
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								) : (
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+								)}
+								{brandData.ui.buttons.downloadDesktopFonts}
 							</a>
-							<a href={brandData.typography.downloads.desktop} class="download-link" download>
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-								Download Desktop Fonts
+							<a href={brandData.typography.downloads.heading.googleFonts.url} class="download-link" target="_blank" rel="noopener noreferrer">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+								{brandData.ui.buttons.viewGoogleFonts}
 							</a>
 						</div>
 					</div>
@@ -216,7 +227,6 @@ import brandData from '../data/brand.json';
 					<div class="font-family-card">
 						<div class="font-family-header">
 							<h3>{brandData.typography.families.body.title}</h3>
-							<p class="font-name">{brandData.typography.font}</p>
 							<p class="font-description">{brandData.typography.families.body.description}</p>
 						</div>
 						<div class="font-preview">
@@ -228,13 +238,25 @@ import brandData from '../data/brand.json';
 							</div>
 						</div>
 						<div class="download-links">
-							<a href={brandData.typography.downloads.web} class="download-link" download>
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-								Download Web Fonts
+							<!-- <a href={brandData.typography.downloads.body.web.url} class="download-link" download={brandData.typography.downloads.body.web.iconType === 'download' ? true : null}>
+								{brandData.typography.downloads.body.web.iconType === 'download' ? (
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								) : (
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+								)}
+								{brandData.ui.buttons.downloadWebFonts}
+							</a> -->
+							<a href={brandData.typography.downloads.body.desktop.url} class="download-link" download={brandData.typography.downloads.body.desktop.iconType === 'download' ? true : null}>
+								{brandData.typography.downloads.body.desktop.iconType === 'download' ? (
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+								) : (
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+								)}
+								{brandData.ui.buttons.downloadDesktopFonts}
 							</a>
-							<a href={brandData.typography.downloads.desktop} class="download-link" download>
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-								Download Desktop Fonts
+							<a href={brandData.typography.downloads.body.googleFonts.url} class="download-link" target="_blank" rel="noopener noreferrer">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+								{brandData.ui.buttons.viewGoogleFonts}
 							</a>
 						</div>
 					</div>
@@ -242,7 +264,7 @@ import brandData from '../data/brand.json';
 
 				<!-- Keep the original sections but hide them with CSS -->
 				<div class="type-section">
-					<h3>Headings</h3>
+					<h3>{brandData.ui.sections.headings}</h3>
 					<div class="type-grid">
 						{brandData.typography.headings.map(heading => (
 							<div class="type-card">
@@ -273,7 +295,7 @@ import brandData from '../data/brand.json';
 				</div>
 
 				<div class="type-section">
-					<h3>Body Text</h3>
+					<h3>{brandData.ui.sections.bodyText}</h3>
 					<div class="type-grid">
 						{brandData.typography.body.map(text => (
 							<div class="type-card">
@@ -304,7 +326,7 @@ import brandData from '../data/brand.json';
 				</div>
 
 				<div class="typography-guidelines">
-					<h3>Typography Guidelines</h3>
+					<h3>{brandData.ui.sections.typographyGuidelines}</h3>
 					<ul class="guidelines-list">
 						{brandData.typography.guidelines.map(guideline => (
 							<li>
@@ -320,26 +342,6 @@ import brandData from '../data/brand.json';
 </Layout>
 
 <style>
-	:root {
-		--primary: #2563eb;
-		--primary-light: #60a5fa;
-		--primary-dark: #1e40af;
-		--accent-purple: #8b5cf6;
-		--accent-green: #10b981;
-		--accent-red: #ef4444;
-		--text: #1f2937;
-		--text-light: #6b7280;
-		--background: #ffffff;
-		--secondary-bg: #f3f4f6;
-		--border: #e5e7eb;
-		--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-		--shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-		--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-		--radius-sm: 0.375rem;
-		--radius: 0.5rem;
-		--radius-lg: 1rem;
-	}
-
 	.container {
 		max-width: 1200px;
 		margin: 0 auto;
@@ -350,7 +352,7 @@ import brandData from '../data/brand.json';
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 6rem 2rem 4rem;
+		padding: 6rem 4rem;
 		background: linear-gradient(135deg, var(--secondary-bg) 0%, #ffffff 100%);
 		border-radius: var(--radius-lg);
 		margin-bottom: 4rem;
@@ -362,6 +364,7 @@ import brandData from '../data/brand.json';
 
 	.hero h1 {
 		font-size: 3.5rem;
+		letter-spacing: -0.04em;
 		font-weight: 700;
 		margin: 0;
 		color: var(--text);
@@ -443,7 +446,7 @@ import brandData from '../data/brand.json';
 	.section h2::after {
 		content: '';
 		position: absolute;
-		bottom: -0.5rem;
+		bottom: -0.8rem;
 		left: 0;
 		width: 3rem;
 		height: 0.25rem;
@@ -815,11 +818,20 @@ import brandData from '../data/brand.json';
 			max-width: 100%;
 			margin-bottom: 1.5rem;
 		}
+
+		.font-family-section {
+			grid-template-columns: 1fr;
+		}
+
+		.section {
+			margin: 4rem 0;
+		}
 	}
 
 	@media (max-width: 768px) {
 		.section {
 			padding: 1.5rem;
+			margin: 3rem 0;
 		}
 
 		.content {
@@ -834,10 +846,99 @@ import brandData from '../data/brand.json';
 		.color-usage,
 		.type-grid {
 			grid-template-columns: 1fr;
+			gap: 1.5rem;
 		}
 
 		.download-links {
 			flex-direction: column;
+		}
+
+		.hero {
+			padding: 3.5rem 1.25rem 2.5rem;
+			margin-bottom: 2.5rem;
+		}
+
+		.hero-image img {
+			width: 180px;
+			height: auto;
+		}
+
+		.btn {
+			width: auto;
+			max-width: 100%;
+			padding: 0.75rem 1rem;
+		}
+
+		.hero-cta {
+			flex-direction: column;
+			width: 100%;
+		}
+
+		.logo-preview img {
+			max-width: 80%;
+			height: auto;
+		}
+
+		.guidelines-list li {
+			padding: 0.75rem 0.5rem;
+		}
+	}
+
+	/* Small mobile devices */
+	@media (max-width: 480px) {
+		.section {
+			padding: 1rem;
+			margin: 2rem 0;
+		}
+
+		.content {
+			padding: 1rem;
+		}
+
+		.hero {
+			padding: 3rem 1rem 2rem;
+			margin-bottom: 2rem;
+		}
+
+		.hero h1 {
+			font-size: 2rem;
+		}
+
+		.hero p {
+			font-size: 1rem;
+			margin: 1rem 0;
+		}
+
+		.section h2 {
+			font-size: 1.75rem;
+		}
+
+		h3 {
+			font-size: 1.25rem;
+			margin: 1.5rem 0 1rem;
+		}
+
+		.logo-preview {
+			padding: 1rem;
+		}
+
+		.download-link {
+			padding: 0.6rem 1rem;
+			width: auto;
+			max-width: 100%;
+			justify-content: center;
+		}
+
+		.color-intro p {
+			font-size: 1rem;
+		}
+
+		.font-family-card {
+			padding: 1.25rem;
+		}
+
+		.font-preview {
+			padding: 1.25rem;
 		}
 	}
 
@@ -845,83 +946,49 @@ import brandData from '../data/brand.json';
 	.copy-btn:active {
 		transform: scale(0.95);
 	}
+
+	/* Touch feedback for mobile */
+	.touch-active {
+		transform: scale(0.97);
+		opacity: 0.9;
+		transition: transform 0.1s ease, opacity 0.1s ease;
+	}
 </style>
 
-<script src="/js/colorManager.js" type="module" is:inline></script>
+<!-- <script src="/js/colorManager.js" type="module" is:inline></script> -->
+
 
 <script is:inline>
 	// Add client-side JavaScript for copy to clipboard functionality
 	document.addEventListener('DOMContentLoaded', () => {
-		// Initialize color manager with brand data
-		const brandData = JSON.parse(document.getElementById('brand-data').textContent);
-		const colorManager = window.colorManagerModule.initColorManager(brandData.colors);
-
-		// Make colorManager available globally
-		window.colorManager = colorManager;
-
 		// Handle copy to clipboard
 		const copyButtons = document.querySelectorAll('.copy-btn');
 		copyButtons.forEach(button => {
 			button.addEventListener('click', () => {
 				const colorValueElement = button.closest('.color-value');
-				const colorValue = colorValueElement?.getAttribute('data-clipboard') || '';
+				if (!colorValueElement) return;
+
+				const colorValue = colorValueElement.getAttribute('data-clipboard');
+				if (!colorValue) return;
+
 				navigator.clipboard.writeText(colorValue).then(() => {
 					// Show success feedback
 					const originalHTML = button.innerHTML;
 					button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-					button.style.color = '#10b981'; // Green color
+
+					// Use setAttribute for TypeScript compatibility
+					button.setAttribute('style', 'color: #10b981'); // Green color
 
 					setTimeout(() => {
 						button.innerHTML = originalHTML;
-						button.style.color = '';
+						button.setAttribute('style', ''); // Reset style
 					}, 2000);
+				}).catch(err => {
+					console.error('Failed to copy: ', err);
+					// Provide visual feedback even if clipboard fails
+					alert('Valor da cor: ' + colorValue);
 				});
 			});
-		});
-
-		// Add color update functionality to color previews
-		const colorPreviews = document.querySelectorAll('.color-preview');
-		colorPreviews.forEach(preview => {
-			// Get category and color name from data attributes
-			const category = preview.getAttribute('data-category');
-			const colorName = preview.getAttribute('data-color-name');
-			if (!category || !colorName) return;
-
-			// Find the current hex value
-			const card = preview.closest('.color-card');
-			if (!card) return;
-
-			const hexEl = card.querySelector('.color-value[data-clipboard*="#"] code');
-			if (!hexEl || !hexEl.textContent) return;
-
-			const hexValue = hexEl.textContent.split(': ')[1] || '';
-
-			// Add click event to color preview for editing
-			preview.addEventListener('click', function() {
-				const newColor = prompt(`Update ${colorName} color:`, hexValue);
-				if (newColor && /^#[0-9A-F]{6}$/i.test(newColor)) {
-					// Update color in data and UI
-					colorManager.updateColor(category, colorName, newColor);
-
-					// Update the preview and hex code display
-					this.style.backgroundColor = newColor;
-
-					const hexEl = card.querySelector('.color-value[data-clipboard*="#"] code');
-					if (hexEl) hexEl.textContent = `HEX: ${newColor}`;
-
-					const hexClipEl = card.querySelector('.color-value[data-clipboard*="#"]');
-					if (hexClipEl) hexClipEl.setAttribute('data-clipboard', newColor);
-
-					// Update CSS variables
-					document.documentElement.style.setProperty(`--${category}-${colorName.toLowerCase().replace(' ', '-')}`, newColor);
-				} else if (newColor) {
-					alert('Please enter a valid hex color (e.g., #FF5500)');
-				}
-			});
-
-			// Add tooltip to indicate editability
-			preview.title = 'Click to edit color';
-			preview.style.cursor = 'pointer';
 		});
 
 		// Smooth scrolling for anchor links
@@ -942,5 +1009,19 @@ import brandData from '../data/brand.json';
 				}
 			});
 		});
+
+		// Add touch feedback for mobile devices
+		const allButtons = document.querySelectorAll('.btn, .download-link, .copy-btn');
+		allButtons.forEach(button => {
+			button.addEventListener('touchstart', () => {
+				button.classList.add('touch-active');
+			});
+
+			button.addEventListener('touchend', () => {
+				button.classList.remove('touch-active');
+			});
+		});
 	});
 </script>
+
+

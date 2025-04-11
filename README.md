@@ -1,26 +1,34 @@
-# Astro Starter Kit: Basics
+# 🎨 Brand Guidelines Portal
 
-```sh
-npm create astro@latest -- --template basics
-```
+Um portal de diretrizes de marca moderno e interativo construído com Astro.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+![Brand Guidelines Preview](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## ✨ Funcionalidades
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+- 🖌️ Exibição de logotipos e variações
+- 🎭 Paleta de cores interativa
+- 📝 Guia de tipografia
+- 🌓 Suporte para modo claro/escuro
+- 📱 Design responsivo para todos os dispositivos
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## 🚀 Estrutura do Projeto
 
 ```text
 /
 ├── public/
+│   ├── assets/
+│   │   ├── logo-primary.svg
+│   │   ├── logo-dark.svg
+│   │   └── ...
+│   ├── js/
+│   │   └── colorManager.js
 │   └── favicon.svg
 ├── src/
+│   ├── components/
+│   │   └── ColorGrid.astro
+│   ├── data/
+│   │   └── brand.json
 │   ├── layouts/
 │   │   └── Layout.astro
 │   └── pages/
@@ -28,21 +36,30 @@ Inside of your Astro project, you'll see the following folders and files:
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🧞 Comandos
 
-## 🧞 Commands
+Todos os comandos são executados a partir da raiz do projeto:
 
-All commands are run from the root of the project, from a terminal:
+| Comando            | Ação                                      |
+| :----------------- | :---------------------------------------- |
+| `pnpm install`     | Instala dependências                      |
+| `pnpm run dev`     | Inicia servidor local em `localhost:4321` |
+| `pnpm run build`   | Compila o site para produção em `./dist/` |
+| `pnpm run preview` | Visualiza a compilação localmente         |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 🛠️ Personalização
 
-## 👀 Want to learn more?
+1. Edite o arquivo `src/data/brand.json` para atualizar as informações da marca
+2. Substitua os logotipos em `public/assets/` pelos seus próprios arquivos
+3. Ajuste as cores e tipografia conforme necessário
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 🔗 Tecnologias
+
+- [Astro](https://astro.build) - Framework web rápido e leve
+- CSS Moderno - Variáveis CSS, Grid, Flexbox
+- JavaScript - Para interatividade e gerenciamento de cores
+
+## 👀 Saiba mais
+
+- [Documentação do Astro](https://docs.astro.build)
+- [Discord do Astro](https://astro.build/chat)
