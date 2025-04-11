@@ -3,7 +3,9 @@ import vercel from "@astrojs/vercel";
 
 export default defineConfig({
   output: "server",
-  adapter: vercel(),
+  adapter: vercel({
+    analytics: true,
+  }),
   server: {
     host: true,
   },
