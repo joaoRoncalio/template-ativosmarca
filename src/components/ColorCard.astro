@@ -26,7 +26,7 @@ const { color, category } = Astro.props;
     <div class="color-values">
       <div class="color-value" data-clipboard={color.hex}>
         <code>HEX: {color.hex}</code>
-        <button class="copy-btn" aria-label="Copy to clipboard">
+        <button class="copy-btn" aria-label="Copiar para área de transferência">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -45,7 +45,7 @@ const { color, category } = Astro.props;
       </div>
       <div class="color-value" data-clipboard={`cmyk(${color.cmyk})`}>
         <code>CMYK: {color.cmyk}</code>
-        <button class="copy-btn" aria-label="Copy to clipboard">
+        <button class="copy-btn" aria-label="Copiar para área de transferência">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
