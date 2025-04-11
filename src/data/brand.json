@@ -1,6 +1,54 @@
 {
   "companyName": "Acme Corp",
   "tagline": "Essential resources for our brand identity",
+  "ui": {
+    "meta": {
+      "title": "Brand Guidelines",
+      "description": "Official brand guidelines for"
+    },
+    "navigation": {
+      "brandGuidelines": "Brand Guidelines",
+      "links": {
+        "logos": "Logos",
+        "colors": "Colors",
+        "typography": "Typography"
+      }
+    },
+    "buttons": {
+      "exploreGuidelines": "Explore Guidelines",
+      "viewColorPalette": "View Color Palette",
+      "downloadSvg": "Download SVG",
+      "downloadPng": "Download PNG",
+      "downloadWebFonts": "Download Web Fonts",
+      "downloadDesktopFonts": "Download Desktop Fonts"
+    },
+    "sections": {
+      "logos": "Logo",
+      "primaryLogo": "Primary Logo",
+      "logoVariations": "Logo Variations",
+      "darkVersion": "Dark Version",
+      "lightVersion": "Light Version",
+      "iconOnly": "Icon Only",
+      "usageGuidelines": "Usage Guidelines",
+      "colors": "Colors",
+      "primaryColors": "Primary Colors",
+      "accentColors": "Accent Colors",
+      "neutralColors": "Neutral Colors",
+      "colorUsageGuidelines": "Color Usage Guidelines",
+      "typography": "Typography",
+      "headings": "Headings",
+      "bodyText": "Body Text",
+      "typographyGuidelines": "Typography Guidelines"
+    },
+    "footer": {
+      "brandAssets": "Brand Assets",
+      "resources": "Resources",
+      "downloadAllAssets": "Download All Assets",
+      "brandGuidelinesPdf": "Brand Guidelines PDF",
+      "contactBrandTeam": "Contact Brand Team",
+      "copyright": "© 2025 Acme Corp. All rights reserved."
+    }
+  },
   "logos": {
     "primary": {
       "svg": "/assets/logo-primary.svg",

@@ -1,3 +1,7 @@
+---
+import brandData from "../data/brand.json";
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>Acme Corp Brand Guidelines</title>
+    <title>{brandData.companyName} {brandData.ui.meta.title}</title>
     <script src="/js/colorManager.js" type="module" is:inline></script>
 
     <!-- Initialize color manager with brand data -->
@@ -44,16 +48,22 @@
           <a href="/" class="logo">
             <img
               src="/assets/logo-primary.svg"
-              alt="Acme Corp Logo"
+              alt="{brandData.companyName} Logo"
               width="150"
               height="45"
             />
-            <span>Brand Guidelines</span>
+            <span>{brandData.ui.navigation.brandGuidelines}</span>
           </a>
           <div class="nav-links">
-            <a href="#logos" class="nav-link">Logos</a>
-            <a href="#colors" class="nav-link">Colors</a>
-            <a href="#typography" class="nav-link">Typography</a>
+            <a href="#logos" class="nav-link"
+              >{brandData.ui.navigation.links.logos}</a
+            >
+            <a href="#colors" class="nav-link"
+              >{brandData.ui.navigation.links.colors}</a
+            >
+            <a href="#typography" class="nav-link"
+              >{brandData.ui.navigation.links.typography}</a
+            >
           </div>
           <button class="mobile-menu-toggle" aria-label="Toggle menu">
             <svg
@@ -84,32 +94,40 @@
         <div class="footer-logo">
           <img
             src="/assets/logo-dark.svg"
-            alt="Acme Corp Logo"
+            alt="{brandData.companyName} Logo"
             width="150"
             height="45"
           />
         </div>
         <div class="footer-links">
           <div class="footer-section">
-            <h3>Brand Assets</h3>
+            <h3>{brandData.ui.footer.brandAssets}</h3>
             <ul>
-              <li><a href="#logos">Logos</a></li>
-              <li><a href="#colors">Colors</a></li>
-              <li><a href="#typography">Typography</a></li>
+              <li>
+                <a href="#logos">{brandData.ui.navigation.links.logos}</a>
+              </li>
+              <li>
+                <a href="#colors">{brandData.ui.navigation.links.colors}</a>
+              </li>
+              <li>
+                <a href="#typography"
+                  >{brandData.ui.navigation.links.typography}</a
+                >
+              </li>
             </ul>
           </div>
           <div class="footer-section">
-            <h3>Resources</h3>
+            <h3>{brandData.ui.footer.resources}</h3>
             <ul>
-              <li><a href="#">Download All Assets</a></li>
-              <li><a href="#">Brand Guidelines PDF</a></li>
-              <li><a href="#">Contact Brand Team</a></li>
+              <li><a href="#">{brandData.ui.footer.downloadAllAssets}</a></li>
+              <li><a href="#">{brandData.ui.footer.brandGuidelinesPdf}</a></li>
+              <li><a href="#">{brandData.ui.footer.contactBrandTeam}</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Acme Corp. All rights reserved.</p>
+        <p>{brandData.ui.footer.copyright}</p>
       </div>
     </footer>
   </body>
