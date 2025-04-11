@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "framework": "astro",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "github": { "silent": true },
+  "functions": {
+    "api/entry.js": { "runtime": "nodejs20.x" }
+  }
+}

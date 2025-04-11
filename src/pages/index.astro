@@ -1,8 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ColorGrid from '../components/ColorGrid.astro';
-import brandData from '../data/brand.json';
-import { config } from '../config/config';
+import * as brandDataModule from '../data/brand.json';
+const brandData = brandDataModule;
+
+// Mark this page for server-side rendering
+export const prerender = true;
 ---
 
 <Layout title="Brand Guidelines" description={`Official brand guidelines for ${brandData.companyName}`}>
@@ -892,3 +895,5 @@ import { config } from '../config/config';
 		});
 	});
 </script>
+
+
