@@ -687,19 +687,20 @@ if (Astro.request.method === "POST") {
             },
           };
 
-          // Send data to the server
-          const response = await fetch("/api/save-config", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              brandData,
-              configData,
-            }),
-          });
+          // In static mode, we'll simulate a successful API response
+          // In a real implementation, this would send data to a database or API
+          console.log("Brand data:", brandData);
+          console.log("Config data:", configData);
 
-          const result = await response.json();
+          // Simulate API delay
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+
+          // Simulate API response
+          const result = {
+            success: true,
+            message:
+              "This is a static demo version. In a production environment, this would save to a database.",
+          };
 
           if (result.success) {
             // Show success message
