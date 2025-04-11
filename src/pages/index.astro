@@ -2,9 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import ColorGrid from '../components/ColorGrid.astro';
 import brandData from '../data/brand.json';
-
-// Mark this page for server-side rendering
-export const prerender = true;
 ---
 
 <Layout title="Brand Guidelines" description={`Official brand guidelines for ${brandData.companyName}`}>
