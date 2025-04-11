@@ -35,41 +35,41 @@
     "intro": "Our color palette is designed to create a consistent and recognizable brand experience across all touchpoints. The colors below form the foundation of our visual identity.",
     "primary": [
       {
-        "name": "Verde Cu",
-        "hex": "#51173d",
-        "cmyk": "65, 0, 73, 10",
-        "description": "teste"
+        "name": "Indigo",
+        "hex": "#ff6438",
+        "cmyk": "65, 55, 0, 29",
+        "description": "Primary brand color"
       },
       {
-        "name": "Verde Light",
-        "hex": "#60a5fa",
-        "cmyk": "62, 33, 0, 2",
+        "name": "Indigo Light",
+        "hex": "#7986cb",
+        "cmyk": "40, 35, 0, 20",
         "description": "Used for hover states and secondary elements"
       },
       {
-        "name": "Blue Dark",
-        "hex": "#1e40af",
-        "cmyk": "83, 64, 0, 31",
+        "name": "Indigo Dark",
+        "hex": "#303f9f",
+        "cmyk": "70, 60, 0, 38",
         "description": "Used for active states and emphasis"
       }
     ],
     "accent": [
       {
-        "name": "Purple",
-        "hex": "#8b5cf6",
-        "cmyk": "44, 63, 0, 4",
+        "name": "Orange",
+        "hex": "#ff9800",
+        "cmyk": "0, 40, 100, 0",
         "description": "Accent color for special elements and highlights"
       },
       {
-        "name": "Green",
-        "hex": "#10b981",
-        "cmyk": "91, 0, 30, 28",
+        "name": "Teal",
+        "hex": "#009688",
+        "cmyk": "100, 0, 10, 47",
         "description": "Used for success states and positive indicators"
       },
       {
-        "name": "HAHAHA",
-        "hex": "#ff40ff",
-        "cmyk": "0, 71, 71, 6",
+        "name": "Red",
+        "hex": "#f44336",
+        "cmyk": "0, 72, 77, 4",
         "description": "Used for error states and negative indicators"
       }
     ],

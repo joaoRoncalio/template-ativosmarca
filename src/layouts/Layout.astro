@@ -14,22 +14,27 @@
     <title>Acme Corp Brand Guidelines</title>
     <script src="/js/colorManager.js" type="module"></script>
 
-    <!-- Initialize default CSS variables -->
+    <!-- Initialize color manager with brand data -->
     <script is:inline>
-      // This will be replaced by dynamic values from colorManager.js
-      window.brandColors = {
-        primary: "#2563eb",
-        primaryLight: "#60a5fa",
-        primaryDark: "#1e40af",
-        accentPurple: "#8b5cf6",
-        accentGreen: "#10b981",
-        accentRed: "#ef4444",
-        text: "#1f2937",
-        textLight: "#6b7280",
-        background: "#ffffff",
-        secondaryBg: "#f3f4f6",
-        border: "#e5e7eb",
-      };
+      document.addEventListener("DOMContentLoaded", function () {
+        // Import brand data
+        fetch("/data/brand.json")
+          .then((response) => response.json())
+          .then((brandData) => {
+            console.log("Brand data loaded:", brandData);
+
+            // Initialize color manager with the colors from brand.json
+            if (window.colorManagerModule) {
+              window.colorManager = window.colorManagerModule.initColorManager(
+                brandData.colors,
+              );
+              console.log("Color manager initialized");
+            } else {
+              console.error("Color manager module not available");
+            }
+          })
+          .catch((error) => console.error("Error loading brand data:", error));
+      });
     </script>
   </head>
   <body>

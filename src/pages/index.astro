@@ -6,7 +6,7 @@ import brandData from '../data/brand.json';
 
 <Layout title="Brand Guidelines" description={`Official brand guidelines for ${brandData.companyName}`}>
 	<!-- Hidden element to store brand data for JavaScript access -->
-	<script id="brand-data" type="application/json" is:inline>
+	<script id="brand-data" type="application/json">
 		{JSON.stringify(brandData)}
 	</script>
 	<div class="container">
@@ -322,16 +322,16 @@ import brandData from '../data/brand.json';
 <style>
 	:root {
 		--primary: #2563eb;
-		--primary-light: #60a5fa;
-		--primary-dark: #1e40af;
-		--accent-purple: #8b5cf6;
-		--accent-green: #10b981;
-		--accent-red: #ef4444;
-		--text: #1f2937;
-		--text-light: #6b7280;
-		--background: #ffffff;
-		--secondary-bg: #f3f4f6;
-		--border: #e5e7eb;
+        --primary-light: #60a5fa;
+        --primary-dark: #1e40af;
+        --accent-purple: #8b5cf6;
+        --accent-green: #10b981;
+        --accent-red: #ef4444;
+        --text: #1f2937;
+        --text-light: #6b7280;
+        --background: #ffffff;
+        --secondary-bg: #f3f4f6;
+        --border: #e5e7eb;
 		--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 		--shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 		--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -847,7 +847,8 @@ import brandData from '../data/brand.json';
 	}
 </style>
 
-<script src="/js/colorManager.js" type="module" is:inline></script>
+<!-- <script src="/js/colorManager.js" type="module" is:inline></script> -->
+
 
 <script>
 	// Add client-side JavaScript for copy to clipboard functionality
