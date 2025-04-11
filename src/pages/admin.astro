@@ -5,7 +5,7 @@ import { config } from "../config/config";
 import brandData from "../data/brand.json";
 
 // Mark this page for server-side rendering
-export const prerender = false;
+export const prerender = true;
 
 // Simple authentication for personal use
 // In a real app, you would use a more secure approach
@@ -271,8 +271,9 @@ if (Astro.request.method === "POST") {
               Save Configuration
             </button>
             <p class="vercel-note">
-              Note: When deployed on Vercel, changes are not permanently saved.
-              This is a demo version.
+              Note: This is a static demo version. Changes are not permanently
+              saved. In a real implementation, this would save to a database or
+              API.
             </p>
           </div>
         </div>

@@ -1,6 +1,7 @@
-// For Vercel deployment, we can't write directly to the file system
-// Instead, we'll simulate a successful response for the admin panel
-// In a real production environment, you would use a database or storage service
+// For static site generation, we'll use client-side JavaScript to handle form submissions
+// This file is just a placeholder and won't be used in the static build
+
+export const prerender = true;
 
 export async function POST({ request }) {
   try {
