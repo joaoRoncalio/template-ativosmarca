@@ -1,8 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ColorGrid from '../components/ColorGrid.astro';
-import * as brandDataModule from '../data/brand.json';
-const brandData = brandDataModule;
+import brandData from '../data/brand.json';
 
 // Mark this page for server-side rendering
 export const prerender = true;
@@ -895,5 +894,6 @@ export const prerender = true;
 		});
 	});
 </script>
+
 
 
