@@ -270,6 +270,10 @@ if (Astro.request.method === "POST") {
               </svg>
               Save Configuration
             </button>
+            <p class="vercel-note">
+              Note: When deployed on Vercel, changes are not permanently saved.
+              This is a demo version.
+            </p>
           </div>
         </div>
       </div>
@@ -484,6 +488,15 @@ if (Astro.request.method === "POST") {
     100% {
       transform: rotate(360deg);
     }
+  }
+
+  .vercel-note {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    max-width: 300px;
+    line-height: 1.4;
   }
 
   /* Admin actions styling already defined above */

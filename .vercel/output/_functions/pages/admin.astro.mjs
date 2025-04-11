@@ -63,7 +63,10 @@ Show CMYK Values
 Enable Downloads
 </label> </div> </section> <div class="admin-actions" data-astro-cid-2zp6q64z> <button id="save-config" class="btn-primary save-btn" data-astro-cid-2zp6q64z> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-2zp6q64z> ${renderComponent($$result2, "Fragment", Fragment, { "data-astro-cid-2zp6q64z": true }, { "default": async ($$result3) => renderTemplate` <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" data-astro-cid-2zp6q64z></path> <polyline points="17 21 17 13 7 13 7 21" data-astro-cid-2zp6q64z></polyline> <polyline points="7 3 7 8 15 8" data-astro-cid-2zp6q64z></polyline> ` })} </svg>
 Save Configuration
-</button> </div> </div> </div>`}` })}  ${renderScript($$result, "E:/Miscel\xE2nia/VSCode/template-brandguide/src/pages/admin.astro?astro&type=script&index=0&lang.ts")}`;
+</button> <p class="vercel-note" data-astro-cid-2zp6q64z>
+Note: When deployed on Vercel, changes are not permanently saved.
+              This is a demo version.
+</p> </div> </div> </div>`}` })}  ${renderScript($$result, "E:/Miscel\xE2nia/VSCode/template-brandguide/src/pages/admin.astro?astro&type=script&index=0&lang.ts")}`;
 }, "E:/Miscel\xE2nia/VSCode/template-brandguide/src/pages/admin.astro", void 0);
 
 const $$file = "E:/Miscelânia/VSCode/template-brandguide/src/pages/admin.astro";
