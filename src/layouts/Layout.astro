@@ -8,6 +8,9 @@ import brandData from "../data/brand.json";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={Astro.props.title} />
+    <meta property="og:description" content={Astro.props.description} />
+    <meta property="og:image" content="/brandguide-template-ogimage_tiny.webp" />
     <meta name="generator" content={Astro.generator} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
