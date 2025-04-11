@@ -2,8 +2,6 @@
 
 Um portal de diretrizes de marca moderno e interativo construído com Astro.
 
-![Brand Guidelines Preview](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
 ## ✨ Funcionalidades
 
 - 🖌️ Exibição de logotipos e variações
