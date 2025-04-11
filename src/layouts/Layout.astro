@@ -3,7 +3,7 @@ import brandData from "../data/brand.json";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -18,26 +18,34 @@ import brandData from "../data/brand.json";
     <title>{brandData.companyName} {brandData.ui.meta.title}</title>
     <script src="/js/colorManager.js" type="module" is:inline></script>
 
+    <!-- Hidden element to store brand data for JavaScript access -->
+    <script id="brand-data" type="application/json" is:inline>
+      {JSON.stringify(brandData)}
+    </script>
+
     <!-- Initialize color manager with brand data -->
     <script is:inline>
       document.addEventListener("DOMContentLoaded", function () {
-        // Import brand data
-        fetch("/data/brand.json")
-          .then((response) => response.json())
-          .then((brandData) => {
-            console.log("Brand data loaded:", brandData);
+        try {
+          // Get brand data from the hidden JSON element
+          const brandDataElement = document.getElementById('brand-data');
+          if (brandDataElement) {
+            const brandData = JSON.parse(brandDataElement.textContent || '{}');
+            console.log("Brand data loaded from inline JSON");
 
-            // Initialize color manager with the colors from brand.json
+            // Initialize color manager with the colors from brand data
             if (window.colorManagerModule) {
               window.colorManager = window.colorManagerModule.initColorManager(
-                brandData.colors,
+                brandData.colors
               );
               console.log("Color manager initialized");
             } else {
               console.error("Color manager module not available");
             }
-          })
-          .catch((error) => console.error("Error loading brand data:", error));
+          }
+        } catch (error) {
+          console.error("Error loading brand data:", error);
+        }
       });
     </script>
   </head>
@@ -48,7 +56,7 @@ import brandData from "../data/brand.json";
           <a href="/" class="logo">
             <img
               src="/assets/logo-primary.svg"
-              alt="{brandData.companyName} Logo"
+              alt="Logotipo {brandData.companyName}"
               width="150"
               height="45"
             />
@@ -65,7 +73,7 @@ import brandData from "../data/brand.json";
               >{brandData.ui.navigation.links.typography}</a
             >
           </div>
-          <button class="mobile-menu-toggle" aria-label="Toggle menu">
+          <button class="mobile-menu-toggle" aria-label="Alternar menu">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -94,7 +102,7 @@ import brandData from "../data/brand.json";
         <div class="footer-logo">
           <img
             src="/assets/logo-dark.svg"
-            alt="{brandData.companyName} Logo"
+            alt="Logotipo {brandData.companyName}"
             width="150"
             height="45"
           />
@@ -142,8 +150,8 @@ import brandData from "../data/brand.json";
   :root {
     /* These default values will be overridden by the colorManager.js */
     --primary: var(--primaryColor, #2563eb);
-    --primary-light: #60a5fa;
-    --primary-dark: #1e40af;
+    --primary-light: color-mix(in srgb, var(--primary) 70%, white);
+    --primary-dark: color-mix(in srgb, var(--primary) 80%, black);
     --accent-purple: #8b5cf6;
     --accent-green: #10b981;
     --accent-red: #ef4444;
