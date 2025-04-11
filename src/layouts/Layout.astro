@@ -133,10 +133,15 @@ import brandData from "../data/brand.json";
   </body>
 </html>
 
-<style is:global>
+<style
+  is:global
+  define:vars={{
+    primaryColor: brandData.colors.primary?.[0]?.hex,
+  }}
+>
   :root {
     /* These default values will be overridden by the colorManager.js */
-    --primary: #2563eb;
+    --primary: var(--primaryColor, #2563eb);
     --primary-light: #60a5fa;
     --primary-dark: #1e40af;
     --accent-purple: #8b5cf6;
@@ -467,7 +472,7 @@ import brandData from "../data/brand.json";
     }
 
     main {
-      padding: 4rem 0.75rem 1.5rem;
+      padding: 6rem 0.75rem 1.5rem;
     }
 
     footer {

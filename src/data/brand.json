@@ -19,8 +19,8 @@
       "viewColorPalette": "View Color Palette",
       "downloadSvg": "Download SVG",
       "downloadPng": "Download PNG",
-      "downloadWebFonts": "Download Web Fonts",
-      "downloadDesktopFonts": "Download Desktop Fonts",
+      "downloadWebFonts": "Download Font Family",
+      "downloadDesktopFonts": "Download Font Family",
       "viewGoogleFonts": "View on Google Fonts"
     },
     "sections": {
