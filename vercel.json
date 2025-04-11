@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
+  "buildCommand": "pnpm build",
+  "devCommand": "pnpm dev",
+  "installCommand": "pnpm install",
   "framework": "astro",
-  "outputDirectory": "dist",
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "github": { "silent": true },
-  "functions": {
-    "api/entry.js": { "runtime": "nodejs20.x" }
-  }
+  "outputDirectory": "dist"
 }

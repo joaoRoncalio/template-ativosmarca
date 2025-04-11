@@ -63,11 +63,6 @@ const fullTitle = `${brandData.companyName} ${title}`;
                     {link.text}
                   </a>
                 ))}
-                {Astro.url.pathname !== "/admin" && (
-                  <a href="/admin" class="nav-link admin-link">
-                    Admin
-                  </a>
-                )}
               </div>
               {config.navigation.showMobileMenu && (
                 <button class="mobile-menu-toggle" aria-label="Toggle menu">
