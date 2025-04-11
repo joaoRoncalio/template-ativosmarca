@@ -1,8 +1,7 @@
 {
-  "version": 2,
   "buildCommand": "pnpm build",
   "devCommand": "pnpm dev",
   "installCommand": "pnpm install",
-  "framework": null,
+  "framework": "astro",
   "outputDirectory": "dist"
 }
