@@ -84,8 +84,8 @@
     "intro": "Nossa paleta de cores foi projetada para criar uma experiência de marca consistente e reconhecível em todos os pontos de contato. As cores abaixo formam a base da nossa identidade visual.",
     "primary": [
       {
-        "name": "Índigo",
-        "hex": "#ff6438",
+        "name": "Azul Principal",
+        "hex": "#1A066B",
         "cmyk": "65, 55, 0, 29",
         "description": "Cor principal da marca"
       },
@@ -242,13 +242,13 @@
     ],
     "families": {
       "heading": {
-        "title": "Inter (Fonte de Títulos)",
+        "title": "Inter (Títulos)",
         "description": "Usada para todos os títulos, cabeçalhos e elementos de texto proeminentes para estabelecer hierarquia visual.",
         "sample": "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj",
         "weights": ["Regular", "Medium", "Semibold", "Bold"]
       },
       "body": {
-        "title": "Roboto (Fonte de Corpo)",
+        "title": "Roboto (Parágrafos)",
         "description": "Usada para texto de corpo, parágrafos e conteúdo geral para garantir legibilidade ideal.",
         "sample": "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj",
         "weights": ["Regular", "Medium", "Semibold"]
