@@ -250,5 +250,18 @@ const gridStyle = `grid-template-columns: repeat(${getGridColumns(logoArray.leng
     .logo-variations {
       grid-template-columns: 1fr !important;
     }
+
+    @media (max-width: 480px) {
+      .logo-card {
+        padding: 0rem;
+        margin-bottom: 4rem;
+        box-shadow: none;
+      }
+
+      .logo-card:hover {
+        transform: translateY(0);
+        box-shadow: none;
+      }
+    }
   }
 </style>

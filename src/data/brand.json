@@ -9,7 +9,7 @@
     "navigation": {
       "brandGuidelines": "Ativos de Marca",
       "links": {
-        "logos": "Logotipo",
+        "logos": "Logos",
         "colors": "Cores",
         "typography": "Tipografia"
       }
@@ -24,12 +24,8 @@
       "viewGoogleFonts": "Ver no Google Fonts"
     },
     "sections": {
-      "logos": "Logotipo",
-      "primaryLogo": "Logotipo Principal",
+      "logos": "Logos",
       "logoVariations": "Variações do Logotipo",
-      "darkVersion": "Versão Escura",
-      "lightVersion": "Versão Clara",
-      "iconOnly": "Apenas Ícone",
       "usageGuidelines": "Diretrizes de Uso",
       "colors": "Cores",
       "primaryColors": "Cores Primárias",
@@ -53,7 +49,7 @@
     }
   },
   "logos": {
-    "primary": {
+    "principal": {
       "svg": "/assets/logo-primary.svg",
       "png": "/assets/logo-primary.png",
       "description": "O logotipo principal deve ser usado na maioria das aplicações onde a marca é destacada.",
@@ -71,7 +67,7 @@
       "description": "A versão clara deve ser usada em fundos escuros para máximo contraste.",
       "background": "default-bg"
     },
-    "icon": {
+    "ícone": {
       "svg": "/assets/logo-icon.svg",
       "png": "/assets/logo-icon.png",
       "description": "A versão apenas com ícone pode ser usada para favicons, ícones de aplicativos ou quando o espaço é limitado.",
