@@ -9,7 +9,7 @@
     "navigation": {
       "brandGuidelines": "Guia de Marca",
       "links": {
-        "logos": "Logotipos",
+        "logos": "Logotipo",
         "colors": "Cores",
         "typography": "Tipografia"
       }
@@ -47,7 +47,7 @@
       "downloadAllAssets": "Baixar Todos os Recursos",
       "brandGuidelinesPdf": "PDF do Guia de Marca",
       "contactBrandTeam": "Contatar Equipe de Marca",
-      "copyright": "© 2025 Acme Corp. Todos os direitos reservados."
+      "copyright": "© 2025 Acme Corp. WebDev & Design por <a href='https://montefiorestudio.com' target='_blank'>Montefiore Studio</a>."
     }
   },
   "logos": {
@@ -85,7 +85,7 @@
     "primary": [
       {
         "name": "Azul Principal",
-        "hex": "#1A066B",
+        "hex": "#2563eb",
         "cmyk": "65, 55, 0, 29",
         "description": "Cor principal da marca"
       },
@@ -244,7 +244,7 @@
       "heading": {
         "title": "Inter (Títulos)",
         "description": "Usada para todos os títulos, cabeçalhos e elementos de texto proeminentes para estabelecer hierarquia visual.",
-        "sample": "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj",
+        "sample": "Aa Bb Cc Dd Ee Ff Gg Hh",
         "weights": ["Regular", "Medium", "Semibold", "Bold"]
       },
       "body": {

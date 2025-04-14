@@ -29,14 +29,14 @@ import brandData from "../data/brand.json";
           >
         </div>
       </div>
-      <div class="hero-image">
+      <!--  <div class="hero-image">
         <img
           src={brandData.logos.primary.svg}
           alt="Logotipo {brandData.companyName}"
           width="300"
           height="90"
         />
-      </div>
+      </div> -->
     </section>
 
     <section id="logos" class="section">
@@ -942,6 +942,7 @@ import brandData from "../data/brand.json";
   }
 
   .logo-card {
+    margin-bottom: 2rem;
     background: white;
     border-radius: var(--radius);
     padding: 1.5rem;
@@ -1329,7 +1330,7 @@ import brandData from "../data/brand.json";
     }
 
     .logo-preview img {
-      max-width: 80%;
+      max-width: 50%;
       height: auto;
     }
 
@@ -1341,12 +1342,17 @@ import brandData from "../data/brand.json";
   /* Small mobile devices */
   @media (max-width: 480px) {
     .section {
-      padding: 1rem;
+      padding: 0;
       margin: 2rem 0;
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
     }
 
     .content {
-      padding: 1rem;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
     }
 
     .hero {
@@ -1359,14 +1365,20 @@ import brandData from "../data/brand.json";
     }
 
     .hero p {
+      max-width: 24ch;
       font-size: var(--font-size-small);
       margin: 1rem 0;
     }
 
     .section h2 {
       margin-top: 0.5rem;
-      margin-left: 0.25rem;
+      margin-left: 0rem;
       font-size: calc(var(--font-size-h3) + 0.25rem);
+    }
+
+    .section p {
+      font-size: var(--font-size-xs) !important;
+      line-height: var(--line-height-normal) !important;
     }
 
     h3 {
@@ -1400,13 +1412,12 @@ import brandData from "../data/brand.json";
     .guidelines-list li {
       gap: 0.5rem;
       font-size: var(--font-size-xs);
-      padding: 0.5rem;
+      padding: 0.75rem;
     }
 
-    .guidelines-list svg {
+    .guidelines-list li svg {
       margin-top: 0;
-      width: 18px !important;
-      height: 18px !important;
+      min-width: 16px !important;
     }
   }
 

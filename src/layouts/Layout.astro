@@ -69,7 +69,7 @@ import brandData from "../data/brand.json";
               width="150"
               height="45"
             />
-            <span>{brandData.ui.navigation.brandGuidelines}</span>
+            <!-- <span>{brandData.ui.navigation.brandGuidelines}</span> -->
           </a>
           <div class="nav-links">
             <a href="#logos" class="nav-link"
@@ -144,7 +144,7 @@ import brandData from "../data/brand.json";
         </div>
       </div>
       <div class="footer-bottom">
-        <p>{brandData.ui.footer.copyright}</p>
+        <p set:html={brandData.ui.footer.copyright} />
       </div>
     </footer>
   </body>
@@ -225,6 +225,12 @@ import brandData from "../data/brand.json";
     width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    transition: color 0.2s ease;
   }
 
   /* Header & Navigation */
@@ -504,7 +510,7 @@ import brandData from "../data/brand.json";
     }
 
     main {
-      padding: 6rem 0.75rem 1.5rem;
+      padding: 6rem 2rem 1.5rem;
     }
 
     footer {
