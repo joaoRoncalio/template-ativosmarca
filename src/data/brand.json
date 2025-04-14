@@ -3,11 +3,11 @@
   "tagline": "Recursos essenciais para nossa identidade de marca",
   "ui": {
     "meta": {
-      "title": "Guia de Marca",
+      "title": "Ativos de Marca",
       "description": "Ativos de marca e diretrizes de uso para a marca Acme Corp."
     },
     "navigation": {
-      "brandGuidelines": "Guia de Marca",
+      "brandGuidelines": "Ativos de Marca",
       "links": {
         "logos": "Logotipo",
         "colors": "Cores",
@@ -46,7 +46,9 @@
       "resources": "Recursos",
       "downloadAllAssets": "Baixar Todos os Recursos",
       "brandGuidelinesPdf": "PDF do Guia de Marca",
+      "PDFurl": "https://example.com/brand-guidelines.pdf",
       "contactBrandTeam": "Contatar Equipe de Marca",
+      "contactMail": "contato@montefiorestudio.com",
       "copyright": "© 2025 Acme Corp. WebDev & Design por <a href='https://montefiorestudio.com' target='_blank'>Montefiore Studio</a>."
     }
   },

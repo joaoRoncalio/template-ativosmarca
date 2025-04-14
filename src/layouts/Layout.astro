@@ -137,8 +137,16 @@ import brandData from "../data/brand.json";
             <h3>{brandData.ui.footer.resources}</h3>
             <ul>
               <li><a href="#">{brandData.ui.footer.downloadAllAssets}</a></li>
-              <li><a href="#">{brandData.ui.footer.brandGuidelinesPdf}</a></li>
-              <li><a href="#">{brandData.ui.footer.contactBrandTeam}</a></li>
+              <li>
+                <a href={brandData.ui.footer.PDFurl} target="_blank"
+                  >{brandData.ui.footer.brandGuidelinesPdf}</a
+                >
+              </li>
+              <li>
+                <a href={`mailto:${brandData.ui.footer.contactMail}`}
+                  >{brandData.ui.footer.contactBrandTeam}</a
+                >
+              </li>
             </ul>
           </div>
         </div>
