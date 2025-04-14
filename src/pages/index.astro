@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ColorGrid from "../components/ColorGrid.astro";
+import LogoGrid from "../components/LogoGrid.astro";
 import brandData from "../data/brand.json";
 ---
 
@@ -42,69 +43,12 @@ import brandData from "../data/brand.json";
     <section id="logos" class="section">
       <h2>{brandData.ui.sections.logos}</h2>
       <div class="content">
-        <div class="logo-main">
-          <h3>{brandData.ui.sections.primaryLogo}</h3>
-          <p>{brandData.logos.primary.description}</p>
-          <div class="logo-preview">
-            <img
-              src={brandData.logos.primary.svg}
-              alt="Logotipo Principal"
-              width="300"
-              height="90"
-            />
-          </div>
-          <div class="download-links">
-            <a
-              href={brandData.logos.primary.svg}
-              class="download-link"
-              download
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
-                ></path><polyline points="7 10 12 15 17 10"></polyline><line
-                  x1="12"
-                  y1="15"
-                  x2="12"
-                  y2="3"></line></svg
-              >
-              {brandData.ui.buttons.downloadSvg}
-            </a>
-            <a
-              href={brandData.logos.primary.png}
-              class="download-link"
-              download
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
-                ></path><polyline points="7 10 12 15 17 10"></polyline><line
-                  x1="12"
-                  y1="15"
-                  x2="12"
-                  y2="3"></line></svg
-              >
-              {brandData.ui.buttons.downloadPng}
-            </a>
-          </div>
-        </div>
+        <LogoGrid
+          logos={{ ...brandData.logos }}
+          title={brandData.ui.sections.logoVariations}
+        />
 
+        <!-- Guidelines section remains unchanged -->
         <h3>{brandData.ui.sections.usageGuidelines}</h3>
         <ul class="guidelines-list">
           {
@@ -128,180 +72,6 @@ import brandData from "../data/brand.json";
             ))
           }
         </ul>
-
-        <h3>{brandData.ui.sections.logoVariations}</h3>
-        <div class="logo-variations">
-          <div class="logo-card">
-            <h4>{brandData.ui.sections.darkVersion}</h4>
-            <p>{brandData.logos.dark.description}</p>
-            <div class="logo-preview dark-bg">
-              <img
-                src={brandData.logos.dark.svg}
-                alt="Logotipo Escuro"
-                width="200"
-                height="60"
-              />
-            </div>
-            <div class="download-links">
-              <a href={brandData.logos.dark.svg} class="download-link" download>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
-                  ></path><polyline points="7 10 12 15 17 10"></polyline><line
-                    x1="12"
-                    y1="15"
-                    x2="12"
-                    y2="3"></line></svg
-                >
-                {brandData.ui.buttons.downloadSvg}
-              </a>
-              <a href={brandData.logos.dark.png} class="download-link" download>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
-                  ></path><polyline points="7 10 12 15 17 10"></polyline><line
-                    x1="12"
-                    y1="15"
-                    x2="12"
-                    y2="3"></line></svg
-                >
-                {brandData.ui.buttons.downloadPng}
-              </a>
-            </div>
-          </div>
-          <div class="logo-card">
-            <h4>{brandData.ui.sections.lightVersion}</h4>
-            <p>{brandData.logos.light.description}</p>
-            <div class="logo-preview light-bg">
-              <img
-                src={brandData.logos.light.svg}
-                alt="Logotipo Claro"
-                width="200"
-                height="60"
-              />
-            </div>
-            <div class="download-links">
-              <a
-                href={brandData.logos.light.svg}
-                class="download-link"
-                download
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
-                  ></path><polyline points="7 10 12 15 17 10"></polyline><line
-                    x1="12"
-                    y1="15"
-                    x2="12"
-                    y2="3"></line></svg
-                >
-                {brandData.ui.buttons.downloadSvg}
-              </a>
-              <a
-                href={brandData.logos.light.png}
-                class="download-link"
-                download
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
-                  ></path><polyline points="7 10 12 15 17 10"></polyline><line
-                    x1="12"
-                    y1="15"
-                    x2="12"
-                    y2="3"></line></svg
-                >
-                {brandData.ui.buttons.downloadPng}
-              </a>
-            </div>
-          </div>
-          <div class="logo-card">
-            <h4>{brandData.ui.sections.iconOnly}</h4>
-            <p>{brandData.logos.icon.description}</p>
-            <div class="logo-preview">
-              <img
-                src={brandData.logos.icon.svg}
-                alt="Ícone do Logotipo"
-                width="60"
-                height="60"
-              />
-            </div>
-            <div class="download-links">
-              <a href={brandData.logos.icon.svg} class="download-link" download>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
-                  ></path><polyline points="7 10 12 15 17 10"></polyline><line
-                    x1="12"
-                    y1="15"
-                    x2="12"
-                    y2="3"></line></svg
-                >
-                {brandData.ui.buttons.downloadSvg}
-              </a>
-              <a href={brandData.logos.icon.png} class="download-link" download>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
-                  ></path><polyline points="7 10 12 15 17 10"></polyline><line
-                    x1="12"
-                    y1="15"
-                    x2="12"
-                    y2="3"></line></svg
-                >
-                {brandData.ui.buttons.downloadPng}
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -917,46 +687,6 @@ import brandData from "../data/brand.json";
     color: var(--text);
   }
 
-  /* Logo Section */
-  .logo-main {
-    margin-bottom: 3rem;
-  }
-
-  .logo-preview {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    background-color: var(--secondary-bg);
-    border-radius: var(--radius);
-    margin: 1.5rem 0;
-  }
-
-  .dark-bg {
-    background-color: var(--text);
-  }
-
-  .light-bg {
-    background-color: white;
-    border: 1px solid var(--border);
-  }
-
-  .logo-card {
-    margin-bottom: 2rem;
-    background: white;
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-sm);
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .logo-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow);
-  }
-
   .guidelines-list {
     list-style-type: none;
     padding: 0;
@@ -1432,7 +1162,7 @@ import brandData from "../data/brand.json";
       min-width: 16px !important;
     }
 
-    .logo-card {
+    /* .logo-card {
       padding: 0rem;
       margin-bottom: 4rem;
     }
@@ -1440,10 +1170,11 @@ import brandData from "../data/brand.json";
     .logo-card:hover {
       transform: translateY(0);
       box-shadow: none;
-    }
+    } */
 
     .font-family-card {
       padding: 0;
+      box-shadow: none;
     }
 
     .font-family-card:hover {
@@ -1491,7 +1222,7 @@ import brandData from "../data/brand.json";
               '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
 
             // Use setAttribute for TypeScript compatibility
-            button.setAttribute("style", "color: #10b981"); // Green color
+            button.setAttribute("style", "color: #10b981 !important"); // Green color
 
             setTimeout(() => {
               button.innerHTML = originalHTML;

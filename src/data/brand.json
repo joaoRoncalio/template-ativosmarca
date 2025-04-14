@@ -9,7 +9,7 @@
     "navigation": {
       "brandGuidelines": "Ativos de Marca",
       "links": {
-        "logos": "Logotipo",
+        "logos": "Logos",
         "colors": "Cores",
         "typography": "Tipografia"
       }
@@ -24,12 +24,8 @@
       "viewGoogleFonts": "Ver no Google Fonts"
     },
     "sections": {
-      "logos": "Logotipo",
-      "primaryLogo": "Logotipo Principal",
+      "logos": "Logos",
       "logoVariations": "Variações do Logotipo",
-      "darkVersion": "Versão Escura",
-      "lightVersion": "Versão Clara",
-      "iconOnly": "Apenas Ícone",
       "usageGuidelines": "Diretrizes de Uso",
       "colors": "Cores",
       "primaryColors": "Cores Primárias",
@@ -53,25 +49,29 @@
     }
   },
   "logos": {
-    "primary": {
+    "principal": {
       "svg": "/assets/logo-primary.svg",
       "png": "/assets/logo-primary.png",
-      "description": "O logotipo principal deve ser usado na maioria das aplicações onde a marca é destacada."
+      "description": "O logotipo principal deve ser usado na maioria das aplicações onde a marca é destacada.",
+      "background": "default-bg"
     },
     "dark": {
       "svg": "/assets/logo-dark.svg",
       "png": "/assets/logo-dark.png",
-      "description": "A versão escura deve ser usada em fundos claros para máximo contraste."
+      "description": "A versão escura deve ser usada em fundos claros para máximo contraste.",
+      "background": "dark-bg"
     },
     "light": {
       "svg": "/assets/logo-light.svg",
       "png": "/assets/logo-light.png",
-      "description": "A versão clara deve ser usada em fundos escuros para máximo contraste."
+      "description": "A versão clara deve ser usada em fundos escuros para máximo contraste.",
+      "background": "default-bg"
     },
-    "icon": {
+    "ícone": {
       "svg": "/assets/logo-icon.svg",
       "png": "/assets/logo-icon.png",
-      "description": "A versão apenas com ícone pode ser usada para favicons, ícones de aplicativos ou quando o espaço é limitado."
+      "description": "A versão apenas com ícone pode ser usada para favicons, ícones de aplicativos ou quando o espaço é limitado.",
+      "background": "default-bg"
     },
     "guidelines": [
       "Mantenha um espaço livre ao redor do logotipo igual à altura da marca",

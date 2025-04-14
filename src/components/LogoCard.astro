@@ -1,0 +1,60 @@
+---
+interface Props {
+  logo: {
+    name: string;
+    svg: string;
+    png: string;
+    description: string;
+  };
+  type: string;
+  bgClass?: string;
+}
+
+const { logo, type, bgClass = "" } = Astro.props;
+---
+
+<div class="logo-card">
+  <h4>{logo.name}</h4>
+  <p>{logo.description}</p>
+  <div class={`logo-preview ${bgClass}`}>
+    <img src={logo.svg} alt={`Logotipo ${logo.name}`} width="200" height="60" />
+  </div>
+  <div class="download-links">
+    <a href={logo.svg} class="download-link" download>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      SVG
+    </a>
+    <a href={logo.png} class="download-link" download>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      PNG
+    </a>
+  </div>
+</div>
