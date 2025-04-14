@@ -1,4 +1,4 @@
-# 🎨 Brand Guidelines Portal
+# 🎨 Portal de Ativos de Marca
 
 Um portal de diretrizes de marca moderno e interativo construído com Astro.
 
