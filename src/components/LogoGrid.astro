@@ -1,0 +1,254 @@
+---
+interface LogoItem {
+  svg: string;
+  png: string;
+  description: string;
+  background?: string; // Optional background property from JSON
+}
+
+interface Props {
+  logos: Record<string, LogoItem>;
+  title: string;
+}
+
+const { logos, title } = Astro.props;
+
+// Convert the logos object to an array with names, filtering out guidelines
+const logoArray = Object.entries(logos)
+  .filter(([key]) => key !== "guidelines")
+  .map(([key, logo]) => ({
+    name: key.charAt(0).toUpperCase() + key.slice(1),
+    ...logo,
+  }));
+
+// Calculate grid columns based on number of logos
+const getGridColumns = (count: number) => {
+  if (count % 3 === 0) return 3; // If divisible by 3, use 3 columns
+  if (count % 2 === 0) return 2; // If even (pair), use 2 columns
+  return 2; // Default to 2 columns for odd numbers
+};
+
+const gridStyle = `grid-template-columns: repeat(${getGridColumns(logoArray.length)}, 1fr);`;
+---
+
+<div class="logo-section">
+  <h3>{title}</h3>
+  <div class="logo-variations" style={gridStyle}>
+    {
+      logoArray.map((logo) => (
+        <div class="logo-card">
+          <h4>{logo.name}</h4>
+          <p>{logo.description}</p>
+
+          <div
+            class="logo-preview"
+            class:list={[logo.background || "default-bg"]}
+          >
+            <img
+              src={logo.svg}
+              alt={`Logo ${logo.name}`}
+              width="200"
+              height="60"
+            />
+          </div>
+
+          <div class="download-links">
+            <a href={logo.svg} class="download-link" download>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              SVG
+            </a>
+            <a href={logo.png} class="download-link" download>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              PNG
+            </a>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style is:global>
+  .logo-section {
+    margin-bottom: 3rem;
+  }
+
+  .logo-variations {
+    display: grid;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  h3 {
+    font-size: var(--font-size-h3);
+    font-weight: 600;
+    margin: 2.5rem 0 1.5rem;
+    color: var(--text);
+  }
+
+  h4 {
+    font-size: var(--font-size-h4);
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+    color: var(--text);
+  }
+
+  .logo-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .logo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+  }
+
+  .logo-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: var(--secondary-bg);
+    border-radius: var(--radius);
+    margin: 1rem 0;
+    transition: background-color 0.3s ease;
+  }
+
+  .default-bg {
+    background-color: var(--secondary-bg);
+  }
+
+  .dark-bg {
+    background-color: var(--text);
+    color: white;
+  }
+
+  .light-bg {
+    background-color: white;
+    border: 1px solid var(--border);
+  }
+
+  /* Add styles for dynamic color backgrounds */
+  .primary-bg {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  .accent-bg {
+    background-color: var(--accent);
+    color: white;
+  }
+
+  .background-selector {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: var(--font-size-xs);
+    color: var(--text-light);
+  }
+
+  .background-options {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  .bg-option {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .bg-option:hover {
+    transform: scale(1.1);
+  }
+
+  .bg-option.dark-bg {
+    background-color: var(--text);
+  }
+
+  .bg-option.light-bg {
+    background-color: white;
+  }
+
+  .bg-option:not(.dark-bg):not(.light-bg) {
+    background-color: var(--secondary-bg);
+  }
+
+  .download-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .download-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background-color: var(--secondary-bg);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: var(--font-size-small);
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .download-link:hover {
+    background-color: #e5e7eb;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .download-link svg {
+    color: var(--primary);
+  }
+
+  @media (max-width: 768px) {
+    .logo-variations {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
