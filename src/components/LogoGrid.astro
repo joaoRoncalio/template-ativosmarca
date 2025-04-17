@@ -21,14 +21,8 @@ const logoArray = Object.entries(logos)
     ...logo,
   }));
 
-// Calculate grid columns based on number of logos
-const getGridColumns = (count: number) => {
-  if (count % 3 === 0) return 3; // If divisible by 3, use 3 columns
-  if (count % 2 === 0) return 2; // If even (pair), use 2 columns
-  return 2; // Default to 2 columns for odd numbers
-};
-
-const gridStyle = `grid-template-columns: repeat(${getGridColumns(logoArray.length)}, 1fr);`;
+// Use a responsive grid layout that adapts to available space
+const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));`;
 ---
 
 <div class="logo-section">
@@ -89,6 +83,23 @@ const gridStyle = `grid-template-columns: repeat(${getGridColumns(logoArray.leng
               </svg>
               PNG
             </a>
+            <button class="download-link copy-svg-btn" data-svg-url={logo.svg}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+              Copiar SVG
+            </button>
           </div>
         </div>
       ))
@@ -105,6 +116,7 @@ const gridStyle = `grid-template-columns: repeat(${getGridColumns(logoArray.leng
     display: grid;
     gap: 2rem;
     margin: 2rem 0;
+    max-width: 100%;
   }
 
   h3 {
@@ -219,6 +231,11 @@ const gridStyle = `grid-template-columns: repeat(${getGridColumns(logoArray.leng
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  button.download-link {
+    cursor: pointer;
   }
 
   .download-link {
@@ -228,12 +245,14 @@ const gridStyle = `grid-template-columns: repeat(${getGridColumns(logoArray.leng
     padding: 0.75rem 1.25rem;
     background-color: var(--secondary-bg);
     border-radius: var(--radius);
+    border: none;
     text-decoration: none;
     color: var(--text);
     font-weight: 500;
     font-size: var(--font-size-small);
     transition: all 0.2s ease;
     box-shadow: var(--shadow-sm);
+    font-family: inherit;
   }
 
   .download-link:hover {
@@ -244,6 +263,7 @@ const gridStyle = `grid-template-columns: repeat(${getGridColumns(logoArray.leng
 
   .download-link svg {
     color: var(--primary);
+    min-width: 16px;
   }
 
   @media (max-width: 768px) {
@@ -251,17 +271,63 @@ const gridStyle = `grid-template-columns: repeat(${getGridColumns(logoArray.leng
       grid-template-columns: 1fr !important;
     }
 
-    @media (max-width: 480px) {
-      .logo-card {
-        padding: 0rem;
-        margin-bottom: 4rem;
-        box-shadow: none;
-      }
+    .logo-card {
+      max-width: 100% !important;
+      padding: 0rem;
+      margin-bottom: 4rem;
+      box-shadow: none;
+    }
 
-      .logo-card:hover {
-        transform: translateY(0);
-        box-shadow: none;
-      }
+    .logo-card:hover {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .download-links {
+      flex-direction: column;
+    }
+
+    .copy-svg-btn {
+      display: none;
     }
   }
 </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Handle SVG copy functionality
+    const copySvgButtons = document.querySelectorAll(".copy-svg-btn");
+
+    copySvgButtons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        const svgUrl = button.getAttribute("data-svg-url");
+        if (!svgUrl) return;
+
+        try {
+          // Fetch the SVG content
+          const response = await fetch(svgUrl);
+          const svgText = await response.text();
+
+          // Copy to clipboard
+          await navigator.clipboard.writeText(svgText);
+
+          // Show success feedback
+          const originalHTML = button.innerHTML;
+          button.innerHTML =
+            '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Copiado!';
+          button.setAttribute("style", "color: #10b981 !important"); // Green color
+
+          setTimeout(() => {
+            button.innerHTML = originalHTML;
+            button.setAttribute("style", ""); // Reset style
+          }, 2000);
+        } catch (err) {
+          console.error("Failed to copy SVG:", err);
+          alert("Não foi possível copiar o SVG. Tente novamente.");
+        }
+      });
+    });
+  });
+</script>
