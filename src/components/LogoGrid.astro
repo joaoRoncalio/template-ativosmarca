@@ -21,13 +21,6 @@ const logoArray = Object.entries(logos)
     ...logo,
   }));
 
-// Calculate grid columns based on number of logos
-const getGridColumns = (count: number) => {
-  if (count <= 1) return 1; // Single column for 1 logo
-  if (count <= 3) return Math.min(count, 2); // Max 2 columns for 2-3 logos
-  return 3; // Max 3 columns for 4+ logos
-};
-
 // Use a responsive grid layout that adapts to available space
 const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));`;
 ---
