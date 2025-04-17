@@ -4,8 +4,9 @@ interface Props {
   color: {
     name: string;
     hex: string;
-    cmyk: string;
-    description: string;
+    cmyk?: string;
+    rgb?: string;
+    description?: string;
   };
   category: string;
 }
@@ -103,113 +104,7 @@ const { color, category } = Astro.props;
   </div>
 </div>
 
-<style>
-  .color-card {
-    background-color: var(--background);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition:
-      background-color 0.3s ease,
-      box-shadow 0.3s ease,
-      transform 0.2s ease;
-  }
-
-  .color-card:hover {
-    box-shadow: var(--shadow);
-    transform: translateY(-2px);
-  }
-
-  .color-preview {
-    height: 120px;
-    width: 100%;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .color-info {
-    padding: 1.25rem;
-  }
-
-  h4 {
-    margin: 0 0 1rem;
-    font-size: var(--font-size-h4);
-    color: var(--text);
-  }
-
-  .color-values {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .color-value {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: var(--font-size-small);
-    background-color: rgba(0, 0, 0, 0.03);
-    border-radius: var(--radius-sm);
-    padding: 0.5rem 0.75rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .label {
-    font-weight: 600;
-    color: var(--text);
-    width: 50px;
-  }
-
-  .value {
-    font-family: monospace;
-    color: var(--text-light);
-    flex: 1;
-    margin: 0 0.5rem;
-    font-weight: 500;
-  }
-
-  .copy-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--primary);
-    padding: 0.25rem;
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease;
-  }
-
-  .copy-btn:hover {
-    background-color: var(--secondary-bg);
-  }
-
-  /* Dark mode specific styles */
-  :global(.dark-mode) .color-card {
-    background-color: var(--secondary-bg);
-    border: 1px solid var(--border);
-  }
-
-  :global(.dark-mode) .color-preview {
-    border-bottom: 1px solid var(--border);
-  }
-
-  :global(.dark-mode) .label {
-    color: var(--text);
-  }
-
-  :global(.dark-mode) .value {
-    color: var(--text-light);
-  }
-
-  :global(.dark-mode) .copy-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  :global(.dark-mode) .color-value {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
-</style>
+<!-- Styles moved to global.css -->
 
 <script>
   // Initialize copy buttons
@@ -220,11 +115,19 @@ const { color, category } = Astro.props;
         if (value) {
           navigator.clipboard.writeText(value).then(() => {
             // Visual feedback for copy
-            const originalColor = button.style.color;
-            button.style.color = "var(--accent-green)";
+            const btn = button as HTMLElement;
+            const originalHTML = btn.innerHTML;
+
+            // Change to check mark icon
+            btn.innerHTML =
+              '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            btn.style.color = "var(--accent-green)";
+
+            // Restore original icon after 2 seconds
             setTimeout(() => {
-              button.style.color = originalColor;
-            }, 1000);
+              btn.innerHTML = originalHTML;
+              btn.style.color = "";
+            }, 2000);
           });
         }
       });

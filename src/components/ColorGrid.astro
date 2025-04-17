@@ -5,8 +5,9 @@ interface Props {
   colors: Array<{
     name: string;
     hex: string;
-    cmyk: string;
-    description: string;
+    cmyk?: string;
+    rgb?: string;
+    description?: string;
   }>;
   category: string;
   title: string;
@@ -32,32 +33,4 @@ const gridStyle = `grid-template-columns: ${getGridColumns(colors.length)};`;
   </div>
 </div>
 
-<style>
-  .color-section {
-    margin-bottom: 3rem;
-  }
-
-  .color-grid {
-    display: grid;
-    gap: 2rem;
-    margin: 2rem 0;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 2.5rem 0 1.5rem;
-    color: var(--text);
-  }
-
-  /* Add theme-specific styles */
-  :global(.dark-mode) .color-section h3 {
-    color: var(--text);
-  }
-
-  @media (max-width: 768px) {
-    .color-grid {
-      grid-template-columns: 1fr !important;
-    }
-  }
-</style>
+<!-- Styles moved to global.css -->

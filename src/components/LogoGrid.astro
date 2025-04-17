@@ -1,25 +1,42 @@
 ---
-interface LogoItem {
-  svg: string;
-  png: string;
-  description: string;
-  background?: string; // Optional background property from JSON
-}
-
 interface Props {
-  logos: Record<string, LogoItem>;
+  logos: Record<string, any>;
   title: string;
 }
 
 const { logos, title } = Astro.props;
 
 // Convert the logos object to an array with names, filtering out guidelines
-const logoArray = Object.entries(logos)
+const logoArray: Array<{
+  name: string;
+  svg?: string;
+  png?: string;
+  description?: string;
+  background?: string;
+  [key: string]: any;
+}> = [];
+
+// Process each logo entry
+Object.entries(logos)
   .filter(([key]) => key !== "guidelines")
-  .map(([key, logo]) => ({
-    name: key.charAt(0).toUpperCase() + key.slice(1),
-    ...logo,
-  }));
+  .forEach(([key, logo]) => {
+    // Skip if not an object
+    if (!logo || typeof logo !== "object") return;
+
+    // Create a new logo item with the name property
+    const item: any = {
+      name: key.charAt(0).toUpperCase() + key.slice(1),
+    };
+
+    // Copy all properties from the logo object
+    for (const prop in logo) {
+      if (Object.prototype.hasOwnProperty.call(logo, prop)) {
+        item[prop] = (logo as any)[prop];
+      }
+    }
+
+    logoArray.push(item);
+  });
 
 // Use a responsive grid layout that adapts to available space
 const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));`;
@@ -107,89 +124,7 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
   </div>
 </div>
 
-<style is:global>
-  .logo-section {
-    margin-bottom: 3rem;
-  }
-
-  .logo-variations {
-    display: grid;
-    gap: 2rem;
-    margin: 2rem 0;
-    max-width: 100%;
-  }
-
-  h3 {
-    font-size: var(--font-size-h3);
-    font-weight: 600;
-    margin: 2.5rem 0 1.5rem;
-    color: var(--text);
-  }
-
-  h4 {
-    font-size: var(--font-size-h4);
-    font-weight: 600;
-    margin: 0 0 0.75rem 0;
-    color: var(--text);
-  }
-
-  .logo-card {
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-sm);
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .logo-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow);
-  }
-
-  .logo-preview {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    border-radius: var(--radius);
-    margin: 1rem 0;
-    transition: background-color 0.3s ease;
-  }
-
-  /* Define fixed background colors that don't change with theme */
-  .default-bg {
-    background-color: #f3f4f6;
-  }
-
-  .dark-bg {
-    background-color: #1f2937;
-    color: white;
-  }
-
-  .light-bg {
-    background-color: #ffffff;
-    border: 1px solid var(--border);
-  }
-
-  /* Remove any theme-dependent background overrides */
-  :global(.dark-mode) .default-bg,
-  :global(.dark-mode) .light-bg,
-  :global(.dark-mode) .dark-bg {
-    /* Remove these overrides to keep backgrounds consistent */
-  }
-
-  /* Add styles for dynamic color backgrounds */
-  .primary-bg {
-    background-color: var(--primary);
-    color: white;
-  }
-
-  .accent-bg {
-    background-color: var(--accent);
-    color: white;
-  }
-
+<style>
   .background-selector {
     display: flex;
     align-items: center;
@@ -242,52 +177,8 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
 
   button.download-link {
     cursor: pointer;
-  }
-
-  .download-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    background-color: var(--secondary-bg);
-    border-radius: var(--radius);
-    border: none;
-    text-decoration: none;
-    color: var(--text);
-    font-weight: 500;
-    font-size: var(--font-size-small);
-    transition: all 0.2s ease;
-    box-shadow: var(--shadow-sm);
     font-family: inherit;
-  }
-
-  .download-link:hover {
-    background-color: #e5e7eb;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-  }
-
-  .download-link svg {
-    color: var(--primary);
-    min-width: 16px;
-  }
-
-  @media (max-width: 768px) {
-    .logo-variations {
-      grid-template-columns: 1fr !important;
-    }
-
-    .logo-card {
-      max-width: 100% !important;
-      padding: 0rem;
-      margin-bottom: 4rem;
-      box-shadow: none;
-    }
-
-    .logo-card:hover {
-      transform: translateY(0);
-      box-shadow: none;
-    }
+    border: none;
   }
 
   @media (max-width: 480px) {
@@ -346,7 +237,7 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
           document.documentElement.classList.contains("dark-mode")
         ) {
           document.querySelectorAll(".logo-card").forEach((card) => {
-            card.style.backgroundColor = "transparent";
+            (card as HTMLElement).style.backgroundColor = "transparent";
           });
         }
       });
@@ -357,7 +248,7 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
     // Also set initially
     if (document.documentElement.classList.contains("dark-mode")) {
       document.querySelectorAll(".logo-card").forEach((card) => {
-        card.style.backgroundColor = "transparent";
+        (card as HTMLElement).style.backgroundColor = "transparent";
       });
     }
   });
