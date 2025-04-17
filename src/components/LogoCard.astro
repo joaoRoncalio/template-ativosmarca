@@ -1,60 +1,205 @@
 ---
-interface Props {
-  logo: {
-    name: string;
-    svg: string;
-    png: string;
-    description: string;
-  };
-  type: string;
-  bgClass?: string;
-}
+const { logo, index } = Astro.props;
+const { name, file, description, background } = logo;
 
-const { logo, type, bgClass = "" } = Astro.props;
+// Determine background class based on the background property
+let bgClass = "default-bg";
+if (background === "light") {
+  bgClass = "light-bg";
+} else if (background === "dark") {
+  bgClass = "dark-bg";
+}
 ---
 
 <div class="logo-card">
-  <h4>{logo.name}</h4>
-  <p>{logo.description}</p>
   <div class={`logo-preview ${bgClass}`}>
-    <img src={logo.svg} alt={`Logotipo ${logo.name}`} width="200" height="60" />
+    <img src={file} alt={`${name} logo`} />
   </div>
-  <div class="download-links">
-    <a href={logo.svg} class="download-link" download>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-        <polyline points="7 10 12 15 17 10"></polyline>
-        <line x1="12" y1="15" x2="12" y2="3"></line>
-      </svg>
-      SVG
-    </a>
-    <a href={logo.png} class="download-link" download>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-        <polyline points="7 10 12 15 17 10"></polyline>
-        <line x1="12" y1="15" x2="12" y2="3"></line>
-      </svg>
-      PNG
-    </a>
+  <div class="logo-info">
+    <h4>{name}</h4>
+    <p>{description}</p>
+    <div class="logo-actions">
+      <a href={file} download class="btn btn-primary">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download
+      </a>
+      <button class="btn btn-secondary toggle-bg-btn">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <path
+            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+          ></path>
+        </svg>
+        Toggle Background
+      </button>
+    </div>
   </div>
 </div>
+
+<style>
+  .logo-card {
+    background-color: var(--background) !important;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.2s ease;
+  }
+
+  .logo-card:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+  }
+
+  .logo-preview {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.3s ease;
+  }
+
+  .logo-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  /* Define fixed background colors that don't change with theme */
+  .default-bg {
+    background-color: #f3f4f6 !important;
+  }
+
+  .light-bg {
+    background-color: #ffffff !important;
+  }
+
+  .dark-bg {
+    background-color: #1f2937 !important;
+  }
+
+  .logo-info {
+    padding: 1.5rem;
+  }
+
+  h4 {
+    margin: 0 0 0.75rem;
+    font-size: var(--font-size-h4);
+    color: var(--text);
+  }
+
+  p {
+    margin: 0 0 1.5rem;
+    color: var(--text-light);
+    font-size: var(--font-size-small);
+    line-height: 1.5;
+  }
+
+  .logo-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background-color: var(--secondary-bg);
+    border-radius: var(--radius);
+    border: none;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: var(--font-size-small);
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+    font-family: inherit;
+  }
+
+  .btn:hover {
+    background-color: #e5e7eb;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .btn svg {
+    color: var(--primary);
+    min-width: 16px;
+  }
+
+  .btn-primary {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--primary-dark);
+  }
+
+  .btn-primary svg {
+    color: white;
+  }
+
+  .btn-secondary {
+    background-color: var(--secondary-bg);
+  }
+
+  /* Remove theme-dependent overrides completely */
+  :global(.dark-mode) .default-bg,
+  :global(.dark-mode) .light-bg,
+  :global(.dark-mode) .dark-bg {
+    /* These styles are intentionally empty to prevent theme overrides */
+  }
+
+  :global(.dark-mode) p {
+    color: var(--text-light);
+  }
+
+  :global(.dark-mode) .btn {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :global(.dark-mode) .btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  :global(.dark-mode) .btn-primary {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  :global(.dark-mode) .btn-primary:hover {
+    background-color: var(--primary-dark);
+  }
+</style>

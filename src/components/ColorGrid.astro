@@ -1,5 +1,5 @@
 ---
-import ColorCard from './ColorCard.astro';
+import ColorCard from "./ColorCard.astro";
 
 interface Props {
   colors: Array<{
@@ -19,7 +19,7 @@ const { colors, category, title } = Astro.props;
 const getGridColumns = (count: number) => {
   if (count === 1) return 1;
   if (count === 2) return 2;
-  return 'repeat(auto-fill, minmax(280px, 1fr))';
+  return "repeat(auto-fill, minmax(280px, 1fr))";
 };
 
 const gridStyle = `grid-template-columns: ${getGridColumns(colors.length)};`;
@@ -28,9 +28,7 @@ const gridStyle = `grid-template-columns: ${getGridColumns(colors.length)};`;
 <div class="color-section">
   <h3>{title}</h3>
   <div class="color-grid" style={gridStyle}>
-    {colors.map(color => (
-      <ColorCard color={color} category={category} />
-    ))}
+    {colors.map((color) => <ColorCard color={color} category={category} />)}
   </div>
 </div>
 
@@ -49,6 +47,11 @@ const gridStyle = `grid-template-columns: ${getGridColumns(colors.length)};`;
     font-size: 1.5rem;
     font-weight: 600;
     margin: 2.5rem 0 1.5rem;
+    color: var(--text);
+  }
+
+  /* Add theme-specific styles */
+  :global(.dark-mode) .color-section h3 {
     color: var(--text);
   }
 

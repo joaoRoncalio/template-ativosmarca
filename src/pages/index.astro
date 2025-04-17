@@ -100,100 +100,6 @@ import brandData from "../data/brand.json";
           category="neutral"
           title={brandData.ui.sections.neutralColors}
         />
-
-        <h3>{brandData.ui.sections.colorUsageGuidelines}</h3>
-        <div class="color-usage">
-          <div class="usage-card">
-            <h4>{brandData.ui.sections.primaryColors}</h4>
-            <ul class="usage-list">
-              {
-                brandData.colors.usage.primary.map((usage) => (
-                  <li>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="usage-icon"
-                    >
-                      <>
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="12" y1="8" x2="12" y2="16" />
-                        <line x1="8" y1="12" x2="16" y2="12" />
-                      </>
-                    </svg>
-                    {usage}
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-          <div class="usage-card">
-            <h4>{brandData.ui.sections.accentColors}</h4>
-            <ul class="usage-list">
-              {
-                brandData.colors.usage.accent.map((usage) => (
-                  <li>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="usage-icon"
-                    >
-                      <>
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="12" y1="8" x2="12" y2="16" />
-                        <line x1="8" y1="12" x2="16" y2="12" />
-                      </>
-                    </svg>
-                    {usage}
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-          <div class="usage-card">
-            <h4>{brandData.ui.sections.neutralColors}</h4>
-            <ul class="usage-list">
-              {
-                brandData.colors.usage.neutral.map((usage) => (
-                  <li>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="usage-icon"
-                    >
-                      <>
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="12" y1="8" x2="12" y2="16" />
-                        <line x1="8" y1="12" x2="16" y2="12" />
-                      </>
-                    </svg>
-                    {usage}
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -698,20 +604,35 @@ import brandData from "../data/brand.json";
     align-items: flex-start;
     gap: 0.75rem;
     margin-bottom: 1rem;
-    padding: 0.75rem;
+    padding: 0.75rem 1rem;
     background-color: var(--secondary-bg);
     border-radius: var(--radius-sm);
     transition: background-color 0.2s ease;
     font-size: var(--font-size-small);
+    border-left: 3px solid var(--primary);
+    box-shadow: var(--shadow-sm);
   }
 
   .guidelines-list li:hover {
-    background-color: #e5e7eb;
+    background-color: color-mix(
+      in srgb,
+      var(--secondary-bg) 95%,
+      var(--primary)
+    );
   }
 
   .guidelines-list svg {
-    color: var(--accent-green);
+    color: var(--primary);
     margin-top: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  :global(.dark-mode) .guidelines-list li {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  :global(.dark-mode) .guidelines-list li:hover {
+    background-color: rgba(255, 255, 255, 0.08);
   }
 
   /* Download Links */
@@ -847,6 +768,10 @@ import brandData from "../data/brand.json";
   .font-family-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow);
+  }
+
+  :global(.dark-mode) .font-family-card {
+    background: transparent;
   }
 
   .font-family-header h3 {
@@ -1196,6 +1121,43 @@ import brandData from "../data/brand.json";
       transform 0.1s ease,
       opacity 0.1s ease;
   }
+
+  /* Add theme-specific styles */
+  .section {
+    background-color: var(--secondary-bg);
+    color: var(--text);
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  .content {
+    background-color: var(--background);
+    transition: background-color 0.3s ease;
+  }
+
+  .color-intro p {
+    color: var(--text);
+    transition: color 0.3s ease;
+  }
+
+  .usage-card {
+    background: var(--background);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .usage-list li {
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    transition:
+      border-color 0.3s ease,
+      color 0.3s ease;
+  }
 </style>
 
 <script src="/js/colorManager.js" type="module" is:inline></script>
@@ -1272,3 +1234,35 @@ import brandData from "../data/brand.json";
     });
   });
 </script>
+
+<script>
+  // Add event listener for theme changes to update colors
+  document.addEventListener("DOMContentLoaded", () => {
+    // Initial update
+    updateThemeSpecificElements();
+
+    // Listen for theme toggle clicks
+    const themeToggle = document.getElementById("theme-toggle");
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        // Allow a small delay for the class to be applied
+        setTimeout(updateThemeSpecificElements, 50);
+      });
+    }
+
+    function updateThemeSpecificElements() {
+      // Update any theme-specific elements that might need JavaScript
+      const isDarkMode =
+        document.documentElement.classList.contains("dark-mode");
+
+      // Example: Update card backgrounds if needed
+      document.querySelectorAll(".usage-card").forEach((card) => {
+        card.style.backgroundColor = isDarkMode
+          ? "var(--secondary-bg)"
+          : "var(--background)";
+      });
+    }
+  });
+</script>
+
+<script src="/js/themeManager.js" is:inline></script>

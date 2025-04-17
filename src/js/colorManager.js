@@ -254,6 +254,9 @@ function updateSvgElements() {
     .getPropertyValue("--accent")
     .trim();
 
+  // Check if dark mode is active
+  const isDarkMode = document.documentElement.classList.contains("dark-mode");
+
   // Update inline SVGs in the document
   document.querySelectorAll("svg").forEach((svg) => {
     // Update elements with stroke="currentColor" to use the primary color
@@ -263,20 +266,21 @@ function updateSvgElements() {
     });
   });
 
-  // Update SVG background colors in various UI elements
-  document.querySelectorAll(".usage-icon").forEach((icon) => {
-    // For usage icons, use the primary color
-    icon.setAttribute("stroke", primaryColor);
-  });
+  // Remove any previous dynamic styles to avoid duplication
+  const existingStyle = document.getElementById("dynamic-theme-styles");
+  if (existingStyle) {
+    existingStyle.remove();
+  }
 
-  // Update nav-link hover color
+  // Update nav-link hover color and other elements
   const style = document.createElement("style");
+  style.id = "dynamic-theme-styles";
   style.textContent = `
     .nav-link:hover { color: ${primaryColor} !important; }
     .nav-link::after { background-color: ${primaryColor} !important; }
     .btn-primary { background-color: ${primaryColor} !important; }
     .btn-primary:hover { background-color: var(--primary-dark) !important; }
-    .btn-secondary { color: ${primaryColor} !important; }
+    .btn-secondary { color: ${isDarkMode ? "var(--primary-light)" : primaryColor} !important; }
     .section h2::after { background-color: ${primaryColor} !important; }
     .copy-btn { color: ${primaryColor} !important; }
     .footer-section a:hover { color: var(--primary-light) !important; }

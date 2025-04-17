@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
+    "build:color-manager": "node scripts/build-color-manager.js",
+    "prebuild": "npm run build:color-manager",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

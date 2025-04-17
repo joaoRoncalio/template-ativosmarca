@@ -6,6 +6,10 @@
       "title": "Ativos de Marca",
       "description": "Ativos de marca e diretrizes de uso para a marca Acme Corp."
     },
+    "theme": {
+      "defaultMode": "dark",
+      "allowUserToggle": true
+    },
     "navigation": {
       "brandGuidelines": "Ativos de Marca",
       "links": {

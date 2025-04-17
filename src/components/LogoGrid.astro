@@ -134,7 +134,6 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
   }
 
   .logo-card {
-    background: white;
     border-radius: var(--radius);
     padding: 1.5rem;
     box-shadow: var(--shadow-sm);
@@ -153,24 +152,31 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    background-color: var(--secondary-bg);
     border-radius: var(--radius);
     margin: 1rem 0;
     transition: background-color 0.3s ease;
   }
 
+  /* Define fixed background colors that don't change with theme */
   .default-bg {
-    background-color: var(--secondary-bg);
+    background-color: #f3f4f6;
   }
 
   .dark-bg {
-    background-color: var(--text);
+    background-color: #1f2937;
     color: white;
   }
 
   .light-bg {
-    background-color: white;
+    background-color: #ffffff;
     border: 1px solid var(--border);
+  }
+
+  /* Remove any theme-dependent background overrides */
+  :global(.dark-mode) .default-bg,
+  :global(.dark-mode) .light-bg,
+  :global(.dark-mode) .dark-bg {
+    /* Remove these overrides to keep backgrounds consistent */
   }
 
   /* Add styles for dynamic color backgrounds */
@@ -329,5 +335,30 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
         }
       });
     });
+  });
+
+  // Force logo card background in dark mode
+  document.addEventListener("DOMContentLoaded", function () {
+    const observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        if (
+          mutation.attributeName === "class" &&
+          document.documentElement.classList.contains("dark-mode")
+        ) {
+          document.querySelectorAll(".logo-card").forEach((card) => {
+            card.style.backgroundColor = "transparent";
+          });
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+
+    // Also set initially
+    if (document.documentElement.classList.contains("dark-mode")) {
+      document.querySelectorAll(".logo-card").forEach((card) => {
+        card.style.backgroundColor = "transparent";
+      });
+    }
   });
 </script>

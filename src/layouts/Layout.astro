@@ -1,9 +1,13 @@
 ---
 import brandData from "../data/brand.json";
+import ThemeToggle from "../components/ThemeToggle.astro";
+
+// Get default theme from brand.json
+const defaultTheme = brandData.ui.theme?.defaultMode || "light";
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class={defaultTheme === "dark" ? "dark-mode" : ""}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -54,6 +58,13 @@ import brandData from "../data/brand.json";
                 brandData.colors,
               );
               console.log("Color manager initialized");
+
+              // Apply theme-specific colors
+              const isDarkMode =
+                document.documentElement.classList.contains("dark-mode");
+              if (isDarkMode) {
+                window.colorManagerModule.updateSvgElements();
+              }
             } else {
               console.error("Color manager module not available");
             }
@@ -63,6 +74,50 @@ import brandData from "../data/brand.json";
         }
       });
     </script>
+
+    <!-- Theme management script -->
+    <script is:inline>
+      // Check for saved theme preference or use default from brand data
+      const savedTheme = localStorage.getItem("theme");
+      const defaultTheme = document.documentElement.classList.contains(
+        "dark-mode",
+      )
+        ? "dark"
+        : "light";
+      const theme = savedTheme || defaultTheme;
+
+      // Apply theme
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+      } else {
+        document.documentElement.classList.remove("dark-mode");
+      }
+
+      // Add class for transitions after initial load
+      document.addEventListener("DOMContentLoaded", () => {
+        document.documentElement.classList.add("theme-transition");
+      });
+    </script>
+
+    <!-- Add theme transition styles -->
+    <style is:inline>
+      /* Add base transition styles for theme switching */
+      html {
+        transition: background-color 0.3s ease;
+      }
+      body {
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+      }
+      /* Ensure content doesn't flash during theme change */
+      .theme-transition * {
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease,
+          border-color 0.3s ease;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -74,8 +129,16 @@ import brandData from "../data/brand.json";
               alt="Logotipo {brandData.companyName}"
               width="150"
               height="45"
+              class="logo-light"
             />
-            <!-- <span>{brandData.ui.navigation.brandGuidelines}</span> -->
+            <img
+              src="/assets/logo-dark.svg"
+              alt="Logotipo {brandData.companyName}"
+              width="150"
+              height="45"
+              class="logo-dark"
+              style="display: none;"
+            />
           </a>
           <div class="nav-links">
             <a href="#logos" class="nav-link"
@@ -88,6 +151,7 @@ import brandData from "../data/brand.json";
               >{brandData.ui.navigation.links.typography}</a
             >
           </div>
+          <ThemeToggle />
           <button class="mobile-menu-toggle" aria-label="Alternar menu">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -214,6 +278,50 @@ import brandData from "../data/brand.json";
       color 0.3s ease,
       background-color 0.3s ease,
       border-color 0.3s ease;
+  }
+
+  /* Dark theme variables */
+  .dark-mode {
+    --text: #f3f4f6;
+    --text-light: #9ca3af;
+    --background: #19222e;
+    --secondary-bg: #1f2937;
+    --border: #374151;
+    --footer-bg: #141c27;
+    --footer-text: #f3f4f6;
+
+    /* Adjust shadows for dark mode */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg:
+      0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Base styles for dark mode */
+  .dark-mode body {
+    background-color: var(--background);
+    color: var(--text);
+  }
+
+  /* Additional dark mode adjustments */
+  .dark-mode .section,
+  .dark-mode .content {
+    background-color: var(--background);
+  }
+
+  .dark-mode .btn-secondary {
+    background-color: var(--background);
+    color: var(--primary-light);
+    border-color: var(--border);
+  }
+
+  .dark-mode .logo-preview.light-bg {
+    background-color: #ffffff;
+  }
+
+  .dark-mode .logo-preview.default-bg {
+    background-color: var(--secondary-bg);
   }
 
   /* Base Styles */
@@ -532,6 +640,23 @@ import brandData from "../data/brand.json";
       margin-top: 2rem;
     }
   }
+
+  /* Logo switching based on theme */
+  .logo-light {
+    display: block;
+  }
+
+  .logo-dark {
+    display: none;
+  }
+
+  .dark-mode .logo-light {
+    display: none;
+  }
+
+  .dark-mode .logo-dark {
+    display: block;
+  }
 </style>
 
 <script is:inline>
@@ -637,5 +762,44 @@ import brandData from "../data/brand.json";
         }
       }
     });
+  });
+</script>
+
+<script is:inline>
+  // Update logo when theme changes
+  document.addEventListener("DOMContentLoaded", function () {
+    const themeToggle = document.getElementById("theme-toggle");
+    const logoLight = document.querySelector(".logo-light");
+    const logoDark = document.querySelector(".logo-dark");
+
+    // Function to update logo visibility based on theme
+    function updateLogoVisibility() {
+      const isDarkMode =
+        document.documentElement.classList.contains("dark-mode");
+
+      if (logoLight && logoDark) {
+        logoLight.style.display = isDarkMode ? "none" : "block";
+        logoDark.style.display = isDarkMode ? "block" : "none";
+      }
+    }
+
+    // Update initially
+    updateLogoVisibility();
+
+    // Update when theme toggle is clicked
+    if (themeToggle) {
+      themeToggle.addEventListener("click", updateLogoVisibility);
+    }
+
+    // Also observe theme changes that might happen from other sources
+    const observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        if (mutation.attributeName === "class") {
+          updateLogoVisibility();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
   });
 </script>
