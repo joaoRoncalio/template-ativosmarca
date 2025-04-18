@@ -165,7 +165,10 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
     const copySvgButtons = document.querySelectorAll(".copy-svg-btn");
 
     copySvgButtons.forEach((button) => {
-      button.addEventListener("click", async () => {
+      button.addEventListener("click", async (event) => {
+        // Prevent default link behavior
+        event.preventDefault();
+
         const svgUrl = button.getAttribute("data-svg-url");
         if (!svgUrl) return;
 

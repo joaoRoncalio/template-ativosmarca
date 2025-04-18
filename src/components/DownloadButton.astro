@@ -19,7 +19,7 @@ const isExternalLink = type === "link";
 // Set appropriate attributes based on type
 const attributes = {
   href: url,
-  class: `download-link ${type}-btn`,
+  class: `download-link ${type === "copy" ? "copy-svg-btn" : ""} ${type}-btn`,
   ...(type === "copy" && { "data-svg-url": url }),
   ...(isExternalLink && { target: "_blank", rel: "noopener noreferrer" }),
   ...(type === "download" && { download: "" }),

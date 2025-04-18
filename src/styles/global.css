@@ -363,6 +363,12 @@ footer {
 
 .btn-secondary {
   background-color: var(--secondary-bg);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--background);
 }
 
 .dark-mode .btn {
