@@ -1,0 +1,29 @@
+---
+// @ts-ignore - JSON import
+import brandData from "../data/brand.json";
+
+interface Props {
+  url: string;
+  label: string;
+  type?: "download" | "copy" | "link";
+}
+
+const { url, label, type = "download" } = Astro.props;
+
+// Get the appropriate icon based on type
+const iconSvg = brandData.ui.icons[type] || brandData.ui.icons.download;
+
+// Determine if this is an external link
+const isExternalLink = type === "link";
+
+// Set appropriate attributes based on type
+const attributes = {
+  href: url,
+  class: `download-link ${type === "copy" ? "copy-svg-btn" : ""} ${type}-btn`,
+  ...(type === "copy" && { "data-svg-url": url }),
+  ...(isExternalLink && { target: "_blank", rel: "noopener noreferrer" }),
+  ...(type === "download" && { download: "" }),
+};
+---
+
+<a {...attributes} set:html={iconSvg + " " + label} />

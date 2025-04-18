@@ -17,20 +17,28 @@ Um portal de diretrizes de marca moderno e interativo construído com Astro.
 │   ├── assets/
 │   │   ├── logo-primary.svg
 │   │   ├── logo-dark.svg
+│   │   ├── fonts/
+│   │   │   └── yourfont.zip
 │   │   └── ...
 │   ├── js/
 │   │   └── colorManager.js
 │   └── favicon.svg
 ├── src/
 │   ├── components/
-│   │   └── ColorGrid.astro
+│   │   ├── ColorGrid.astro
+│   │   ├── LogoGrid.astro
+│   │   └── ThemeToggle.astro
 │   ├── data/
 │   │   └── brand.json
 │   ├── layouts/
 │   │   └── Layout.astro
+│   ├── styles/
+│   │   └── global.css
 │   └── pages/
 │       └── index.astro
 ├── package.json
+├── tsconfig.json
+├── .prettierrc.mjs
 └── astro.config.mjs
 ```
 

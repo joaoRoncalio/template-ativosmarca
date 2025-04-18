@@ -1,4 +1,6 @@
 ---
+import DownloadButton from "./DownloadButton.astro";
+
 interface Props {
   logos: Record<string, any>;
   title: string;
@@ -9,8 +11,6 @@ const { logos, title } = Astro.props;
 // Convert the logos object to an array with names, filtering out guidelines
 const logoArray: Array<{
   name: string;
-  svg?: string;
-  png?: string;
   description?: string;
   background?: string;
   [key: string]: any;
@@ -64,59 +64,26 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
           </div>
 
           <div class="download-links">
-            <a href={logo.svg} class="download-link" download>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-              SVG
-            </a>
-            <a href={logo.png} class="download-link" download>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-              PNG
-            </a>
-            <button class="download-link copy-svg-btn" data-svg-url={logo.svg}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-              </svg>
-              Copiar SVG
-            </button>
+            {/* Dynamically generate download buttons based on available formats */}
+            {Object.entries(logo)
+              .filter(
+                ([key, value]) =>
+                  typeof value === "string" &&
+                  value.startsWith("/assets/") &&
+                  !key.startsWith("_"),
+              )
+              .map(([key, url]) => (
+                <DownloadButton
+                  url={url as string}
+                  label={key.toUpperCase()}
+                  type={key === "svg" && "copy" in logo ? "copy" : "download"}
+                />
+              ))}
+
+            {/* Add copy SVG button if svg exists */}
+            {logo.svg && (
+              <DownloadButton url={logo.svg} label="Copiar SVG" type="copy" />
+            )}
           </div>
         </div>
       ))
@@ -124,7 +91,7 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
   </div>
 </div>
 
-<style>
+<style is:global>
   .background-selector {
     display: flex;
     align-items: center;
@@ -198,7 +165,10 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
     const copySvgButtons = document.querySelectorAll(".copy-svg-btn");
 
     copySvgButtons.forEach((button) => {
-      button.addEventListener("click", async () => {
+      button.addEventListener("click", async (event) => {
+        // Prevent default link behavior
+        event.preventDefault();
+
         const svgUrl = button.getAttribute("data-svg-url");
         if (!svgUrl) return;
 
