@@ -1,60 +1,61 @@
 ---
-interface Props {
-  logo: {
-    name: string;
-    svg: string;
-    png: string;
-    description: string;
-  };
-  type: string;
-  bgClass?: string;
-}
+const { logo, index } = Astro.props;
+const { name, file, description, background } = logo;
 
-const { logo, type, bgClass = "" } = Astro.props;
+// Determine background class based on the background property
+let bgClass = "default-bg";
+if (background === "light") {
+  bgClass = "light-bg";
+} else if (background === "dark") {
+  bgClass = "dark-bg";
+}
 ---
 
 <div class="logo-card">
-  <h4>{logo.name}</h4>
-  <p>{logo.description}</p>
   <div class={`logo-preview ${bgClass}`}>
-    <img src={logo.svg} alt={`Logotipo ${logo.name}`} width="200" height="60" />
+    <img src={file} alt={`${name} logo`} />
   </div>
-  <div class="download-links">
-    <a href={logo.svg} class="download-link" download>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-        <polyline points="7 10 12 15 17 10"></polyline>
-        <line x1="12" y1="15" x2="12" y2="3"></line>
-      </svg>
-      SVG
-    </a>
-    <a href={logo.png} class="download-link" download>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-        <polyline points="7 10 12 15 17 10"></polyline>
-        <line x1="12" y1="15" x2="12" y2="3"></line>
-      </svg>
-      PNG
-    </a>
+  <div class="logo-info">
+    <h4>{name}</h4>
+    <p>{description}</p>
+    <div class="logo-actions">
+      <a href={file} download class="btn btn-primary">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download
+      </a>
+      <button class="btn btn-secondary toggle-bg-btn">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <path
+            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+          ></path>
+        </svg>
+        Toggle Background
+      </button>
+    </div>
   </div>
 </div>

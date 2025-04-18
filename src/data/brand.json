@@ -6,6 +6,10 @@
       "title": "Ativos de Marca",
       "description": "Ativos de marca e diretrizes de uso para a marca Acme Corp."
     },
+    "theme": {
+      "defaultMode": "dark",
+      "allowUserToggle": true
+    },
     "navigation": {
       "brandGuidelines": "Ativos de Marca",
       "links": {
@@ -52,19 +56,22 @@
     "principal": {
       "svg": "/assets/logo-primary.svg",
       "png": "/assets/logo-primary.png",
+      "JPG": "/assets/logo-primary.jpg",
       "description": "O logotipo principal deve ser usado na maioria das aplicações onde a marca é destacada.",
       "background": "default-bg"
     },
     "dark": {
+      "_comment": "PARA FUNDOS ESCUROS",
       "svg": "/assets/logo-dark.svg",
       "png": "/assets/logo-dark.png",
-      "description": "A versão escura deve ser usada em fundos claros para máximo contraste.",
+      "description": "A versão para fundos escuros oferece máximo contraste e visibilidade em superfícies de cor escura.",
       "background": "dark-bg"
     },
     "light": {
+      "_comment": "PARA FUNDOS CLAROS",
       "svg": "/assets/logo-light.svg",
       "png": "/assets/logo-light.png",
-      "description": "A versão clara deve ser usada em fundos escuros para máximo contraste.",
+      "description": "A versão para fundos claros oferece máximo contraste e visibilidade em superfícies de cor clara.",
       "background": "default-bg"
     },
     "ícone": {

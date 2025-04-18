@@ -7,6 +7,12 @@
 // Create a global module object
 window.colorManagerModule = {};
 
+/**
+ * Color Manager Module
+ * Handles dynamic color updates and CSS variable management
+ * Designed to be completely independent of hardcoded color names
+ */
+
 // CSS variable mappings for core UI elements
 window.colorManagerModule.UI_CSS_MAPPINGS = {
   // Core UI elements that need specific colors
@@ -49,29 +55,26 @@ window.colorManagerModule.UI_CSS_MAPPINGS = {
 };
 
 // Function to generate CSS variable name from color data
-window.colorManagerModule.generateCssVariableName = function (
-  category,
-  colorName,
-) {
+window.colorManagerModule.generateCssVariableName = function(category, colorName) {
   // Convert color name to kebab-case for CSS variable naming
-  const cssName = colorName.toLowerCase().replace(/\s+/g, "-");
+  window.colorManagerModule.cssName = colorName.toLowerCase().replace(/\s+/g, "-");
   return `--${category}-${cssName}`;
-};
+}
 
 // Function to update CSS variables based on color data
-window.colorManagerModule.updateCSSVariables = function (colorData) {
+window.colorManagerModule.updateCSSVariables = function(colorData) {
   // Process each color category (primary, accent, neutral)
   Object.keys(colorData).forEach((category) => {
     if (Array.isArray(colorData[category]) && colorData[category].length > 0) {
       // Set position-based CSS variables
       // The first color in each category becomes the main color for that category
-      const firstColor = colorData[category][0];
+      window.colorManagerModule.firstColor = colorData[category][0];
       if (firstColor && firstColor.hex) {
         // Set the main category variable
         if (category === "primary") {
           // Primary colors
           document.documentElement.style.setProperty(
-            window.colorManagerModule.UI_CSS_MAPPINGS.primary.cssVar,
+            UI_CSS_MAPPINGS.primary.cssVar,
             firstColor.hex,
           );
 
@@ -82,17 +85,14 @@ window.colorManagerModule.updateCSSVariables = function (colorData) {
             colorData[category][1].hex
           ) {
             document.documentElement.style.setProperty(
-              window.colorManagerModule.UI_CSS_MAPPINGS.primaryLight.cssVar,
+              UI_CSS_MAPPINGS.primaryLight.cssVar,
               colorData[category][1].hex,
             );
           } else {
             // If no light variant provided, generate one
-            const lightHex = window.colorManagerModule.lightenColor(
-              firstColor.hex,
-              20,
-            );
+            window.colorManagerModule.lightHex = lightenColor(firstColor.hex, 20);
             document.documentElement.style.setProperty(
-              window.colorManagerModule.UI_CSS_MAPPINGS.primaryLight.cssVar,
+              UI_CSS_MAPPINGS.primaryLight.cssVar,
               lightHex,
             );
           }
@@ -103,24 +103,21 @@ window.colorManagerModule.updateCSSVariables = function (colorData) {
             colorData[category][2].hex
           ) {
             document.documentElement.style.setProperty(
-              window.colorManagerModule.UI_CSS_MAPPINGS.primaryDark.cssVar,
+              UI_CSS_MAPPINGS.primaryDark.cssVar,
               colorData[category][2].hex,
             );
           } else {
             // If no dark variant provided, generate one
-            const darkHex = window.colorManagerModule.darkenColor(
-              firstColor.hex,
-              20,
-            );
+            window.colorManagerModule.darkHex = darkenColor(firstColor.hex, 20);
             document.documentElement.style.setProperty(
-              window.colorManagerModule.UI_CSS_MAPPINGS.primaryDark.cssVar,
+              UI_CSS_MAPPINGS.primaryDark.cssVar,
               darkHex,
             );
           }
         } else if (category === "accent") {
           // Accent colors
           document.documentElement.style.setProperty(
-            window.colorManagerModule.UI_CSS_MAPPINGS.accent.cssVar,
+            UI_CSS_MAPPINGS.accent.cssVar,
             firstColor.hex,
           );
 
@@ -134,11 +131,10 @@ window.colorManagerModule.updateCSSVariables = function (colorData) {
               );
 
               // Also set a CSS variable by color name
-              const nameBasedCssVar =
-                window.colorManagerModule.generateCssVariableName(
-                  category,
-                  color.name,
-                );
+              window.colorManagerModule.nameBasedCssVar = generateCssVariableName(
+                category,
+                color.name,
+              );
               document.documentElement.style.setProperty(
                 nameBasedCssVar,
                 color.hex,
@@ -147,12 +143,12 @@ window.colorManagerModule.updateCSSVariables = function (colorData) {
           });
         } else if (category === "neutral") {
           // Neutral colors - map by position to UI elements
-          const neutralMappings = [
-            window.colorManagerModule.UI_CSS_MAPPINGS.text.cssVar,
-            window.colorManagerModule.UI_CSS_MAPPINGS.textLight.cssVar,
-            window.colorManagerModule.UI_CSS_MAPPINGS.border.cssVar,
-            window.colorManagerModule.UI_CSS_MAPPINGS.secondaryBg.cssVar,
-            window.colorManagerModule.UI_CSS_MAPPINGS.background.cssVar,
+          window.colorManagerModule.neutralMappings = [
+            UI_CSS_MAPPINGS.text.cssVar,
+            UI_CSS_MAPPINGS.textLight.cssVar,
+            UI_CSS_MAPPINGS.border.cssVar,
+            UI_CSS_MAPPINGS.secondaryBg.cssVar,
+            UI_CSS_MAPPINGS.background.cssVar,
           ];
 
           // Map each neutral color to its corresponding UI element
@@ -165,11 +161,10 @@ window.colorManagerModule.updateCSSVariables = function (colorData) {
             }
 
             // Also set a CSS variable by color name
-            const nameBasedCssVar =
-              window.colorManagerModule.generateCssVariableName(
-                category,
-                color.name,
-              );
+            window.colorManagerModule.nameBasedCssVar = generateCssVariableName(
+              category,
+              color.name,
+            );
             document.documentElement.style.setProperty(
               nameBasedCssVar,
               color.hex,
@@ -189,48 +184,15 @@ window.colorManagerModule.updateCSSVariables = function (colorData) {
         );
 
         // Set a CSS variable for each color by name
-        const nameBasedCssVar =
-          window.colorManagerModule.generateCssVariableName(
-            category,
-            color.name,
-          );
+        window.colorManagerModule.nameBasedCssVar = generateCssVariableName(category, color.name);
         document.documentElement.style.setProperty(nameBasedCssVar, color.hex);
       });
     }
   });
-};
+}
 
-// Function to update a specific color in the color data
-window.colorManagerModule.updateColor = function (
-  colorData,
-  category,
-  colorName,
-  newHexValue,
-) {
-  // Find and update the color in the appropriate category
-  const colorCategory = colorData[category];
-  if (!colorCategory) return false;
-
-  const colorIndex = colorCategory.findIndex(
-    (color) => color.name.toLowerCase() === colorName.toLowerCase(),
-  );
-
-  if (colorIndex === -1) return false;
-
-  // Update hex value
-  colorCategory[colorIndex].hex = newHexValue;
-
-  // We're not automatically updating CMYK values anymore
-  // This allows the user to manually set CMYK values if needed
-
-  // Update CSS variables
-  window.colorManagerModule.updateCSSVariables(colorData);
-
-  return true;
-};
-
-// Helper function to lighten a color
-window.colorManagerModule.lightenColor = function (hex, percent) {
+// Helper window.colorManagerModule.to = function lighten a color
+window.colorManagerModule.lightenColor = function(hex, percent) {
   // Remove # if present
   hex = hex.replace(/^#/, "");
 
@@ -246,10 +208,10 @@ window.colorManagerModule.lightenColor = function (hex, percent) {
 
   // Convert back to hex
   return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
-};
+}
 
-// Helper function to darken a color
-window.colorManagerModule.darkenColor = function (hex, percent) {
+// Helper window.colorManagerModule.to = function darken a color
+window.colorManagerModule.darkenColor = function(hex, percent) {
   // Remove # if present
   hex = hex.replace(/^#/, "");
 
@@ -265,17 +227,44 @@ window.colorManagerModule.darkenColor = function (hex, percent) {
 
   // Convert back to hex
   return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
-};
+}
+
+// Function to update a specific color in the color data
+window.colorManagerModule.updateColor = function(colorData, category, colorName, newHexValue) {
+  // Find and update the color in the appropriate category
+  window.colorManagerModule.colorCategory = colorData[category];
+  if (!colorCategory) return false;
+
+  window.colorManagerModule.colorIndex = colorCategory.findIndex(
+    (color) => color.name.toLowerCase() === colorName.toLowerCase(),
+  );
+
+  if (colorIndex === -1) return false;
+
+  // Update hex value
+  colorCategory[colorIndex].hex = newHexValue;
+
+  // We're not automatically updating CMYK values anymore
+  // This allows the user to manually set CMYK values if needed
+
+  // Update CSS variables
+  updateCSSVariables(colorData);
+
+  return true;
+}
 
 // Function to update SVG elements with the current color scheme
-window.colorManagerModule.updateSvgElements = function () {
+window.colorManagerModule.updateSvgElements = function() {
   // Get the primary color value
-  const primaryColor = getComputedStyle(document.documentElement)
+  window.colorManagerModule.primaryColor = getComputedStyle(document.documentElement)
     .getPropertyValue("--primary")
     .trim();
-  const accentColor = getComputedStyle(document.documentElement)
+  window.colorManagerModule.accentColor = getComputedStyle(document.documentElement)
     .getPropertyValue("--accent")
     .trim();
+
+  // Check if dark mode is active
+  window.colorManagerModule.isDarkMode = document.documentElement.classList.contains("dark-mode");
 
   // Update inline SVGs in the document
   document.querySelectorAll("svg").forEach((svg) => {
@@ -286,50 +275,46 @@ window.colorManagerModule.updateSvgElements = function () {
     });
   });
 
-  // Update SVG background colors in various UI elements
-  document.querySelectorAll(".usage-icon").forEach((icon) => {
-    // For usage icons, use the primary color
-    icon.setAttribute("stroke", primaryColor);
-  });
+  // Remove any previous dynamic styles to avoid duplication
+  window.colorManagerModule.existingStyle = document.getElementById("dynamic-theme-styles");
+  if (existingStyle) {
+    existingStyle.remove();
+  }
 
-  // Update nav-link hover color
-  const style = document.createElement("style");
+  // Update nav-link hover color and other elements
+  window.colorManagerModule.style = document.createElement("style");
+  style.id = "dynamic-theme-styles";
   style.textContent = `
     .nav-link:hover { color: ${primaryColor} !important; }
     .nav-link::after { background-color: ${primaryColor} !important; }
     .btn-primary { background-color: ${primaryColor} !important; }
     .btn-primary:hover { background-color: var(--primary-dark) !important; }
-    .btn-secondary { color: ${primaryColor} !important; }
+    .btn-secondary { color: ${isDarkMode ? "var(--primary-light)" : primaryColor} !important; }
     .section h2::after { background-color: ${primaryColor} !important; }
     .copy-btn { color: ${primaryColor} !important; }
     .footer-section a:hover { color: var(--primary-light) !important; }
   `;
   document.head.appendChild(style);
-};
+}
 
 // Function to initialize color management
-window.colorManagerModule.initColorManager = function (colorData) {
+window.colorManagerModule.initColorManager = function(colorData) {
   // Set initial CSS variables
-  window.colorManagerModule.updateCSSVariables(colorData);
+  updateCSSVariables(colorData);
 
   // Update SVG elements with the new color scheme
   setTimeout(() => {
-    window.colorManagerModule.updateSvgElements();
+    updateSvgElements();
   }, 100); // Small delay to ensure CSS variables are applied
 
   // Return API for color management
   return {
     updateColor: (category, colorName, newHexValue) => {
-      const result = window.colorManagerModule.updateColor(
-        colorData,
-        category,
-        colorName,
-        newHexValue,
-      );
+      window.colorManagerModule.result = updateColor(colorData, category, colorName, newHexValue);
       if (result) {
         // If color was updated successfully, also update SVG elements
         setTimeout(() => {
-          window.colorManagerModule.updateSvgElements();
+          updateSvgElements();
         }, 100);
       }
       return result;
@@ -337,10 +322,10 @@ window.colorManagerModule.initColorManager = function (colorData) {
     getColorData: () => colorData,
     // Add a method to get a specific color by category and name
     getColor: (category, colorName) => {
-      const colorCategory = colorData[category];
+      window.colorManagerModule.colorCategory = colorData[category];
       if (!colorCategory) return null;
 
-      const color = colorCategory.find(
+      window.colorManagerModule.color = colorCategory.find(
         (c) => c.name.toLowerCase() === colorName.toLowerCase(),
       );
 
@@ -348,12 +333,9 @@ window.colorManagerModule.initColorManager = function (colorData) {
     },
     // Add a method to get CSS variable name for a color
     getCssVariableName: (category, colorName) => {
-      return window.colorManagerModule.generateCssVariableName(
-        category,
-        colorName,
-      );
+      return generateCssVariableName(category, colorName);
     },
     // Add a method to manually update SVG elements
-    updateSvgElements: window.colorManagerModule.updateSvgElements,
+    updateSvgElements: updateSvgElements,
   };
-};
+}

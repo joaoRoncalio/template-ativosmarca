@@ -4,8 +4,9 @@ interface Props {
   color: {
     name: string;
     hex: string;
-    cmyk: string;
-    description: string;
+    cmyk?: string;
+    rgb?: string;
+    description?: string;
   };
   category: string;
 }
@@ -14,19 +15,18 @@ const { color, category } = Astro.props;
 ---
 
 <div class="color-card">
-  <div
-    class="color-preview"
-    style={`background-color: ${color.hex}`}
-    data-category={category}
-    data-color-name={color.name}
-  >
-  </div>
+  <div class="color-preview" style={`background-color: ${color.hex};`}></div>
   <div class="color-info">
-    <h3>{color.name}</h3>
+    <h4>{color.name}</h4>
     <div class="color-values">
-      <div class="color-value" data-clipboard={color.hex}>
-        <code>HEX: {color.hex}</code>
-        <button class="copy-btn" aria-label="Copiar para área de transferência">
+      <div class="color-value">
+        <span class="label">HEX</span>
+        <span class="value">{color.hex}</span>
+        <button
+          class="copy-btn"
+          data-value={color.hex}
+          aria-label="Copy HEX value"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -37,162 +37,98 @@ const { color, category } = Astro.props;
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            ><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path
-              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-            ></path></svg
           >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+            ></path>
+          </svg>
         </button>
       </div>
-      <div class="color-value" data-clipboard={`cmyk(${color.cmyk})`}>
-        <code>CMYK: {color.cmyk}</code>
-        <button class="copy-btn" aria-label="Copiar para área de transferência">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path
-              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-            ></path></svg
-          >
-        </button>
-      </div>
-    </div>
-    <div class="color-description">
       {
-        color.description && color.description.length > 0 && (
-          <p>{color.description}</p>
+        color.rgb && (
+          <div class="color-value">
+            <span class="label">RGB</span>
+            <span class="value">{color.rgb}</span>
+            <button
+              class="copy-btn"
+              data-value={color.rgb}
+              aria-label="Copy RGB value"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
+          </div>
+        )
+      }
+      {
+        color.cmyk && (
+          <div class="color-value">
+            <span class="label">CMYK</span>
+            <span class="value">{color.cmyk}</span>
+            <button
+              class="copy-btn"
+              data-value={color.cmyk}
+              aria-label="Copy CMYK value"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
+          </div>
         )
       }
     </div>
   </div>
-
-  <style>
-    .color-card {
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-
-    .color-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .color-preview {
-      height: 160px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      position: relative;
-      border-bottom: 0.5px solid var(--border);
-    }
-
-    .color-info {
-      padding: 1.5rem;
-      background: white;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .color-info h3 {
-      color: var(--text);
-      margin: 0 0 1rem;
-      font-size: 1.25rem;
-    }
-
-    .color-values {
-      margin: 1rem 0;
-    }
-
-    .color-value {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-      padding: 0.5rem 0.75rem;
-      background-color: var(--secondary-bg);
-      border-radius: var(--radius-sm);
-      transition: background-color 0.2s ease;
-    }
-
-    .color-value:hover {
-      background-color: #e5e7eb;
-    }
-
-    .color-info code {
-      font-family: monospace;
-      color: var(--text-light);
-    }
-
-    .copy-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--primary);
-      padding: 0.25rem;
-      border-radius: var(--radius-sm);
-      transition: background-color 0.2s ease;
-    }
-
-    .copy-btn:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    .copy-btn:active {
-      transform: scale(0.95);
-    }
-
-    .color-description {
-      margin-top: auto;
-      padding-top: 1rem;
-    }
-
-    .color-description p {
-      margin: 0;
-      color: var(--text-light);
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    /* Mobile styles */
-    @media (max-width: 768px) {
-      .color-info {
-        padding: 1.25rem;
-      }
-
-      .color-preview {
-        height: 120px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .color-info h3 {
-        font-size: 1.1rem;
-      }
-
-      .color-info code {
-        font-size: 0.85rem;
-      }
-
-      .color-description p {
-        font-size: 0.8rem;
-      }
-
-      .color-preview {
-        height: 100px;
-      }
-    }
-  </style>
 </div>
+
+<script>
+  // Initialize copy buttons
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".copy-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        const value = button.getAttribute("data-value");
+        if (value) {
+          navigator.clipboard.writeText(value).then(() => {
+            // Visual feedback for copy
+            const btn = button as HTMLElement;
+            const originalHTML = btn.innerHTML;
+
+            // Change to check mark icon
+            btn.innerHTML =
+              '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            btn.style.color = "var(--accent-green)";
+
+            // Restore original icon after 2 seconds
+            setTimeout(() => {
+              btn.innerHTML = originalHTML;
+              btn.style.color = "";
+            }, 2000);
+          });
+        }
+      });
+    });
+  });
+</script>
