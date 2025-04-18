@@ -2,6 +2,8 @@
 
 Um portal de diretrizes de marca moderno e interativo construído com Astro.
 
+![Portal de Ativos de Marca](/public/template-ativosmarca-ogimage.webp)
+
 ## ✨ Funcionalidades
 
 - 🖌️ Exibição de logotipos e variações
