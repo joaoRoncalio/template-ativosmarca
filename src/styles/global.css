@@ -5,6 +5,11 @@
 
 /* ===== CSS Variables ===== */
 :root {
+  /* Font families */
+  --font-heading: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "Roboto Mono", monospace;
+
   /* These default values will be overridden by the colorManager.js */
   --primary: #2563eb;
   --primary-light: color-mix(in srgb, var(--primary) 70%, white);
@@ -69,7 +74,7 @@
 
 /* ===== Base Styles ===== */
 html {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   scroll-behavior: smooth;
   scroll-padding-top: 80px; /* Adjust for fixed header */
   transition: background-color 0.3s ease;
@@ -100,6 +105,15 @@ a {
   color: inherit;
   text-decoration: underline;
   transition: color 0.2s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
 }
 
 h3 {
@@ -164,6 +178,7 @@ nav {
 }
 
 .logo span {
+  font-family: var(--font-heading);
   font-weight: 600;
   font-size: 1.25rem;
 }
@@ -176,6 +191,7 @@ nav {
 .nav-link {
   color: var(--text);
   text-decoration: none;
+  font-family: var(--font-heading);
   font-weight: 500;
   padding: 0.5rem 0;
   position: relative;
@@ -279,6 +295,7 @@ footer {
   margin-bottom: 1.5rem;
   margin-top: 0;
   font-weight: 600;
+  font-family: var(--font-heading);
 }
 
 .footer-section ul {
@@ -328,11 +345,11 @@ footer {
   border: none;
   text-decoration: none;
   color: var(--text);
+  font-family: var(--font-body);
   font-weight: 500;
   font-size: var(--font-size-small);
   transition: all 0.2s ease;
   box-shadow: var(--shadow-sm);
-  font-family: inherit;
   cursor: pointer;
   text-align: center;
 }
@@ -469,7 +486,7 @@ footer {
 }
 
 .value {
-  font-family: monospace;
+  font-family: var(--font-mono);
   color: var(--text-light);
   flex: 1;
   margin: 0 0.5rem;
@@ -500,7 +517,6 @@ footer {
 /* Dark mode specific styles for color cards */
 .dark-mode .color-card {
   background-color: var(--secondary-bg);
-  border: 1px solid var(--border);
 }
 
 .dark-mode .color-preview {
@@ -913,6 +929,7 @@ footer {
 }
 
 .font-name {
+  font-family: var(--font-heading);
   font-size: var(--font-size-h3);
   font-weight: 600;
   color: var(--primary);
@@ -940,12 +957,14 @@ footer {
 }
 
 .heading-sample {
+  font-family: var(--font-heading);
   font-size: var(--font-size-section-title);
   font-weight: 700;
   line-height: 1.2;
 }
 
 .body-sample {
+  font-family: var(--font-body);
   font-size: var(--font-size-body-large);
   font-weight: 400;
   line-height: var(--line-height-normal);
