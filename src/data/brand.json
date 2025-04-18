@@ -61,8 +61,7 @@
   "logos": {
     "principal": {
       "svg": "/assets/logo-primary.svg",
-      "light": "/assets/logo-primary.png",
-      "dark": "/assets/logo-primary.jpg",
+      "png": "/assets/logo-primary.png",
       "description": "O logotipo principal deve ser usado na maioria das aplicações onde a marca é destacada.",
       "background": "default-bg"
     },
@@ -225,37 +224,86 @@
         "example": "Título de Cartão"
       }
     ],
+    "body": [
+      {
+        "name": "Texto regular",
+        "weight": "Regular",
+        "size": "1rem",
+        "lineHeight": "1.5",
+        "example": "Este é o texto regular de corpo usado para a maioria do conteúdo."
+      },
+      {
+        "name": "Ênfase média",
+        "weight": "Medium",
+        "size": "1rem",
+        "lineHeight": "1.5",
+        "example": "Este texto tem ênfase média para informações importantes."
+      },
+      {
+        "name": "Ênfase forte",
+        "weight": "Semibold",
+        "size": "1rem",
+        "lineHeight": "1.5",
+        "example": "Este texto tem ênfase forte para informações críticas."
+      },
+      {
+        "name": "Texto pequeno",
+        "weight": "Regular",
+        "size": "0.875rem",
+        "lineHeight": "1.5",
+        "example": "Este texto menor é usado para legendas e informações de suporte."
+      }
+    ],
     "families": {
       "heading": {
-        "name": "Inter",
         "title": "Inter (Títulos)",
         "description": "Usada para todos os títulos, cabeçalhos e elementos de texto proeminentes para estabelecer hierarquia visual.",
         "sample": "Aa Bb Cc Dd Ee Ff Gg Hh",
-        "weights": ["Regular", "Medium", "Semibold", "Bold"],
-        "web": "/assets/fonts/inter.zip",
-        "desktop": "/assets/fonts/inter-desktop.zip",
-        "googleFonts": "https://fonts.google.com/specimen/Inter",
-        "background": "default-bg"
+        "weights": ["Regular", "Medium", "Semibold", "Bold"]
       },
       "body": {
-        "name": "Roboto",
         "title": "Roboto (Parágrafos)",
         "description": "Usada para texto de corpo, parágrafos e conteúdo geral para garantir legibilidade ideal.",
         "sample": "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj",
-        "weights": ["Regular", "Medium", "Semibold"],
-        "web": "/assets/fonts/roboto.zip",
-        "desktop": "/assets/fonts/roboto-desktop.zip",
-        "googleFonts": "https://fonts.google.com/specimen/Roboto",
-        "background": "default-bg"
+        "weights": ["Regular", "Medium", "Semibold"]
       }
     },
     "guidelines": [
-      "Use Inter para todos os títulos e cabeçalhos",
-      "Use Roboto para todo o texto de corpo e parágrafos",
-      "Mantenha uma hierarquia clara com tamanhos de fonte consistentes",
-      "Evite usar mais de 3 pesos diferentes em uma única página",
-      "Mantenha o contraste adequado entre o texto e o fundo",
-      "Use tamanhos de fonte responsivos para diferentes dispositivos"
-    ]
+      "Mantenha o uso consistente da tipografia em todos os materiais da marca",
+      "Use níveis apropriados de títulos para estabelecer uma hierarquia clara de conteúdo",
+      "Garanta contraste suficiente entre as cores do texto e do fundo",
+      "Evite usar mais de dois pesos de fonte em um único design",
+      "Mantenha o comprimento de linha apropriado para legibilidade ideal (50-75 caracteres)"
+    ],
+    "downloads": {
+      "heading": {
+        "web": {
+          "url": "/assets/fonts/inter.zip",
+          "iconType": "download"
+        },
+        "desktop": {
+          "url": "/assets/fonts/inter-desktop.zip",
+          "iconType": "download"
+        },
+        "googleFonts": {
+          "url": "https://fonts.google.com/specimen/Inter",
+          "iconType": "external"
+        }
+      },
+      "body": {
+        "web": {
+          "url": "/assets/fonts/roboto.zip",
+          "iconType": "download"
+        },
+        "desktop": {
+          "url": "/assets/fonts/roboto-desktop.zip",
+          "iconType": "download"
+        },
+        "googleFonts": {
+          "url": "https://fonts.google.com/specimen/Roboto",
+          "iconType": "external"
+        }
+      }
+    }
   }
 }
