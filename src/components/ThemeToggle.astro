@@ -50,8 +50,6 @@ const allowToggle = brandData.ui.theme?.allowUserToggle ?? true;
   )
 }
 
-<!-- Styles moved to global.css -->
-
 <script>
   // Ensure the theme toggle is properly initialized
   document.addEventListener("DOMContentLoaded", () => {
@@ -63,7 +61,7 @@ const allowToggle = brandData.ui.theme?.allowUserToggle ?? true;
           document.documentElement.classList.contains("dark-mode");
         themeToggle.setAttribute(
           "aria-label",
-          isDarkMode ? "Switch to light mode" : "Switch to dark mode",
+          isDarkMode ? "Mudar para modo Claro" : "Mudar para modo Escuro",
         );
       };
 

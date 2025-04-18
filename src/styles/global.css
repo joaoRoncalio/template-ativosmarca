@@ -204,6 +204,12 @@ nav {
   transform-origin: left;
 }
 
+.nav-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
 /* Mobile menu toggle */
 .mobile-menu-toggle {
   display: none;
@@ -516,7 +522,6 @@ footer {
   background-color: var(--background) !important;
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease,
@@ -524,23 +529,21 @@ footer {
 }
 
 .logo-card:hover {
-  box-shadow: var(--shadow);
   transform: translateY(-2px);
 }
 
 .logo-preview {
-  height: 200px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  border-bottom: 1px solid var(--border);
   transition: background-color 0.3s ease;
   border-radius: var(--radius);
 }
 
 .logo-preview img {
-  max-width: 100%;
+  max-width: 80%;
   max-height: 100%;
   object-fit: contain;
 }
@@ -1230,6 +1233,7 @@ footer {
 
   .logo-preview {
     padding: 1rem;
+    height: 80px;
   }
 
   .download-link {

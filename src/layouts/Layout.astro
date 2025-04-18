@@ -141,36 +141,40 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
               style="display: none;"
             />
           </a>
-          <div class="nav-links">
-            <a href="#logos" class="nav-link"
-              >{brandData.ui.navigation.links.logos}</a
-            >
-            <a href="#colors" class="nav-link"
-              >{brandData.ui.navigation.links.colors}</a
-            >
-            <a href="#typography" class="nav-link"
-              >{brandData.ui.navigation.links.typography}</a
-            >
+          <div class="nav-actions">
+            <div class="nav-links">
+              <a href="#logos" class="nav-link"
+                >{brandData.ui.navigation.links.logos}</a
+              >
+              <a href="#colors" class="nav-link"
+                >{brandData.ui.navigation.links.colors}</a
+              >
+              <a href="#typography" class="nav-link"
+                >{brandData.ui.navigation.links.typography}</a
+              >
+            </div>
+
+            <ThemeToggle />
+            <button class="mobile-menu-toggle" aria-label="Alternar menu">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><line x1="3" y1="12" x2="21" y2="12"></line><line
+                  x1="3"
+                  y1="6"
+                  x2="21"
+                  y2="6"></line><line x1="3" y1="18" x2="21" y2="18"
+                ></line></svg
+              >
+            </button>
           </div>
-          <ThemeToggle />
-          <button class="mobile-menu-toggle" aria-label="Alternar menu">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><line x1="3" y1="12" x2="21" y2="12"></line><line
-                x1="3"
-                y1="6"
-                x2="21"
-                y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg
-            >
-          </button>
         </div>
       </nav>
     </header>
@@ -227,161 +231,161 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
       </div>
     </footer>
   </body>
-</html>
 
-<style
-  is:global
-  define:vars={{ primaryColor: brandData.colors.primary?.[0]?.hex }}
->
-  /* Override primary color from brand data */
-  :root {
-    --primary: var(--primaryColor, #2563eb);
-    --primary-light: color-mix(in srgb, var(--primary) 70%, white);
-    --primary-dark: color-mix(in srgb, var(--primary) 80%, black);
-  }
-</style>
-
-<script is:inline>
-  // Mobile menu toggle
-  document.addEventListener("DOMContentLoaded", function () {
-    // Handle mobile menu toggle
-    const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
-    const navLinks = document.querySelector(".nav-links");
-
-    if (mobileMenuToggle && navLinks) {
-      mobileMenuToggle.addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        navLinks.classList.toggle("active");
-
-        // Toggle aria-expanded attribute for accessibility
-        const isExpanded = navLinks.classList.contains("active");
-        mobileMenuToggle.setAttribute("aria-expanded", isExpanded);
-
-        // Add a class to the body to prevent scrolling when menu is open
-        if (isExpanded) {
-          document.body.classList.add("menu-open");
-        } else {
-          document.body.classList.remove("menu-open");
-        }
-      });
+  <style
+    is:global
+    define:vars={{ primaryColor: brandData.colors.primary?.[0]?.hex }}
+  >
+    /* Override primary color from brand data */
+    :root {
+      --primary: var(--primaryColor, #2563eb);
+      --primary-light: color-mix(in srgb, var(--primary) 70%, white);
+      --primary-dark: color-mix(in srgb, var(--primary) 80%, black);
     }
+  </style>
 
-    // Use color manager from global object
-    // Apply CSS variables from color manager if available
-    if (window.colorManager) {
-      const colorData = window.colorManager.getColorData();
-      window.colorManagerModule.updateCSSVariables(colorData);
-    }
+  <script is:inline>
+    // Mobile menu toggle
+    document.addEventListener("DOMContentLoaded", function () {
+      // Handle mobile menu toggle
+      const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
 
-    // Close mobile menu when clicking outside
-    document.addEventListener("click", (e) => {
-      if (navLinks && navLinks.classList.contains("active")) {
-        if (!e.target.closest("nav")) {
-          navLinks.classList.remove("active");
-          document.body.classList.remove("menu-open");
-          if (mobileMenuToggle) {
-            mobileMenuToggle.setAttribute("aria-expanded", "false");
+      if (mobileMenuToggle && navLinks) {
+        mobileMenuToggle.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          navLinks.classList.toggle("active");
+
+          // Toggle aria-expanded attribute for accessibility
+          const isExpanded = navLinks.classList.contains("active");
+          mobileMenuToggle.setAttribute("aria-expanded", isExpanded);
+
+          // Add a class to the body to prevent scrolling when menu is open
+          if (isExpanded) {
+            document.body.classList.add("menu-open");
+          } else {
+            document.body.classList.remove("menu-open");
           }
-        }
+        });
       }
-    });
 
-    // Close mobile menu when clicking on a nav link
-    const navLinkItems = document.querySelectorAll(".nav-link");
-    navLinkItems.forEach((link) => {
-      link.addEventListener("click", () => {
-        if (window.innerWidth <= 768 && navLinks) {
-          navLinks.classList.remove("active");
-          document.body.classList.remove("menu-open");
-          if (mobileMenuToggle) {
-            mobileMenuToggle.setAttribute("aria-expanded", "false");
-          }
-        }
-      });
-    });
+      // Use color manager from global object
+      // Apply CSS variables from color manager if available
+      if (window.colorManager) {
+        const colorData = window.colorManager.getColorData();
+        window.colorManagerModule.updateCSSVariables(colorData);
+      }
 
-    // Highlight active nav link based on scroll position
-    const sections = document.querySelectorAll("section[id]");
-    const navItems = document.querySelectorAll(".nav-link");
-
-    function highlightNavOnScroll() {
-      let scrollPosition = window.scrollY;
-
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 100;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute("id");
-
-        if (
-          scrollPosition >= sectionTop &&
-          scrollPosition < sectionTop + sectionHeight
-        ) {
-          navItems.forEach((item) => {
-            item.classList.remove("active-section");
-            if (item.getAttribute("href") === `#${sectionId}`) {
-              item.classList.add("active-section");
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (navLinks && navLinks.classList.contains("active")) {
+          if (!e.target.closest("nav")) {
+            navLinks.classList.remove("active");
+            document.body.classList.remove("menu-open");
+            if (mobileMenuToggle) {
+              mobileMenuToggle.setAttribute("aria-expanded", "false");
             }
-          });
+          }
         }
       });
-    }
 
-    window.addEventListener("scroll", highlightNavOnScroll);
-    highlightNavOnScroll(); // Run once on page load
+      // Close mobile menu when clicking on a nav link
+      const navLinkItems = document.querySelectorAll(".nav-link");
+      navLinkItems.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth <= 768 && navLinks) {
+            navLinks.classList.remove("active");
+            document.body.classList.remove("menu-open");
+            if (mobileMenuToggle) {
+              mobileMenuToggle.setAttribute("aria-expanded", "false");
+            }
+          }
+        });
+      });
 
-    // Handle window resize - reset menu state if window is resized above mobile breakpoint
-    window.addEventListener("resize", () => {
-      if (
-        window.innerWidth > 768 &&
-        navLinks &&
-        navLinks.classList.contains("active")
-      ) {
-        navLinks.classList.remove("active");
-        document.body.classList.remove("menu-open");
-        if (mobileMenuToggle) {
-          mobileMenuToggle.setAttribute("aria-expanded", "false");
-        }
+      // Highlight active nav link based on scroll position
+      const sections = document.querySelectorAll("section[id]");
+      const navItems = document.querySelectorAll(".nav-link");
+
+      function highlightNavOnScroll() {
+        let scrollPosition = window.scrollY;
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.getAttribute("id");
+
+          if (
+            scrollPosition >= sectionTop &&
+            scrollPosition < sectionTop + sectionHeight
+          ) {
+            navItems.forEach((item) => {
+              item.classList.remove("active-section");
+              if (item.getAttribute("href") === `#${sectionId}`) {
+                item.classList.add("active-section");
+              }
+            });
+          }
+        });
       }
-    });
-  });
-</script>
 
-<script is:inline>
-  // Update logo when theme changes
-  document.addEventListener("DOMContentLoaded", function () {
-    const themeToggle = document.getElementById("theme-toggle");
-    const logoLight = document.querySelector(".logo-light");
-    const logoDark = document.querySelector(".logo-dark");
+      window.addEventListener("scroll", highlightNavOnScroll);
+      highlightNavOnScroll(); // Run once on page load
 
-    // Function to update logo visibility based on theme
-    function updateLogoVisibility() {
-      const isDarkMode =
-        document.documentElement.classList.contains("dark-mode");
-
-      if (logoLight && logoDark) {
-        logoLight.style.display = isDarkMode ? "none" : "block";
-        logoDark.style.display = isDarkMode ? "block" : "none";
-      }
-    }
-
-    // Update initially
-    updateLogoVisibility();
-
-    // Update when theme toggle is clicked
-    if (themeToggle) {
-      themeToggle.addEventListener("click", updateLogoVisibility);
-    }
-
-    // Also observe theme changes that might happen from other sources
-    const observer = new MutationObserver(function (mutations) {
-      mutations.forEach(function (mutation) {
-        if (mutation.attributeName === "class") {
-          updateLogoVisibility();
+      // Handle window resize - reset menu state if window is resized above mobile breakpoint
+      window.addEventListener("resize", () => {
+        if (
+          window.innerWidth > 768 &&
+          navLinks &&
+          navLinks.classList.contains("active")
+        ) {
+          navLinks.classList.remove("active");
+          document.body.classList.remove("menu-open");
+          if (mobileMenuToggle) {
+            mobileMenuToggle.setAttribute("aria-expanded", "false");
+          }
         }
       });
     });
+  </script>
 
-    observer.observe(document.documentElement, { attributes: true });
-  });
-</script>
+  <script is:inline>
+    // Update logo when theme changes
+    document.addEventListener("DOMContentLoaded", function () {
+      const themeToggle = document.getElementById("theme-toggle");
+      const logoLight = document.querySelector(".logo-light");
+      const logoDark = document.querySelector(".logo-dark");
+
+      // Function to update logo visibility based on theme
+      function updateLogoVisibility() {
+        const isDarkMode =
+          document.documentElement.classList.contains("dark-mode");
+
+        if (logoLight && logoDark) {
+          logoLight.style.display = isDarkMode ? "none" : "block";
+          logoDark.style.display = isDarkMode ? "block" : "none";
+        }
+      }
+
+      // Update initially
+      updateLogoVisibility();
+
+      // Update when theme toggle is clicked
+      if (themeToggle) {
+        themeToggle.addEventListener("click", updateLogoVisibility);
+      }
+
+      // Also observe theme changes that might happen from other sources
+      const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.attributeName === "class") {
+            updateLogoVisibility();
+          }
+        });
+      });
+
+      observer.observe(document.documentElement, { attributes: true });
+    });
+  </script>
+</html>
