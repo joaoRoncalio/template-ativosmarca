@@ -41,7 +41,7 @@ if (mockupPaths.length === 0) {
 
 <Layout
   title={brandData.ui.meta.title}
-  description={`${brandData.ui.meta.description} ${brandData.companyName}`}
+  description={brandData.ui.meta.description}
 >
   <!-- Hidden element to store brand data for JavaScript access -->
   <script
@@ -53,7 +53,7 @@ if (mockupPaths.length === 0) {
   <div class="container">
     <section class="hero">
       <div class="hero-content">
-        <h1>{brandData.companyName} <span>{brandData.ui.meta.title}</span></h1>
+        <h1>{brandData.companyName} <span>{brandData.heroSubtitle}</span></h1>
         <p>{brandData.tagline}</p>
         <div class="hero-cta">
           <a href="#logos" class="btn btn-primary"
@@ -394,7 +394,7 @@ if (mockupPaths.length === 0) {
         </div>
       </div>
     </section>
-    <section class="section">
+    <section id="mockups" class="section">
       <h2>{brandData.ui.sections.mockups || "Aplicações"}</h2>
       <p class="mockup-intro">
         {brandData.mockups.intro || "Descrição das aplicações"}

@@ -1,9 +1,10 @@
 {
   "companyName": "Acme Corp",
+  "heroSubtitle": "Recursos de Marca",
   "tagline": "Recursos de marca e diretrizes de uso",
   "ui": {
     "meta": {
-      "title": "Marcoteca",
+      "title": "Acme Corp | Marcoteca Template",
       "description": "Recursos de marca e diretrizes de uso da Acme Corp."
     },
     "theme": {
@@ -52,9 +53,10 @@
     "footer": {
       "brandAssets": "Recursos de Marca",
       "resources": "Links Úteis",
-      "marcotecaCTA": "Faça sua Marcoteca",
-      "brandGuidelinesPdf": "PDF do Guia de Marca",
-      "PDFurl": "https://example.com/brand-guidelines.pdf",
+      "link01Label": "Faça sua Marcoteca",
+      "link01Url": "https://example.com/marcoteca",
+      "link02Label": "PDF do Guia de Marca",
+      "link02Url": "https://example.com/brand-guidelines.pdf",
       "contactBrandTeam": "Contatar Equipe de Marca",
       "contactMail": "contato@montefiorestudio.com",
       "copyright": "© 2025 Acme Corp. WebDev & Design por <a href='https://montefiorestudio.com' target='_blank'>Montefiore Studio</a>."
@@ -62,6 +64,7 @@
   },
   "logos": {
     "principal": {
+      "_comment": "LOGO PRINCIPAL",
       "svg": "/assets/logo-primary.svg",
       "png": "/assets/logo-primary.png",
       "description": "O logotipo principal deve ser usado na maioria das aplicações onde a marca é destacada.",
@@ -309,6 +312,6 @@
     }
   },
   "mockups": {
-    "intro": "Aqui estão algumas aplicações da marca para ilustrar como ela pode ser usada em diferentes contextos. Cada mockup representa um cenário realista em que a marca pode ser aplicada."
+    "intro": "Aqui estão algumas aplicações da marca para ilustrar como ela pode ser usada em diferentes contextos."
   }
 }
