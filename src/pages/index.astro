@@ -4,6 +4,7 @@ import ColorGrid from "../components/ColorGrid.astro";
 import LogoGrid from "../components/LogoGrid.astro";
 // @ts-ignore - JSON import
 import brandData from "../data/brand.json";
+import { Image } from "astro:assets";
 
 // Get all mockup images from the public assets folder
 // @ts-ignore - Mockup images
@@ -407,7 +408,7 @@ if (mockupPaths.length === 0) {
               {
                 mockupPaths.map((path) => (
                   <li class="splide__slide">
-                    <img src={path} alt="Aplicação da marca" loading="lazy" />
+                    <img src={path} alt="Aplicação da marca" />
                   </li>
                 ))
               }
@@ -498,11 +499,9 @@ if (mockupPaths.length === 0) {
       type: "loop",
       perPage: 1,
       gap: "1rem",
-      autoplay: false,
-      interval: 4000,
-      pauseOnHover: true,
       arrows: true,
       pagination: true,
+      lazyLoad: "nearby",
     }).mount();
   });
 </script>
