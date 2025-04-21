@@ -695,7 +695,8 @@ footer {
   font-size: var(--font-size-body-large);
   color: var(--text-light);
   margin: 1.5rem 0;
-  line-height: var(--line-height-relaxed);
+  line-height: var(--line-height-normal);
+  letter-spacing: -0.02em;
 }
 
 .hero-cta {
@@ -875,17 +876,11 @@ footer {
   margin-right: 0.5rem;
   font-size: var(--font-size-small);
 }
-.typography-intro {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
-}
 
-.typography-header {
-  max-width: 60%;
+.typography-intro,
+.color-intro,
+.mockup-intro {
+  max-width: 52ch;
 }
 
 .typography-header p {
@@ -1124,6 +1119,11 @@ footer {
     justify-content: center;
   }
 
+  .hero-image img {
+    width: 180px;
+    height: auto;
+  }
+
   .section {
     padding: 1.5rem;
   }
@@ -1134,6 +1134,12 @@ footer {
 
   .color-grid {
     grid-template-columns: 1fr !important;
+  }
+
+  .typography-intro,
+  .color-intro,
+  .mockup-intro {
+    max-width: 90%;
   }
 
   .footer-sections {
@@ -1150,11 +1156,6 @@ footer {
 
   .download-links {
     flex-direction: column;
-  }
-
-  .hero-image img {
-    width: 180px;
-    height: auto;
   }
 
   .usage-card {
@@ -1236,9 +1237,11 @@ footer {
   }
 
   .hero p {
-    max-width: 24ch;
+    max-width: 18ch;
     font-size: var(--font-size-small);
     margin: 1rem 0;
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.03em;
   }
 
   .section h2 {

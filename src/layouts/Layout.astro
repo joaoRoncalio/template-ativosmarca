@@ -21,15 +21,24 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
     <!-- Open Graph meta tags -->
     <meta property="og:title" content={Astro.props.title} />
     <meta property="og:description" content={Astro.props.description} />
-    <meta property="og:image" content="/template-ativosmarca-ogimage.webp" />
+    <meta property="description" content={Astro.props.description} />
+    <meta property="og:image" content="/template-marcoteca-ogimage.webp" />
     <meta name="generator" content={Astro.generator} />
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>{brandData.companyName} {brandData.ui.meta.title}</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"
+    ></script>
+    <title>{Astro.props.title}</title>
     <script src="/js/colorManager.js" type="module" is:inline></script>
 
     <!-- Hidden element to store brand data for JavaScript access -->
@@ -149,6 +158,9 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
               <a href="#typography" class="nav-link"
                 >{brandData.ui.navigation.links.typography}</a
               >
+              <a href="#mockups" class="nav-link"
+                >{brandData.ui.navigation.links.mockups}</a
+              >
             </div>
 
             <ThemeToggle />
@@ -186,6 +198,7 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
             alt="Logotipo {brandData.companyName}"
             width="150"
             height="45"
+            loading="lazy"
           />
         </div>
         <div class="footer-links">
@@ -208,10 +221,14 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
           <div class="footer-section">
             <h3>{brandData.ui.footer.resources}</h3>
             <ul>
-              <li><a href="#">{brandData.ui.footer.downloadAllAssets}</a></li>
               <li>
-                <a href={brandData.ui.footer.PDFurl} target="_blank"
-                  >{brandData.ui.footer.brandGuidelinesPdf}</a
+                <a href={brandData.ui.footer.link01Url} target="_blank"
+                  >{brandData.ui.footer.link01Label}</a
+                >
+              </li>
+              <li>
+                <a href={brandData.ui.footer.link02Url} target="_blank"
+                  >{brandData.ui.footer.link02Label}</a
                 >
               </li>
               <li>
@@ -238,6 +255,13 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
       --primary: var(--primaryColor, #2563eb);
       --primary-light: color-mix(in srgb, var(--primary) 70%, white);
       --primary-dark: color-mix(in srgb, var(--primary) 80%, black);
+    }
+    .dark-mode {
+      --primary: color-mix(
+        in srgb,
+        var(--primaryColor) 90%,
+        rgb(255, 255, 255)
+      );
     }
   </style>
 

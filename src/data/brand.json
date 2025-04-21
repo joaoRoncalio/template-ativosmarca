@@ -1,21 +1,23 @@
 {
   "companyName": "Acme Corp",
-  "tagline": "Recursos essenciais para nossa identidade de marca",
+  "heroSubtitle": "Recursos de Marca",
+  "tagline": "Recursos de marca e diretrizes de uso",
   "ui": {
     "meta": {
-      "title": "Ativos de Marca",
-      "description": "Ativos de marca e diretrizes de uso para a marca Acme Corp."
+      "title": "Acme Corp | Marcoteca Template",
+      "description": "Recursos de marca e diretrizes de uso da Acme Corp."
     },
     "theme": {
-      "defaultMode": "dark",
+      "defaultMode": "light",
       "allowUserToggle": true
     },
     "navigation": {
-      "brandGuidelines": "Ativos de Marca",
+      "brandGuidelines": "Marcoteca",
       "links": {
         "logos": "Logos",
         "colors": "Cores",
-        "typography": "Tipografia"
+        "typography": "Tipografia",
+        "mockups": "Aplicações"
       }
     },
     "buttons": {
@@ -45,14 +47,16 @@
       "fontFamilies": "Famílias de Fontes",
       "headings": "Títulos",
       "bodyText": "Texto de Corpo",
-      "typographyGuidelines": "Diretrizes de Tipografia"
+      "typographyGuidelines": "Diretrizes de Tipografia",
+      "mockups": "Aplicações"
     },
     "footer": {
       "brandAssets": "Recursos de Marca",
-      "resources": "Recursos",
-      "downloadAllAssets": "Baixar Todos os Recursos",
-      "brandGuidelinesPdf": "PDF do Guia de Marca",
-      "PDFurl": "https://example.com/brand-guidelines.pdf",
+      "resources": "Links Úteis",
+      "link01Label": "Faça sua Marcoteca",
+      "link01Url": "https://example.com/marcoteca",
+      "link02Label": "PDF do Guia de Marca",
+      "link02Url": "https://example.com/brand-guidelines.pdf",
       "contactBrandTeam": "Contatar Equipe de Marca",
       "contactMail": "contato@montefiorestudio.com",
       "copyright": "© 2025 Acme Corp. WebDev & Design por <a href='https://montefiorestudio.com' target='_blank'>Montefiore Studio</a>."
@@ -60,6 +64,7 @@
   },
   "logos": {
     "principal": {
+      "_comment": "LOGO PRINCIPAL",
       "svg": "/assets/logo-primary.svg",
       "png": "/assets/logo-primary.png",
       "description": "O logotipo principal deve ser usado na maioria das aplicações onde a marca é destacada.",
@@ -305,5 +310,8 @@
         }
       }
     }
+  },
+  "mockups": {
+    "intro": "Aqui estão algumas aplicações da marca para ilustrar como ela pode ser usada em diferentes contextos."
   }
 }
