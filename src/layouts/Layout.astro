@@ -21,7 +21,7 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
     <!-- Open Graph meta tags -->
     <meta property="og:title" content={Astro.props.title} />
     <meta property="og:description" content={Astro.props.description} />
-    <meta property="og:image" content="/template-ativosmarca-ogimage.webp" />
+    <meta property="og:image" content="/template-marcoteca-ogimage.webp" />
     <meta name="generator" content={Astro.generator} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,6 +29,13 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"
+    ></script>
     <title>{brandData.companyName} {brandData.ui.meta.title}</title>
     <script src="/js/colorManager.js" type="module" is:inline></script>
 
@@ -186,6 +193,7 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
             alt="Logotipo {brandData.companyName}"
             width="150"
             height="45"
+            loading="lazy"
           />
         </div>
         <div class="footer-links">
@@ -208,7 +216,10 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
           <div class="footer-section">
             <h3>{brandData.ui.footer.resources}</h3>
             <ul>
-              <li><a href="#">{brandData.ui.footer.downloadAllAssets}</a></li>
+              <li>
+                <a href="https://marcoteca.com.br"
+                  >{brandData.ui.footer.marcotecaCTA}</a>
+              </li>
               <li>
                 <a href={brandData.ui.footer.PDFurl} target="_blank"
                   >{brandData.ui.footer.brandGuidelinesPdf}</a

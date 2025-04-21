@@ -5,6 +5,39 @@ import LogoGrid from "../components/LogoGrid.astro";
 import DownloadButton from "../components/DownloadButton.astro";
 // @ts-ignore - JSON import
 import brandData from "../data/brand.json";
+
+// Get all mockup images from the public assets folder
+// @ts-ignore - Mockup images
+import.meta.glob("/public/assets/mockups/*.{jpg,jpeg,png,webp}", {
+  eager: true,
+});
+
+// Just list the files directly
+const mockupPaths: string[] = [];
+try {
+  // This is a simple way to get files from a directory at build time
+  const files = await Astro.glob(
+    "/public/assets/mockups/*.{jpg,jpeg,png,webp}",
+  );
+
+  // If we have files, process them
+  if (files && files.length > 0) {
+    files.forEach((file) => {
+      if (file.default) {
+        mockupPaths.push(file.default.src || file.default);
+      }
+    });
+  }
+} catch (error) {
+  console.error("Error loading mockup images:", error);
+}
+
+// If no files were found, add some fallback paths for testing
+if (mockupPaths.length === 0) {
+  for (let i = 1; i <= 3; i++) {
+    mockupPaths.push(`/assets/mockups/mockup-${i}.jpg`);
+  }
+}
 ---
 
 <Layout
@@ -79,11 +112,10 @@ import brandData from "../data/brand.json";
 
     <section id="colors" class="section">
       <h2>{brandData.ui.sections.colors}</h2>
+      <div class="color-intro">
+        <p>{brandData.colors.intro}</p>
+      </div>
       <div class="content">
-        <div class="color-intro">
-          <p>{brandData.colors.intro}</p>
-        </div>
-
         {/* Dynamic color grids that adjust based on the number of colors */}
         <ColorGrid
           colors={brandData.colors.primary}
@@ -107,13 +139,10 @@ import brandData from "../data/brand.json";
 
     <section id="typography" class="section">
       <h2>{brandData.ui.sections.typography}</h2>
+      <div class="typography-intro">
+        <p>{brandData.typography.intro}</p>
+      </div>
       <div class="content">
-        <div class="typography-intro">
-          <div class="typography-header">
-            <p>{brandData.typography.intro}</p>
-          </div>
-        </div>
-
         <div class="font-family-section">
           <div class="font-family-card">
             <div class="font-family-header">
@@ -366,10 +395,30 @@ import brandData from "../data/brand.json";
         </div>
       </div>
     </section>
+    <section class="section">
+      <h2>{brandData.ui.sections.mockups || "Aplicações"}</h2>
+      <p class="mockup-intro">
+        {brandData.mockups.intro || "Descrição das aplicações"}
+      </p>
+      <!-- Mockup slider -->
+      <div class="mockup-content content">
+        <div class="splide" id="mockup-slider">
+          <div class="splide__track">
+            <ul class="splide__list">
+              {
+                mockupPaths.map((path) => (
+                  <li class="splide__slide">
+                    <img src={path} alt="Aplicação da marca" loading="lazy" />
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </Layout>
-
-<!-- Styles moved to global.css -->
 
 <script src="/js/colorManager.js" type="module" is:inline></script>
 
@@ -444,6 +493,19 @@ import brandData from "../data/brand.json";
       });
     });
   });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    new Splide("#mockup-slider", {
+      type: "loop",
+      perPage: 1,
+      gap: "1rem",
+      autoplay: false,
+      interval: 4000,
+      pauseOnHover: true,
+      arrows: true,
+      pagination: true,
+    }).mount();
+  });
 </script>
 
 <script>
@@ -477,3 +539,51 @@ import brandData from "../data/brand.json";
 </script>
 
 <script src="/js/themeManager.js" is:inline></script>
+
+<style>
+  .mockup-content {
+    padding: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: transparent;
+  }
+
+  /* Slider customization */
+  .splide__slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 640px; /* Set a fixed height for all slides */
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .splide__slide img {
+    object-fit: contain; /* Maintain aspect ratio */
+    max-width: 100%;
+  }
+
+  /* Make slider responsive */
+  @media (max-width: 768px) {
+    .splide__slide {
+      height: 480px; /* Smaller height on mobile */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .splide__track {
+      max-height: 250px;
+      border-radius: var(--radius-lg);
+    }
+
+    .splide__slide {
+      height: 250px; /* Even smaller on very small screens */
+      border-radius: var(--radius-lg);
+    }
+
+    .splide__slide img {
+      max-width: none;
+      max-height: 100%;
+    }
+  }
+</style>

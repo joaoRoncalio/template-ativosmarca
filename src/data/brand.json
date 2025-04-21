@@ -1,21 +1,22 @@
 {
   "companyName": "Acme Corp",
-  "tagline": "Recursos essenciais para nossa identidade de marca",
+  "tagline": "Recursos de marca e diretrizes de uso",
   "ui": {
     "meta": {
-      "title": "Ativos de Marca",
-      "description": "Ativos de marca e diretrizes de uso para a marca Acme Corp."
+      "title": "Marcoteca",
+      "description": "Recursos de marca e diretrizes de uso da Acme Corp."
     },
     "theme": {
-      "defaultMode": "dark",
+      "defaultMode": "light",
       "allowUserToggle": true
     },
     "navigation": {
-      "brandGuidelines": "Ativos de Marca",
+      "brandGuidelines": "Marcoteca",
       "links": {
         "logos": "Logos",
         "colors": "Cores",
-        "typography": "Tipografia"
+        "typography": "Tipografia",
+        "mockups": "Aplicações"
       }
     },
     "buttons": {
@@ -45,12 +46,13 @@
       "fontFamilies": "Famílias de Fontes",
       "headings": "Títulos",
       "bodyText": "Texto de Corpo",
-      "typographyGuidelines": "Diretrizes de Tipografia"
+      "typographyGuidelines": "Diretrizes de Tipografia",
+      "mockups": "Aplicações"
     },
     "footer": {
       "brandAssets": "Recursos de Marca",
-      "resources": "Recursos",
-      "downloadAllAssets": "Baixar Todos os Recursos",
+      "resources": "Links Úteis",
+      "marcotecaCTA": "Faça sua Marcoteca",
       "brandGuidelinesPdf": "PDF do Guia de Marca",
       "PDFurl": "https://example.com/brand-guidelines.pdf",
       "contactBrandTeam": "Contatar Equipe de Marca",
@@ -305,5 +307,8 @@
         }
       }
     }
+  },
+  "mockups": {
+    "intro": "Aqui estão algumas aplicações da marca para ilustrar como ela pode ser usada em diferentes contextos. Cada mockup representa um cenário realista em que a marca pode ser aplicada."
   }
 }
