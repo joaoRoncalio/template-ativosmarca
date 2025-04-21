@@ -21,8 +21,10 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
     <!-- Open Graph meta tags -->
     <meta property="og:title" content={Astro.props.title} />
     <meta property="og:description" content={Astro.props.description} />
+    <meta property="description" content={Astro.props.description} />
     <meta property="og:image" content="/template-marcoteca-ogimage.webp" />
     <meta name="generator" content={Astro.generator} />
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -218,7 +220,8 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
             <ul>
               <li>
                 <a href="https://marcoteca.com.br"
-                  >{brandData.ui.footer.marcotecaCTA}</a>
+                  >{brandData.ui.footer.marcotecaCTA}</a
+                >
               </li>
               <li>
                 <a href={brandData.ui.footer.PDFurl} target="_blank"
@@ -249,6 +252,13 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
       --primary: var(--primaryColor, #2563eb);
       --primary-light: color-mix(in srgb, var(--primary) 70%, white);
       --primary-dark: color-mix(in srgb, var(--primary) 80%, black);
+    }
+    .dark-mode {
+      --primary: color-mix(
+        in srgb,
+        var(--primaryColor) 90%,
+        rgb(255, 255, 255)
+      );
     }
   </style>
 
