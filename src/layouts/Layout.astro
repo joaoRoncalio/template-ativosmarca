@@ -38,7 +38,7 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
     <script
       src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"
     ></script>
-    <title>{brandData.companyName} {brandData.ui.meta.title}</title>
+    <title>{Astro.props.title}</title>
     <script src="/js/colorManager.js" type="module" is:inline></script>
 
     <!-- Hidden element to store brand data for JavaScript access -->
@@ -158,6 +158,9 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
               <a href="#typography" class="nav-link"
                 >{brandData.ui.navigation.links.typography}</a
               >
+              <a href="#mockups" class="nav-link"
+                >{brandData.ui.navigation.links.mockups}</a
+              >
             </div>
 
             <ThemeToggle />
@@ -219,13 +222,13 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
             <h3>{brandData.ui.footer.resources}</h3>
             <ul>
               <li>
-                <a href="https://marcoteca.com.br"
-                  >{brandData.ui.footer.marcotecaCTA}</a
+                <a href={brandData.ui.footer.link01Url} target="_blank"
+                  >{brandData.ui.footer.link01Label}</a
                 >
               </li>
               <li>
-                <a href={brandData.ui.footer.PDFurl} target="_blank"
-                  >{brandData.ui.footer.brandGuidelinesPdf}</a
+                <a href={brandData.ui.footer.link02Url} target="_blank"
+                  >{brandData.ui.footer.link02Label}</a
                 >
               </li>
               <li>

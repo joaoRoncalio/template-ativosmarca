@@ -695,7 +695,8 @@ footer {
   font-size: var(--font-size-body-large);
   color: var(--text-light);
   margin: 1.5rem 0;
-  line-height: var(--line-height-relaxed);
+  line-height: var(--line-height-normal);
+  letter-spacing: -0.02em;
 }
 
 .hero-cta {
@@ -879,7 +880,7 @@ footer {
 .typography-intro,
 .color-intro,
 .mockup-intro {
-  max-width: 60%;
+  max-width: 52ch;
 }
 
 .typography-header p {
@@ -1236,9 +1237,11 @@ footer {
   }
 
   .hero p {
-    max-width: 24ch;
+    max-width: 18ch;
     font-size: var(--font-size-small);
     margin: 1rem 0;
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.03em;
   }
 
   .section h2 {
