@@ -1067,7 +1067,7 @@ footer {
 
   .nav-links.active {
     height: auto;
-    padding: 1rem 0;
+    padding-top: 1rem;
   }
 
   .nav-link {
