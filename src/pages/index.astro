@@ -557,8 +557,9 @@ if (mockupPaths.length === 0) {
   }
 
   .splide__slide img {
-    object-fit: contain; /* Maintain aspect ratio */
-    max-width: 100%;
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
   }
 
   /* Make slider responsive */
@@ -577,11 +578,6 @@ if (mockupPaths.length === 0) {
     .splide__slide {
       height: 250px; /* Even smaller on very small screens */
       border-radius: var(--radius-lg);
-    }
-
-    .splide__slide img {
-      max-width: none;
-      max-height: 100%;
     }
   }
 </style>

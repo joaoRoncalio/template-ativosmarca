@@ -23,6 +23,7 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
     <meta property="og:title" content={Astro.props.title} />
     <meta property="og:description" content={Astro.props.description} />
     <meta property="description" content={Astro.props.description} />
+    <meta name="description" content={Astro.props.description} />
     <meta property="og:image" content="/template-marcoteca-ogimage.webp" />
     <meta name="generator" content={Astro.generator} />
     <!-- Fonts -->
@@ -32,13 +33,27 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Load Splide.js with defer for non-critical resources -->
     <link
-      rel="stylesheet"
+      rel="preload"
       href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"
+      />
+    </noscript>
+
+    <!-- Load Splide.js only when needed -->
     <script
+      defer
       src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"
     ></script>
+
     <title>{Astro.props.title}</title>
     <script src="/js/colorManager.js" type="module" is:inline></script>
 
