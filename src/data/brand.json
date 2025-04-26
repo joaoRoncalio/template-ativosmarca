@@ -59,7 +59,7 @@
       "link02Url": "https://example.com/brand-guidelines.pdf",
       "contactBrandTeam": "Contatar Equipe de Marca",
       "contactMail": "contato@montefiorestudio.com",
-      "copyright": "© 2025 Acme Corp. WebDev & Design por <a href='https://montefiorestudio.com' target='_blank'>Montefiore Studio</a>."
+      "copyright": "© 2025 Acme Corp. Desenvolvido por <a href='https://montefiorestudio.com' target='_blank'>Montefiore Studio</a>."
     }
   },
   "logos": {
@@ -165,12 +165,6 @@
         "hex": "#f3f4f6",
         "cmyk": "1, 1, 0, 4",
         "description": "Usado para fundos e elementos claros da interface"
-      },
-      {
-        "name": "Branco",
-        "hex": "#ffffff",
-        "cmyk": "0, 0, 0, 0",
-        "description": "Usado para fundos de cartões e áreas de conteúdo principal"
       }
     ],
     "usage": {

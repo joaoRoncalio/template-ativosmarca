@@ -135,6 +135,8 @@ p {
   color: var(--text-light);
   font-size: var(--font-size-small);
   line-height: 1.5;
+  max-width: 54ch;
+  padding-right: 1rem;
 }
 
 /* ===== Container ===== */
@@ -1213,6 +1215,11 @@ footer {
     margin-top: 2rem;
   }
 
+  p {
+    max-width: 38ch;
+    padding-right: 0;
+  }
+
   .section {
     padding: 0;
     margin: 2rem 0;
@@ -1239,7 +1246,7 @@ footer {
   .hero p {
     max-width: 18ch;
     font-size: var(--font-size-small);
-    margin: 1rem 0;
+    margin: 1rem auto;
     line-height: var(--line-height-tight);
     letter-spacing: -0.03em;
   }
