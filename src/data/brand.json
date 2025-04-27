@@ -1,7 +1,7 @@
 {
   "companyName": "Acme Corp",
   "heroSubtitle": "Recursos de Marca",
-  "tagline": "Recursos de marca e diretrizes de uso",
+  "tagline": "Essa é a página-modelo da <a href='https://marcoteca.com' target='_blank'>Marcoteca</a>",
   "ui": {
     "meta": {
       "title": "Acme Corp | Marcoteca Template",
@@ -54,12 +54,12 @@
       "brandAssets": "Recursos de Marca",
       "resources": "Links Úteis",
       "link01Label": "Faça sua Marcoteca",
-      "link01Url": "https://example.com/marcoteca",
+      "link01Url": "https://marcoteca.com",
       "link02Label": "PDF do Guia de Marca",
       "link02Url": "https://example.com/brand-guidelines.pdf",
       "contactBrandTeam": "Contatar Equipe de Marca",
       "contactMail": "contato@montefiorestudio.com",
-      "copyright": "© 2025 Acme Corp. WebDev & Design por <a href='https://montefiorestudio.com' target='_blank'>Montefiore Studio</a>."
+      "copyright": "© 2025 Acme Corp. Desenvolvido por <a href='https://montefiorestudio.com' target='_blank'>Montefiore Studio</a>."
     }
   },
   "logos": {
@@ -67,7 +67,7 @@
       "_comment": "LOGO PRINCIPAL",
       "svg": "/assets/logo-primary.svg",
       "png": "/assets/logo-primary.png",
-      "description": "O logotipo principal deve ser usado na maioria das aplicações onde a marca é destacada.",
+      "description": "O logotipo principal deve ser usado na maioria das aplicações.",
       "background": "default-bg"
     },
     "dark": {
@@ -165,12 +165,6 @@
         "hex": "#f3f4f6",
         "cmyk": "1, 1, 0, 4",
         "description": "Usado para fundos e elementos claros da interface"
-      },
-      {
-        "name": "Branco",
-        "hex": "#ffffff",
-        "cmyk": "0, 0, 0, 0",
-        "description": "Usado para fundos de cartões e áreas de conteúdo principal"
       }
     ],
     "usage": {

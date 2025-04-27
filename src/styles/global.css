@@ -135,6 +135,8 @@ p {
   color: var(--text-light);
   font-size: var(--font-size-small);
   line-height: 1.5;
+  max-width: 54ch;
+  padding-right: 1rem;
 }
 
 /* ===== Container ===== */
@@ -320,12 +322,15 @@ footer {
   text-decoration: underline;
 }
 
+.footer-bottom {
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .footer-bottom p {
   letter-spacing: -0.01em;
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
   font-size: var(--font-size-xs);
   color: rgba(255, 255, 255, 0.7);
@@ -1213,6 +1218,11 @@ footer {
     margin-top: 2rem;
   }
 
+  p {
+    max-width: 32ch;
+    padding-right: 0;
+  }
+
   .section {
     padding: 0;
     margin: 2rem 0;
@@ -1239,7 +1249,7 @@ footer {
   .hero p {
     max-width: 18ch;
     font-size: var(--font-size-small);
-    margin: 1rem 0;
+    margin: 1rem auto;
     line-height: var(--line-height-tight);
     letter-spacing: -0.03em;
   }
@@ -1298,5 +1308,11 @@ footer {
   .guidelines-list li svg {
     margin-top: 0;
     min-width: 16px !important;
+  }
+
+  .footer-bottom p {
+    margin-bottom: 0.5rem;
+    max-width: 28ch;
+    align-self: center;
   }
 }
