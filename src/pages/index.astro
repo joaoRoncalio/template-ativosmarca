@@ -55,7 +55,7 @@ if (mockupPaths.length === 0) {
     <section class="hero">
       <div class="hero-content">
         <h1>{brandData.companyName} <span>{brandData.heroSubtitle}</span></h1>
-        <p>{brandData.tagline}</p>
+        <p set:html={brandData.tagline} />
         <div class="hero-cta">
           <a href="#logos" class="btn btn-primary"
             >{brandData.ui.buttons.exploreGuidelines}</a

@@ -322,12 +322,15 @@ footer {
   text-decoration: underline;
 }
 
+.footer-bottom {
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .footer-bottom p {
   letter-spacing: -0.01em;
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
   font-size: var(--font-size-xs);
   color: rgba(255, 255, 255, 0.7);
@@ -1216,7 +1219,7 @@ footer {
   }
 
   p {
-    max-width: 38ch;
+    max-width: 32ch;
     padding-right: 0;
   }
 
@@ -1305,5 +1308,11 @@ footer {
   .guidelines-list li svg {
     margin-top: 0;
     min-width: 16px !important;
+  }
+
+  .footer-bottom p {
+    margin-bottom: 0.5rem;
+    max-width: 28ch;
+    align-self: center;
   }
 }

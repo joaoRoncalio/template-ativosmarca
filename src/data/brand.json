@@ -1,7 +1,7 @@
 {
   "companyName": "Acme Corp",
   "heroSubtitle": "Recursos de Marca",
-  "tagline": "Recursos de marca e diretrizes de uso",
+  "tagline": "Essa é a página-modelo da <a href='https://marcoteca.com' target='_blank'>Marcoteca</a>",
   "ui": {
     "meta": {
       "title": "Acme Corp | Marcoteca Template",
@@ -67,7 +67,7 @@
       "_comment": "LOGO PRINCIPAL",
       "svg": "/assets/logo-primary.svg",
       "png": "/assets/logo-primary.png",
-      "description": "O logotipo principal deve ser usado na maioria das aplicações onde a marca é destacada.",
+      "description": "O logotipo principal deve ser usado na maioria das aplicações.",
       "background": "default-bg"
     },
     "dark": {
