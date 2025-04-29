@@ -67,7 +67,7 @@
       "_comment": "LOGO PRINCIPAL",
       "svg": "/assets/logo-primary.svg",
       "png": "/assets/logo-primary.png",
-      "description": "O logotipo principal deve ser usado na maioria das aplicações.",
+      "description": "O logotipo principal deve ser usado na maioria das aplicações. Ele é versátil e pode ser adaptado para diferentes fundos.",
       "background": "default-bg"
     },
     "dark": {
