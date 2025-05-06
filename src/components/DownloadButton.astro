@@ -6,9 +6,11 @@ interface Props {
   url: string;
   label: string;
   type?: "download" | "copy" | "link";
+  className?: string;
+  [key: string]: any; // Allow any additional attributes
 }
 
-const { url, label, type = "download" } = Astro.props;
+const { url, label, type = "download", className = "", ...rest } = Astro.props;
 
 // Get the appropriate icon based on type
 const iconSvg = brandData.ui.icons[type] || brandData.ui.icons.download;
@@ -19,10 +21,11 @@ const isExternalLink = type === "link";
 // Set appropriate attributes based on type
 const attributes = {
   href: url,
-  class: `download-link ${type === "copy" ? "copy-svg-btn" : ""} ${type}-btn`,
+  class: `download-link ${type === "copy" ? "copy-svg-btn" : ""} ${type}-btn ${className}`,
   ...(type === "copy" && { "data-svg-url": url }),
   ...(isExternalLink && { target: "_blank", rel: "noopener noreferrer" }),
   ...(type === "download" && { download: "" }),
+  ...rest, // Spread any additional attributes
 };
 ---
 

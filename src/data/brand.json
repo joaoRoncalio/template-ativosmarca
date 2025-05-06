@@ -11,6 +11,10 @@
       "defaultMode": "light",
       "allowUserToggle": true
     },
+    "logoOptions": {
+      "allowColorChange": false,
+      "defaultColors": ["primary", "black", "white"]
+    },
     "navigation": {
       "brandGuidelines": "Marcoteca",
       "links": {
