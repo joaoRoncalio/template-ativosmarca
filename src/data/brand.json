@@ -70,15 +70,14 @@
       "description": "O logotipo principal deve ser usado na maioria das aplicações. Ele é versátil e pode ser adaptado para diferentes fundos.",
       "background": "default-bg"
     },
-    "dark": {
-      "_comment": "PARA FUNDOS ESCUROS",
+    "secundário": {
+      "_comment": "SECUNDÁRIO",
       "svg": "/assets/logo-dark.svg",
       "png": "/assets/logo-dark.png",
       "description": "A versão para fundos escuros oferece máximo contraste e visibilidade em superfícies de cor escura.",
       "background": "dark-bg"
     },
-    "light": {
-      "_comment": "PARA FUNDOS CLAROS",
+    "alternativa": {
       "svg": "/assets/logo-light.svg",
       "png": "/assets/logo-light.png",
       "description": "A versão para fundos claros oferece máximo contraste e visibilidade em superfícies de cor clara.",
@@ -95,7 +94,6 @@
       "Nunca modifique as cores do logotipo",
       "Não estique ou distorça o logotipo",
       "Use a versão apropriada para diferentes fundos",
-      "O tamanho mínimo para o logotipo é de 40px de altura",
       "Sempre use a versão vetorial quando possível para máxima qualidade"
     ]
   },
@@ -193,66 +191,6 @@
   "typography": {
     "intro": "Nosso sistema tipográfico usa Inter para títulos e Roboto para texto de corpo, criando uma combinação versátil e altamente legível que funciona bem em aplicações digitais e impressas.",
     "weights": ["400 Regular", "500 Medium", "600 Semibold", "700 Bold"],
-    "headings": [
-      {
-        "name": "H1",
-        "weight": "Bold",
-        "size": "2.25rem",
-        "lineHeight": "1.2",
-        "example": "Título Principal da Página"
-      },
-      {
-        "name": "H2",
-        "weight": "Semibold",
-        "size": "1.875rem",
-        "lineHeight": "1.3",
-        "example": "Título de Seção"
-      },
-      {
-        "name": "H3",
-        "weight": "Medium",
-        "size": "1.5rem",
-        "lineHeight": "1.4",
-        "example": "Título de Subseção"
-      },
-      {
-        "name": "H4",
-        "weight": "Semibold",
-        "size": "1.25rem",
-        "lineHeight": "1.4",
-        "example": "Título de Cartão"
-      }
-    ],
-    "body": [
-      {
-        "name": "Texto regular",
-        "weight": "Regular",
-        "size": "1rem",
-        "lineHeight": "1.5",
-        "example": "Este é o texto regular de corpo usado para a maioria do conteúdo."
-      },
-      {
-        "name": "Ênfase média",
-        "weight": "Medium",
-        "size": "1rem",
-        "lineHeight": "1.5",
-        "example": "Este texto tem ênfase média para informações importantes."
-      },
-      {
-        "name": "Ênfase forte",
-        "weight": "Semibold",
-        "size": "1rem",
-        "lineHeight": "1.5",
-        "example": "Este texto tem ênfase forte para informações críticas."
-      },
-      {
-        "name": "Texto pequeno",
-        "weight": "Regular",
-        "size": "0.875rem",
-        "lineHeight": "1.5",
-        "example": "Este texto menor é usado para legendas e informações de suporte."
-      }
-    ],
     "families": {
       "heading": {
         "title": "Inter (Títulos)",
@@ -276,29 +214,21 @@
     ],
     "downloads": {
       "heading": {
-        "web": {
-          "url": "/assets/fonts/inter.zip",
-          "iconType": "download"
-        },
-        "desktop": {
+        "Baixar Família": {
           "url": "/assets/fonts/inter-desktop.zip",
           "iconType": "download"
         },
-        "googleFonts": {
+        "Ver no Google Fonts": {
           "url": "https://fonts.google.com/specimen/Inter",
           "iconType": "external"
         }
       },
       "body": {
-        "web": {
+        "Baixar Família": {
           "url": "/assets/fonts/roboto.zip",
           "iconType": "download"
         },
-        "desktop": {
-          "url": "/assets/fonts/roboto-desktop.zip",
-          "iconType": "download"
-        },
-        "googleFonts": {
+        "Ver no Google Fonts": {
           "url": "https://fonts.google.com/specimen/Roboto",
           "iconType": "external"
         }
