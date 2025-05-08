@@ -5,6 +5,7 @@ import LogoGrid from "../components/LogoGrid.astro";
 // @ts-ignore - JSON import
 import brandData from "../data/brand.json";
 import { Image } from "astro:assets";
+import DownloadButton from "../components/DownloadButton.astro";
 
 // Get all mockup images from the public assets folder
 // @ts-ignore - Mockup images
@@ -151,6 +152,7 @@ if (mockupPaths.length === 0) {
                 {brandData.typography.families.heading.description}
               </p>
             </div>
+
             <div class="font-preview">
               <div class="font-sample heading-sample">
                 {brandData.typography.families.heading.sample}
@@ -169,91 +171,27 @@ if (mockupPaths.length === 0) {
                 }
               </div>
             </div>
+
             <div class="download-links">
-              <!-- <a href={brandData.typography.downloads.heading.web.url} class="download-link" download={brandData.typography.downloads.heading.web.iconType === 'download' ? true : null}>
-								{brandData.typography.downloads.heading.web.iconType === 'download' ? (
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-								) : (
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-								)}
-								{brandData.ui.buttons.downloadWebFonts}
-							</a> -->
-              <a
-                href={brandData.typography.downloads.heading.desktop.url}
-                class="download-link"
-                download={brandData.typography.downloads.heading.desktop
-                  .iconType === "download"
-                  ? true
-                  : null}
-              >
-                {
-                  brandData.typography.downloads.heading.desktop.iconType ===
-                  "download" ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <>
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" y1="15" x2="12" y2="3" />
-                      </>
-                    </svg>
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <>
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="2" y1="12" x2="22" y2="12" />
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                      </>
-                    </svg>
-                  )
-                }
-                {brandData.ui.buttons.downloadDesktopFonts}
-              </a>
-              <a
-                href={brandData.typography.downloads.heading.googleFonts.url}
-                class="download-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><circle cx="12" cy="12" r="10"></circle><line
-                    x1="2"
-                    y1="12"
-                    x2="22"
-                    y2="12"></line><path
-                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                  ></path></svg
-                >
-                {brandData.ui.buttons.viewGoogleFonts}
-              </a>
+              {
+                Object.entries(brandData.typography.downloads.heading).map(
+                  ([key, value]) => (
+                    <DownloadButton
+                      url={value.url}
+                      label={key}
+                      type={
+                        value.iconType === "download"
+                          ? "download"
+                          : value.iconType === "external"
+                            ? "link"
+                            : value.iconType === "copy"
+                              ? "copy"
+                              : undefined
+                      }
+                    />
+                  ),
+                )
+              }
             </div>
           </div>
 
@@ -264,6 +202,7 @@ if (mockupPaths.length === 0) {
                 {brandData.typography.families.body.description}
               </p>
             </div>
+
             <div class="font-preview">
               <div class="font-sample body-sample">
                 {brandData.typography.families.body.sample}
@@ -280,91 +219,27 @@ if (mockupPaths.length === 0) {
                 }
               </div>
             </div>
+
             <div class="download-links">
-              <!-- <a href={brandData.typography.downloads.body.web.url} class="download-link" download={brandData.typography.downloads.body.web.iconType === 'download' ? true : null}>
-								{brandData.typography.downloads.body.web.iconType === 'download' ? (
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-								) : (
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-								)}
-								{brandData.ui.buttons.downloadWebFonts}
-							</a> -->
-              <a
-                href={brandData.typography.downloads.body.desktop.url}
-                class="download-link"
-                download={brandData.typography.downloads.body.desktop
-                  .iconType === "download"
-                  ? true
-                  : null}
-              >
-                {
-                  brandData.typography.downloads.body.desktop.iconType ===
-                  "download" ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <>
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" y1="15" x2="12" y2="3" />
-                      </>
-                    </svg>
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <>
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="2" y1="12" x2="22" y2="12" />
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                      </>
-                    </svg>
-                  )
-                }
-                {brandData.ui.buttons.downloadDesktopFonts}
-              </a>
-              <a
-                href={brandData.typography.downloads.body.googleFonts.url}
-                class="download-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><circle cx="12" cy="12" r="10"></circle><line
-                    x1="2"
-                    y1="12"
-                    x2="22"
-                    y2="12"></line><path
-                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                  ></path></svg
-                >
-                {brandData.ui.buttons.viewGoogleFonts}
-              </a>
+              {
+                Object.entries(brandData.typography.downloads.body).map(
+                  ([key, value]) => (
+                    <DownloadButton
+                      url={value.url}
+                      label={key}
+                      type={
+                        value.iconType === "download"
+                          ? "download"
+                          : value.iconType === "external"
+                            ? "link"
+                            : value.iconType === "copy"
+                              ? "copy"
+                              : undefined
+                      }
+                    />
+                  ),
+                )
+              }
             </div>
           </div>
         </div>

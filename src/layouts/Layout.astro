@@ -149,19 +149,20 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
         <div class="nav-content">
           <a href="/" class="logo">
             <img
-              src="/assets/logo-primary.svg"
+              src={Object.values(brandData.logos).find(
+                (logo) => typeof logo === "object" && "svg" in logo,
+              )?.svg || "/assets/logo-light.svg"}
               alt="Logotipo {brandData.companyName}"
-              width="150"
-              height="45"
+              width="120"
+              height="auto"
               class="logo-light"
             />
             <img
               src="/assets/logo-dark.svg"
               alt="Logotipo {brandData.companyName}"
-              width="150"
-              height="45"
+              width="120"
+              height="auto"
               class="logo-dark"
-              style="display: none;"
             />
           </a>
           <div class="nav-actions">
@@ -211,11 +212,20 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
       <div class="footer-content">
         <div class="footer-logo">
           <img
+            src={Object.values(brandData.logos).find(
+              (logo) => typeof logo === "object" && "svg" in logo,
+            )?.svg || "/assets/logo-light.svg"}
+            alt="Logotipo {brandData.companyName}"
+            width="120"
+            height="auto"
+            class="logo-light"
+          />
+          <img
             src="/assets/logo-dark.svg"
             alt="Logotipo {brandData.companyName}"
-            width="150"
-            height="45"
-            loading="lazy"
+            width="120"
+            height="auto"
+            class="logo-dark"
           />
         </div>
         <div class="footer-links">
@@ -272,6 +282,9 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
       --primary: var(--primaryColor, #2563eb);
       --primary-light: color-mix(in srgb, var(--primary) 70%, white);
       --primary-dark: color-mix(in srgb, var(--primary) 80%, black);
+      --text: color-mix(in srgb, var(--primary) 20%, black);
+      --footer-bg: color-mix(in srgb, var(--primary) 2%, white);
+      --footer-text: color-mix(in srgb, var(--primary) 60%, black);
     }
     .dark-mode {
       --primary: color-mix(
@@ -279,6 +292,11 @@ const defaultTheme = brandData.ui.theme?.defaultMode || "light";
         var(--primaryColor) 90%,
         rgb(255, 255, 255)
       );
+      --text: color-mix(in srgb, var(--primary) 20%, white);
+      --background: color-mix(in srgb, var(--primaryColor) 15%, rgb(0, 0, 0));
+      --secondary-bg: color-mix(in srgb, var(--primaryColor) 20%, rgb(0, 0, 0));
+      --footer-bg: color-mix(in srgb, var(--primaryColor) 12%, rgb(0, 0, 0));
+      --footer-text: color-mix(in srgb, var(--primary) 60%, white);
     }
   </style>
 

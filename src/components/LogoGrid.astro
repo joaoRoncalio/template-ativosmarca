@@ -1,5 +1,7 @@
 ---
 import DownloadButton from "./DownloadButton.astro";
+// @ts-ignore - JSON import
+import brandData from "../data/brand.json";
 
 interface Props {
   logos: Record<string, any>;
@@ -51,39 +53,79 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
           <h4>{logo.name}</h4>
           <p>{logo.description}</p>
 
-          <div
-            class="logo-preview"
-            class:list={[logo.background || "default-bg"]}
-          >
-            <img
-              src={logo.svg}
-              alt={`Logo ${logo.name}`}
-              width="200"
-              height="60"
-              loading="lazy"
-            />
+          <div class="logo-container">
+            <div
+              class="logo-preview"
+              class:list={[logo.background || "default-bg"]}
+              data-logo-id={logo.name.toLowerCase()}
+            >
+              <img
+                src={logo.svg}
+                alt={`Logo ${logo.name}`}
+                width="auto"
+                height="auto"
+                loading="lazy"
+                class="logo-image"
+              />
+            </div>
+
+            {brandData.ui.logoOptions?.allowColorChange !== false && (
+              <div class="color-selector">
+                {(
+                  brandData.ui.logoOptions?.defaultColors || [
+                    "primary",
+                    "black",
+                    "white",
+                  ]
+                ).map((color) => (
+                  <button
+                    class={`color-option ${color === "primary" ? "primary-color" : ""}`}
+                    title={
+                      color === "primary"
+                        ? "Cor primária"
+                        : color === "black"
+                          ? "Preto"
+                          : "Branco"
+                    }
+                    data-color={color}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           <div class="download-links">
-            {/* Dynamically generate download buttons based on available formats */}
-            {Object.entries(logo)
-              .filter(
-                ([key, value]) =>
-                  typeof value === "string" &&
-                  value.startsWith("/assets/") &&
-                  !key.startsWith("_"),
-              )
-              .map(([key, url]) => (
-                <DownloadButton
-                  url={url as string}
-                  label={key.toUpperCase()}
-                  type={key === "svg" && "copy" in logo ? "copy" : "download"}
-                />
-              ))}
-
-            {/* Add copy SVG button if svg exists */}
+            {/* SVG Download Button */}
             {logo.svg && (
-              <DownloadButton url={logo.svg} label="Copiar SVG" type="copy" />
+              <DownloadButton
+                url={logo.svg}
+                label={brandData.ui.buttons.downloadSvg}
+                type="download"
+                className="svg-download-btn"
+                data-logo-svg={logo.svg}
+                data-logo-name={logo.name}
+              />
+            )}
+
+            {/* PNG Download Button */}
+            {logo.png && (
+              <DownloadButton
+                url={logo.png}
+                label={brandData.ui.buttons.downloadPng}
+                type="download"
+                className="png-download-btn"
+              />
+            )}
+
+            {/* Copy SVG Button - always show if SVG is available */}
+            {logo.svg && (
+              <DownloadButton
+                url={logo.svg}
+                label="Copiar SVG"
+                type="copy"
+                className="copy-svg-btn"
+                data-logo-svg={logo.svg}
+              />
             )}
           </div>
         </div>
@@ -93,64 +135,67 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
 </div>
 
 <style is:global>
-  .background-selector {
+  .logo-container {
+    position: relative;
     display: flex;
-    align-items: center;
-    margin-top: 1rem;
-    font-size: var(--font-size-xs);
-    color: var(--text-light);
+    margin-bottom: 1.5rem;
   }
 
-  .background-options {
+  .color-selector {
+    position: absolute;
+    right: 8px;
+    top: 8px;
     display: flex;
+    flex-direction: column;
     gap: 0.5rem;
-    margin-left: 0.5rem;
+    padding: 0.5rem;
+    align-items: center;
+    justify-content: center;
   }
 
-  .bg-option {
+  .color-option {
     width: 24px;
     height: 24px;
-    border-radius: 4px;
+    border-radius: 50%;
     cursor: pointer;
-    border: 1px solid var(--border);
+    border: 1px solid #fff;
+    outline: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0;
     transition: transform 0.2s ease;
+    padding: 0;
+    background-color: transparent;
   }
 
-  .bg-option:hover {
+  .color-option:hover {
     transform: scale(1.1);
   }
 
-  .bg-option.dark-bg {
-    background-color: var(--text);
+  .color-option.primary-color {
+    background-color: var(--primary);
   }
 
-  .bg-option.light-bg {
-    background-color: white;
+  .color-option[data-color="black"] {
+    background-color: #000000;
   }
 
-  .bg-option:not(.dark-bg):not(.light-bg) {
-    background-color: var(--secondary-bg);
+  .color-option[data-color="white"] {
+    background-color: #ffffff;
   }
 
-  .download-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-    flex-wrap: wrap;
-  }
-
-  button.download-link {
-    cursor: pointer;
-    font-family: inherit;
-    border: none;
+  .color-option.active {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
   }
 
   @media (max-width: 480px) {
-    .download-links {
+    .color-selector {
+      display: none;
+    }
+
+    .logo-container {
       flex-direction: column;
     }
 
@@ -162,7 +207,313 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // Handle SVG copy functionality
+    // Get brand data from the hidden JSON element
+    const brandDataElement = document.getElementById("brand-data");
+    const brandData = brandDataElement
+      ? JSON.parse(brandDataElement.textContent || "{}")
+      : {};
+    const allowColorChange =
+      brandData.ui?.logoOptions?.allowColorChange !== false;
+
+    // Store modified SVGs for each logo and color
+    const modifiedSvgs = new Map();
+
+    // Function to modify SVG with selected color - available to all features
+    async function modifySvg(svgUrl, color) {
+      // Check if we already have this modified SVG
+      const cacheKey = `${svgUrl}-${color}`;
+      if (modifiedSvgs.has(cacheKey)) {
+        return modifiedSvgs.get(cacheKey);
+      }
+
+      try {
+        // Fetch the SVG content
+        const response = await fetch(svgUrl);
+        const svgText = await response.text();
+
+        // Create a DOM parser to modify the SVG
+        const parser = new DOMParser();
+        const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+
+        // Get primary color from CSS
+        const primaryColor = getComputedStyle(document.documentElement)
+          .getPropertyValue("--primary")
+          .trim();
+
+        // Apply the selected color to all paths, fills, and strokes
+        let fillColor;
+        if (color === "primary") {
+          fillColor = primaryColor;
+        } else if (color === "black") {
+          fillColor = "#000000";
+        } else if (color === "white") {
+          fillColor = "#ffffff";
+        }
+
+        // Apply color to all SVG elements with fill or stroke
+        const elements = svgDoc.querySelectorAll(
+          "[fill]:not([fill='none']), [stroke]:not([stroke='none'])",
+        );
+        elements.forEach((el) => {
+          if (el.hasAttribute("fill") && el.getAttribute("fill") !== "none") {
+            el.setAttribute("fill", fillColor);
+          }
+          if (
+            el.hasAttribute("stroke") &&
+            el.getAttribute("stroke") !== "none"
+          ) {
+            el.setAttribute("stroke", fillColor);
+          }
+        });
+
+        // Convert back to string
+        const serializer = new XMLSerializer();
+        const modifiedSvgText = serializer.serializeToString(svgDoc);
+
+        // Cache the modified SVG
+        modifiedSvgs.set(cacheKey, modifiedSvgText);
+
+        return modifiedSvgText;
+      } catch (err) {
+        console.error("Failed to modify SVG:", err);
+        return null;
+      }
+    }
+
+    // Function to convert SVG to PNG - available to all features
+    async function convertSvgToPng(svgText, maxWidth, maxHeight) {
+      return new Promise((resolve, reject) => {
+        try {
+          // Create a Blob from the SVG string
+          const svgBlob = new Blob([svgText], { type: "image/svg+xml" });
+          const url = URL.createObjectURL(svgBlob);
+
+          // Create an Image element to load the SVG
+          const img = new Image();
+          img.onload = () => {
+            // Calculate dimensions that preserve aspect ratio
+            const originalWidth = img.width;
+            const originalHeight = img.height;
+            const aspectRatio = originalWidth / originalHeight;
+
+            let targetWidth = maxWidth || originalWidth;
+            let targetHeight = maxHeight || originalHeight;
+
+            // Adjust dimensions to maintain aspect ratio
+            if (targetWidth / targetHeight > aspectRatio) {
+              // Width is the limiting factor
+              targetWidth = targetHeight * aspectRatio;
+            } else {
+              // Height is the limiting factor
+              targetHeight = targetWidth / aspectRatio;
+            }
+
+            // Create a canvas with the calculated dimensions
+            const canvas = document.createElement("canvas");
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+
+            // Draw the image on the canvas
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, targetWidth, targetHeight);
+            ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+
+            // Convert canvas to PNG
+            const pngUrl = canvas.toDataURL("image/png");
+
+            // Clean up
+            URL.revokeObjectURL(url);
+
+            resolve(pngUrl);
+          };
+
+          img.onerror = (e) => {
+            URL.revokeObjectURL(url);
+            reject(new Error("Failed to load SVG"));
+          };
+
+          img.src = url;
+        } catch (err) {
+          reject(err);
+        }
+      });
+    }
+
+    // COLOR CHANGE FUNCTIONALITY - Only if enabled
+    if (allowColorChange) {
+      // Handle color selector functionality
+      const colorOptions = document.querySelectorAll(".color-option");
+      const logoImages = document.querySelectorAll(".logo-image");
+
+      // Set primary color as active by default
+      document
+        .querySelectorAll(".color-option.primary-color")
+        .forEach((option) => {
+          option.classList.add("active");
+        });
+
+      colorOptions.forEach((option) => {
+        option.addEventListener("click", async function () {
+          const color = this.getAttribute("data-color");
+          const logoCard = this.closest(".logo-card");
+          const logoImage = logoCard.querySelector(".logo-image");
+          const logoPreview = logoCard.querySelector(".logo-preview");
+          const svgUrl = logoImage.getAttribute("src");
+          // Get the original background class from the data attribute
+          const originalBg =
+            logoPreview.getAttribute("data-original-bg") ||
+            (logoPreview.classList.contains("light-bg")
+              ? "light-bg"
+              : logoPreview.classList.contains("dark-bg")
+                ? "dark-bg"
+                : "default-bg");
+
+          if (!svgUrl) return;
+
+          // Update active state
+          logoCard.querySelectorAll(".color-option").forEach((opt) => {
+            opt.classList.remove("active");
+          });
+          this.classList.add("active");
+
+          // Update background based on selected color
+          if (color === "white") {
+            // Store original background if not already stored
+            if (!logoPreview.hasAttribute("data-original-bg")) {
+              logoPreview.setAttribute("data-original-bg", originalBg);
+            }
+            // Set dark background for white logo
+            logoPreview.classList.remove("default-bg", "light-bg");
+            logoPreview.classList.add("dark-bg");
+          } else {
+            // For primary or black, restore the original background
+            logoPreview.classList.remove("default-bg", "light-bg", "dark-bg");
+            logoPreview.classList.add(originalBg);
+          }
+
+          // Modify the SVG with the selected color
+          const modifiedSvgText = await modifySvg(svgUrl, color);
+
+          if (modifiedSvgText) {
+            // Create a blob URL for the modified SVG
+            const blob = new Blob([modifiedSvgText], { type: "image/svg+xml" });
+            const modifiedSvgUrl = URL.createObjectURL(blob);
+
+            // Update the image source
+            logoImage.src = modifiedSvgUrl;
+
+            // Store the modified SVG in the logo card for download/copy buttons
+            logoCard.setAttribute("data-current-svg", modifiedSvgText);
+          }
+        });
+      });
+
+      // Initialize all logos with primary color and store original backgrounds
+      document.querySelectorAll(".logo-card").forEach(async (logoCard) => {
+        const logoImage = logoCard.querySelector(".logo-image");
+        const logoPreview = logoCard.querySelector(".logo-preview");
+        const svgUrl = logoImage?.getAttribute("src");
+
+        // Store the original background class
+        if (logoPreview) {
+          const originalBg = logoPreview.classList.contains("light-bg")
+            ? "light-bg"
+            : logoPreview.classList.contains("dark-bg")
+              ? "dark-bg"
+              : "default-bg";
+          logoPreview.setAttribute("data-original-bg", originalBg);
+        }
+
+        if (svgUrl) {
+          const modifiedSvgText = await modifySvg(svgUrl, "primary");
+
+          if (modifiedSvgText) {
+            // Create a blob URL for the modified SVG
+            const blob = new Blob([modifiedSvgText], { type: "image/svg+xml" });
+            const modifiedSvgUrl = URL.createObjectURL(blob);
+
+            // Update the image source
+            logoImage.src = modifiedSvgUrl;
+
+            // Store the modified SVG in the logo card for download/copy buttons
+            logoCard.setAttribute("data-current-svg", modifiedSvgText);
+          }
+        }
+      });
+    }
+
+    // SVG DOWNLOAD FUNCTIONALITY - Works regardless of allowColorChange
+    document.addEventListener("click", async function (event) {
+      const target = event.target.closest(".svg-download-btn");
+      if (!target) return;
+
+      // Prevent default link behavior
+      event.preventDefault();
+
+      const logoCard = target.closest(".logo-card");
+      const logoName = target.getAttribute("data-logo-name");
+      const currentSvg = logoCard.getAttribute("data-current-svg");
+      const originalSvgUrl = target.getAttribute("data-logo-svg");
+
+      if (currentSvg) {
+        // Download the modified SVG
+        const blob = new Blob([currentSvg], { type: "image/svg+xml" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${logoName.toLowerCase().replace(/\s+/g, "-")}.svg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      } else if (originalSvgUrl) {
+        // If no modified SVG, check if color changes are enabled
+        if (allowColorChange) {
+          // Get the active color and modify the original
+          const activeColorOption = logoCard.querySelector(
+            ".color-option.active",
+          );
+          if (activeColorOption) {
+            const color = activeColorOption.getAttribute("data-color");
+            const modifiedSvgText = await modifySvg(originalSvgUrl, color);
+
+            if (modifiedSvgText) {
+              const blob = new Blob([modifiedSvgText], {
+                type: "image/svg+xml",
+              });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = `${logoName.toLowerCase().replace(/\s+/g, "-")}.svg`;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+
+              // Store for future use
+              logoCard.setAttribute("data-current-svg", modifiedSvgText);
+              return;
+            }
+          }
+        }
+
+        // Fallback to original SVG (when color change is disabled or no color selected)
+        const response = await fetch(originalSvgUrl);
+        const svgText = await response.text();
+
+        const blob = new Blob([svgText], { type: "image/svg+xml" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${logoName.toLowerCase().replace(/\s+/g, "-")}.svg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+    });
+
+    // COPY SVG FUNCTIONALITY - Works regardless of allowColorChange
     const copySvgButtons = document.querySelectorAll(".copy-svg-btn");
 
     copySvgButtons.forEach((button) => {
@@ -170,13 +521,43 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
         // Prevent default link behavior
         event.preventDefault();
 
+        const logoCard = button.closest(".logo-card");
         const svgUrl = button.getAttribute("data-svg-url");
+
         if (!svgUrl) return;
 
         try {
-          // Fetch the SVG content
-          const response = await fetch(svgUrl);
-          const svgText = await response.text();
+          let svgText;
+
+          // Check if we have a modified SVG and if color changes are allowed
+          if (allowColorChange) {
+            const currentSvg = logoCard?.getAttribute("data-current-svg");
+
+            if (currentSvg) {
+              // Use the cached modified SVG
+              svgText = currentSvg;
+            } else {
+              // Get the active color and modify the SVG
+              const activeColorOption = logoCard?.querySelector(
+                ".color-option.active",
+              );
+              if (activeColorOption) {
+                const color = activeColorOption.getAttribute("data-color");
+                svgText = await modifySvg(svgUrl, color);
+
+                // Store for future use
+                if (svgText && logoCard) {
+                  logoCard.setAttribute("data-current-svg", svgText);
+                }
+              }
+            }
+          }
+
+          // If no modified content or color change not allowed, fetch the original
+          if (!svgText) {
+            const response = await fetch(svgUrl);
+            svgText = await response.text();
+          }
 
           // Copy to clipboard
           await navigator.clipboard.writeText(svgText);
@@ -185,11 +566,11 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
           const originalHTML = button.innerHTML;
           button.innerHTML =
             '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Copiado!';
-          button.setAttribute("style", "color: #10b981 !important"); // Green color
+          button.setAttribute("style", "color: #10b981 !important");
 
           setTimeout(() => {
             button.innerHTML = originalHTML;
-            button.setAttribute("style", ""); // Reset style
+            button.setAttribute("style", "");
           }, 2000);
         } catch (err) {
           console.error("Failed to copy SVG:", err);
@@ -197,30 +578,78 @@ const gridStyle = `grid-template-columns: repeat(auto-fit, minmax(min(100%, 340p
         }
       });
     });
-  });
 
-  // Force logo card background in dark mode
-  document.addEventListener("DOMContentLoaded", function () {
-    const observer = new MutationObserver(function (mutations) {
-      mutations.forEach(function (mutation) {
-        if (
-          mutation.attributeName === "class" &&
-          document.documentElement.classList.contains("dark-mode")
-        ) {
-          document.querySelectorAll(".logo-card").forEach((card) => {
-            (card as HTMLElement).style.backgroundColor = "transparent";
-          });
+    // PNG DOWNLOAD FUNCTIONALITY - Works regardless of allowColorChange
+    document.addEventListener("click", async function (event) {
+      const target = event.target.closest(".png-download-btn");
+      if (!target) return;
+
+      // Prevent default behavior
+      event.preventDefault();
+
+      const logoCard = target.closest(".logo-card");
+      const logoName =
+        target.getAttribute("data-logo-name") ||
+        logoCard.querySelector("h4").textContent.trim();
+      const logoImage = logoCard.querySelector(".logo-image");
+
+      try {
+        // Get the current SVG content (either modified or original)
+        let svgContent;
+        const currentSvg = logoCard.getAttribute("data-current-svg");
+
+        if (currentSvg) {
+          // Use already modified SVG
+          svgContent = currentSvg;
+        } else {
+          // Get the original SVG
+          const svgUrl = logoImage.getAttribute("src");
+          if (!svgUrl) throw new Error("SVG source not found");
+
+          // If color changes are enabled, apply the active color
+          if (allowColorChange) {
+            const activeColorOption = logoCard.querySelector(
+              ".color-option.active",
+            );
+            const color = activeColorOption
+              ? activeColorOption.getAttribute("data-color")
+              : "primary";
+
+            svgContent = await modifySvg(svgUrl, color);
+          }
+
+          // If no modified content or color change not allowed, fetch the original
+          if (!svgContent) {
+            const response = await fetch(svgUrl);
+            svgContent = await response.text();
+          }
         }
-      });
+
+        // Convert SVG to PNG with a reasonable max size that preserves aspect ratio
+        const pngUrl = await convertSvgToPng(svgContent, 1200, 1200);
+
+        // Download the PNG
+        const a = document.createElement("a");
+        a.href = pngUrl;
+        a.download = `${logoName.toLowerCase().replace(/\s+/g, "-")}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        // Show success feedback
+        const originalHTML = target.innerHTML;
+        target.innerHTML =
+          '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Baixado!';
+        target.style.color = "#10b981";
+
+        setTimeout(() => {
+          target.innerHTML = originalHTML;
+          target.style.color = "";
+        }, 2000);
+      } catch (err) {
+        console.error("Failed to convert SVG to PNG:", err);
+        alert("Não foi possível baixar o PNG. Tente novamente.");
+      }
     });
-
-    observer.observe(document.documentElement, { attributes: true });
-
-    // Also set initially
-    if (document.documentElement.classList.contains("dark-mode")) {
-      document.querySelectorAll(".logo-card").forEach((card) => {
-        (card as HTMLElement).style.backgroundColor = "transparent";
-      });
-    }
   });
 </script>
